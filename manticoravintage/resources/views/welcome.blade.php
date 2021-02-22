@@ -14,8 +14,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Quicksand:wght@300&display=swap"
         rel="stylesheet">
+        <!--Druk Wide Bold-->
     <link href="//db.onlinewebfonts.com/c/2206d6cc490084998d531e8c1b2cbb4a?family=Druk+Wide+Bold" rel="stylesheet"
         type="text/css" />
+        <!--Canela-->
     <link href="//db.onlinewebfonts.com/c/9da955c8511328b8b914cf9163add256?family=canela" rel="stylesheet"
         type="text/css" />
 
@@ -418,7 +420,11 @@
     */
 
         body {
-            font-family: 'Canela', 'Quicksand';
+            font-family: 'Druk Wide Bold', 'Quicksand';
+        }
+
+        h1{
+            font-size: 35px;
         }
 
     </style>
