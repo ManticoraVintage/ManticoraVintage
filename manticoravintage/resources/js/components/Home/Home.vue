@@ -9,15 +9,20 @@
 </template>
 
 <style scoped>
+/* Main component style */
 .main {
     width: 100vw;
 }
+
+/* Main title style */
 .page-title-container {
     width: 100vw;
     padding: 10px;
     color: #f522e4;
     letter-spacing: 5px;
 }
+
+/* Logo style */
 .logo-container{
     width: 400px;
     height: 400px;
