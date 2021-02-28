@@ -22,7 +22,7 @@ class ItemFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->title,
+            'name' => $this->faker->realText($maxNbChars = 20, $indexSize = 2),
             'price' => $this->faker->numberBetween(1,100),
             'units_in_stock' => $this->faker->numberBetween(1,100),
             'photo' => 'overridden',
