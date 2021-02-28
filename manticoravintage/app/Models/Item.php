@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-    public function categories()
+    use HasFactory;
+
+    public function category()
     {
-        return $this->hasOne(Categories::class);
+        return $this->hasOne(Category::class);
     }
 
-    public function types()
+    public function type()
     {
-        return $this->hasOne(Types::class);
+        return $this->hasOne(Type::class);
     }
 }
