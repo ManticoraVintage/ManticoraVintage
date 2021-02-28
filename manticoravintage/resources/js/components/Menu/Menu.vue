@@ -1,28 +1,67 @@
 <template>
     <div class="main">
-        <div
-            class="toggle"
-            v-on:click="menuOpen"
-            v-bind:class="{ active: isActive }"
-        >
-            <p>{{ menuStateInput }}</p>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="navbar d-flex flex-column">
+            <div
+                class="toggle"
+                v-on:click="menuOpen"
+                v-bind:class="{ active: isActive }"
+            >
+                <p>{{ menuStateInput }}</p>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul v-bind:class="{menuOpen: isMenuOpen}">
+                <li>Manticora Vintage</li>
+                <li>Manticora Selected</li>
+                <li>Tangas</li>
+            </ul>
         </div>
     </div>
 </template>
 
 <style scoped>
+
+/* Navbar */
+
+.navbar {
+    position: fixed;
+    right: 0;
+    top: 40px;
+}
+
+/* ul & li*/ 
+ul{
+    position: relative;
+    right: -160px;
+    transition: 0.3s ease-in-out;
+    top: 10px;
+}
+
+ul.menuOpen{
+   right: 43%;
+}
+
+ul li{
+    list-style-type: none;
+    text-align: right;
+    margin: 5px 0px;
+    color: #f522e4;
+}
+
+ul li:hover{
+    cursor: pointer;
+}
+
+
+/* Toggle Menu Button */
 .toggle {
     width: 30px;
     height: 25px;
-    position: fixed;
-    right: 50px;
-    top: 35px;
-    transform: translate(-50%, -50%);
+    position: relative;
     z-index: 3;
+    
 }
 
 .toggle:hover {
@@ -54,12 +93,12 @@
 }
 
 .toggle.active span:nth-child(2) {
-    transform: translateY(-15px);
+    transform: translateY(0px);
     opacity: 0;
 }
 
 .toggle.active span:nth-child(5) {
-    transform: translateY(15px);
+    transform: translateY(0px);
     opacity: 0;
 }
 
@@ -70,6 +109,8 @@
 .toggle.active span:nth-child(4) {
     transform: rotate(-135deg);
 }
+
+
 </style>
 
 <script>
@@ -77,12 +118,14 @@ export default {
     name: "Menu",
 
     data: () => ({
-        isActive: false
+        isActive: false,
+        isMenuOpen: false
     }),
 
     methods: {
         menuOpen: function() {
             this.isActive = !this.isActive;
+            this.isMenuOpen = !this.isMenuOpen;
         }
     }
 };
