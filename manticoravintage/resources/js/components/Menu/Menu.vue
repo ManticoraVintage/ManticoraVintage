@@ -12,48 +12,25 @@
                 <span></span>
                 <span></span>
             </div>
-            <ul v-bind:class="{menuOpen: isMenuOpen}">
+            <ul v-bind:class="{ menuOpen: isMenuOpen }">
                 <li>Manticora Vintage</li>
                 <li>Manticora Selected</li>
-                <li>Tangas</li>
+                <li>Zozobra</li>
             </ul>
         </div>
+        <div v-bind:class="{layoutOpen: isLayoutOpen}" class="menu-opened-layout"></div>
     </div>
 </template>
 
 <style scoped>
-
 /* Navbar */
 
 .navbar {
     position: fixed;
     right: 0;
     top: 40px;
+    z-index: 3;
 }
-
-/* ul & li*/ 
-ul{
-    position: relative;
-    right: -160px;
-    transition: 0.3s ease-in-out;
-    top: 10px;
-}
-
-ul.menuOpen{
-   right: 43%;
-}
-
-ul li{
-    list-style-type: none;
-    text-align: right;
-    margin: 5px 0px;
-    color: #f522e4;
-}
-
-ul li:hover{
-    cursor: pointer;
-}
-
 
 /* Toggle Menu Button */
 .toggle {
@@ -61,7 +38,6 @@ ul li:hover{
     height: 25px;
     position: relative;
     z-index: 3;
-    
 }
 
 .toggle:hover {
@@ -110,7 +86,44 @@ ul li:hover{
     transform: rotate(-135deg);
 }
 
+/* ul & li*/
+ul {
+    position: relative;
+    right: -160px;
+    transition: 0.3s ease-in-out;
+    top: 10px;
+}
 
+ul.menuOpen {
+    right: 43%;
+}
+
+ul li {
+    list-style-type: none;
+    text-align: right;
+    margin: 5px 0px;
+    color: #f522e4;
+}
+
+ul li:hover {
+    cursor: pointer;
+}
+
+/* Menu opened black layout */
+
+.menu-opened-layout {
+    position: absolute;
+    background-color: rgba(36, 36, 36, 0.755);
+    width: 0vw;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transition: 0.3s ease-in-out;
+    z-index: 2;
+}
+.menu-opened-layout.layoutOpen {
+    width: 100vw;
+}
 </style>
 
 <script>
@@ -119,13 +132,15 @@ export default {
 
     data: () => ({
         isActive: false,
-        isMenuOpen: false
+        isMenuOpen: false,
+        isLayoutOpen: false,
     }),
 
     methods: {
         menuOpen: function() {
             this.isActive = !this.isActive;
             this.isMenuOpen = !this.isMenuOpen;
+            this.isLayoutOpen = !this.isLayoutOpen;
         }
     }
 };
