@@ -420,12 +420,15 @@
     */
 
         body {
-            font-family: 'Druk Wide Bold', 'Quicksand';
+            font-family: 'Canela', 'Quicksand';
+            font-size: 18px
         }
 
         h1{
-            font-size: 35px;
+            font-size: 30px;
+            font-family: 'Druk Wide Bold', 'Quicksand';
         }
+
 
     </style>
 </head>
