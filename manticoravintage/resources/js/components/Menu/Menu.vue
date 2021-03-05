@@ -6,7 +6,7 @@
                 v-on:click="menuOpen"
                 v-bind:class="{ active: isActive }"
             >
-                <p>{{ menuStateInput }}</p>
+              
                 <span></span>
                 <span></span>
                 <span></span>
@@ -60,29 +60,29 @@
     cursor: pointer;
 }
 
-.toggle span:nth-child(2) {
+.toggle span:nth-child(1) {
     transform: translateY(-10px);
 }
 
-.toggle span:nth-child(5) {
+.toggle span:nth-child(4) {
     transform: translateY(10px);
 }
 
-.toggle.active span:nth-child(2) {
+.toggle.active span:nth-child(1) {
     transform: translateY(0px);
     opacity: 0;
-}
-
-.toggle.active span:nth-child(5) {
-    transform: translateY(0px);
-    opacity: 0;
-}
-
-.toggle.active span:nth-child(3) {
-    transform: rotate(135deg);
 }
 
 .toggle.active span:nth-child(4) {
+    transform: translateY(0px);
+    opacity: 0;
+}
+
+.toggle.active span:nth-child(2) {
+    transform: rotate(135deg);
+}
+
+.toggle.active span:nth-child(3) {
     transform: rotate(-135deg);
 }
 
