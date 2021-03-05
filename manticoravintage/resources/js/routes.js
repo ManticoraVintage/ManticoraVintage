@@ -1,12 +1,12 @@
 
-import Home from "./components/Home/Home.vue";
+import Index from "./components/Index.vue";
 import VueRouter from "vue-router";
 
 const routes = [
     {
         path: "/",
-        component: Home,
-        name: "home"
+        component: Index,
+        name: "index"
     },
 ];
 
