@@ -99,7 +99,6 @@ ul.menuOpen {
 }
 
 ul li {
-    list-style-type: none;
     text-align: right;
     margin: 5px 0px;
     color: #f522e4;

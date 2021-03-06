@@ -20,6 +20,9 @@
         <!--Canela-->
     <link href="//db.onlinewebfonts.com/c/9da955c8511328b8b914cf9163add256?family=canela" rel="stylesheet"
         type="text/css" />
+        <!--Roboto-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Styles -->
@@ -412,6 +415,7 @@
     | FONTS |
     Title: Druk Wide Bold 
     Text: Canela
+    Admin Page: Roboto
 
     | COLOR |
     Primary: #f522e4; -> Pink
@@ -427,6 +431,10 @@
         h1{
             font-size: 30px;
             font-family: 'Druk Wide Bold', 'Quicksand';
+        }
+
+        ul li{
+            list-style-type: none;
         }
 
 
