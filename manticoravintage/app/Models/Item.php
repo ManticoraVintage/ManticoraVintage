@@ -18,4 +18,8 @@ class Item extends Model
     {
         return $this->hasOne(Type::class);
     }
+
+    public static function findAll(){
+        return Item::all();
+    }
 }

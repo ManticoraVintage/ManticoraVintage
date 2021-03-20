@@ -100,5 +100,13 @@
 </style>
 
 <script>
-export default {};
+export default {
+  //data to save response and add items to template
+  mounted () {
+    axios
+      .get(`/api/shop`)
+      .then(response => console.log(response.data, 'suiuuu'))
+      .catch(error => console.log(error.response.data))
+  }
+};
 </script>
