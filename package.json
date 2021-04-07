@@ -25,6 +25,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@burhanahmeed/vue-modal-2": "^1.1.9",
         "fix": "0.0.6",
         "vue-router": "^3.5.1"
     }
