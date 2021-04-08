@@ -6,7 +6,7 @@
     </div>
 
     <div class="logo-container"></div>
-    <Shop></Shop>
+    <!-- <Shop></Shop> -->
   </div>
 </template>
 
