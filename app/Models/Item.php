@@ -19,7 +19,13 @@ class Item extends Model
         return $this->hasOne(Type::class);
     }
 
-    public static function findAll(){
+    public static function findAll()
+    {
         return Item::all();
+    }
+
+    public static function find($id)
+    {
+        return Item::find($id);
     }
 }

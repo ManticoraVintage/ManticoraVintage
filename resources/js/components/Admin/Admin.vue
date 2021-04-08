@@ -37,7 +37,8 @@
         <div
             class="information-container d-flex flex-column justify-content-around"
         >
-            <modal-vue
+            <!-- <modal-vue
+                class="deletePopup"
                 @on-close="$vm2.close('modal-1')"
                 name="modal-1"
                 :headerOptions="{
@@ -58,7 +59,7 @@
                 }"
             >
                 This process cannot be undone
-            </modal-vue>
+            </modal-vue> -->
 
             <div
                 class="information-title-container d-flex justify-content-center align-items-center"
@@ -183,11 +184,10 @@
                                     <td>{{ cloth.photo }}</td>
                                     <td>{{ cloth.category_id }}</td>
                                     <td>{{ cloth.type_id }}</td>
-                                    <td
-                                        v-on:click="showDeletePopup(cloth.name)"
-                                    >
+                                    <td v-on:click="deleteCloth(id, index)">
                                         Delete
                                     </td>
+                                    <!-- v-on:click="showDeletePopup(cloth.id)" -->
                                 </tr>
                             </tbody>
                         </table>
@@ -252,6 +252,12 @@
     z-index: -1;
 }
 
+.delete-table,
+.modify-table,
+.view-all-table {
+    transition: 0.5s ease ease-in-out;
+}
+
 .information-title-container,
 .chart-container {
     width: 100%;
@@ -303,6 +309,11 @@ tr:hover {
 
 .active {
     display: block !important;
+    transition: 0.5s ease ease-in-out;
+}
+
+.modal-body {
+    padding: 20px;
 }
 </style>
 
@@ -315,7 +326,8 @@ export default {
         isViewAllActive: true,
         isModifyActive: false,
         isDeleteActive: false,
-        tabType: 0
+        tabType: 0,
+        selectedId: 0
     }),
 
     mounted() {
@@ -346,16 +358,26 @@ export default {
             }
         },
 
-        showDeletePopup: function(clothName) {
-            this.$vm2.open("modal-1");
-        },
-
-         doDelete:function(){
-             alert("Hola");
-              this.$vm2.close("modal-1");
-         }
-
-
+        deleteCloth: function(id, index) {
+            axios
+                .post(`api/admin/${id}`)
+                .then(response => console.log(response.data, "de locos"))
+                .catch(error => console.log(error.response.data));
+            this.cloths.splice(index, 1 );
+        }
     }
+
+    // showDeletePopup: function(id) {
+    //     alert(this.selectedId + "Antes de click")
+    //     this.$vm2.open("modal-1");
+    //     this.selectedId = id;
+    //     alert(this.selectedId + "Despues del click")
+
+    // },
+
+    // doDelete: function() {
+    //    alert(this.selectedId  + "Despues del delete")
+    //     this.$vm2.close("modal-1");
+    // }
 };
 </script>
