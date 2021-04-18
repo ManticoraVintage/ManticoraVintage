@@ -1,5 +1,28 @@
 <template>
-  <div class="main">
+    <div class="main">
+        <div class="carousel-container">
+            <carousel
+                class="carousel"
+                :autoplay="true"
+                :loop="true"
+                :autoplayTimeout="5000"
+                :centerMode="true"
+                :perPage="1"
+                :autoplayHoverPause="false"
+                :adjustableHeight="true"
+                :speed="1000"
+                :paginationSize="0"
+                :touchDrag="false"
+                :mouseDrag="false"
+            >
+                <slide
+                    v-for="(image, index) in images"
+                    :key="index"
+                    class="slide"
+                    ><div class="slide-img"><img class="slider-image" :src="image"></div
+                ></slide>
+               
+            </carousel>
     <header class="d-flex justify-content-between px-4 row">
       <div class="col-4 dropdowns-container d-flex">
         <div class="dropdown mx-2">
@@ -139,12 +162,44 @@
 <style scoped>
 .main {
   padding: 100px 200px;
+.main {
+
+    margin: 0 auto;
 }
 .items-row {
   margin-top: 100px;
+
+.carousel-container {
+}
+
+.slide {
+    margin: 0 auto;
+}
+
+.slide-img {
+   
+    /* background: url("../../../../public/images/main_slider/01-26.jpg"); */
+    /* background-size: cover;
+    background-size: 75%;
+    background-position: center;
+    background-repeat: no-repeat; */
+    margin: 0 auto;
+    display: flex;
+   
+}
+
+.slider-image{
+    max-width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    margin: 0 auto;
+}
+
+.items-row {
+    margin-top: 100px;
 }
 .items-row img {
-  height: 400px;
+    height: 400px;
 }
 .fas {
   color: #777777;
@@ -152,6 +207,8 @@
 </style>
 
 <script>
+import { Carousel, Slide } from "vue-carousel";
+
 export default {
   data() {
     return {
@@ -201,5 +258,35 @@ export default {
       this.currentType = type;
     },
   },
+    data: () => ({
+        images: [
+            "images/main_slider/01-26.jpg",
+            "images/main_slider/01-31.jpg",
+            "images/main_slider/02-4.jpg",
+            "images/main_slider/02-10.jpg",
+            "images/main_slider/02-28.jpg",
+            "images/main_slider/02-30.jpg",
+            "images/main_slider/02-34.jpg",
+            "images/main_slider/03-20.jpg",
+            "images/main_slider/03-21.jpg",
+            "images/main_slider/03-25.jpg",
+            "images/main_slider/03-32.jpg",
+          
+            
+        ]
+    }),
+
+    components: {
+        Carousel,
+        Slide
+    },
+
+    //data to save response and add items to template
+    mounted() {
+        axios
+            .get(`/api/shop`)
+            .then(response => console.log(response.data, "suiuuu"))
+            .catch(error => console.log(error.response.data));
+    }
 };
 </script>
