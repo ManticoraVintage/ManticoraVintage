@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Type extends Model
 {
     use HasFactory;
+
+    public function item()
+    {
+        return $this->hasMany(Item::class);
+    }
+
+    public static function findAll()
+    {
+        return Type::all();
+    }
+
+    public static function find($id)
+    {
+        return Type::find($id);
+    }
 }

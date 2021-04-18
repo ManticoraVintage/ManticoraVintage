@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Item;
-use Illuminate\Support\Facades\DB;
+use App\Models\Type;
 
-
-class ShopController extends Controller
+class TypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +15,7 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return Item::findAll();
+        return Type::findAll();
     }
 
     /**
@@ -47,24 +45,9 @@ class ShopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($categoryId, $typeId)
+    public function show($id)
     {
-        if ($categoryId == 'null' && $typeId == 'null') {
-            return Item::findAll();
-        }
-        if ($categoryId !== 'null' && $typeId !== 'null') {
-            return DB::table('items')
-                ->where('category_id', '=', $categoryId)
-                ->where('type_id', '=', $typeId)->get();
-        }
-        if ($categoryId !== 'null') {
-            return DB::table('items')
-                ->where('category_id', '=', $categoryId)->get();
-        }
-        if ($typeId !== 'null') {
-            return DB::table('items')
-                ->where('category_id', '=', $categoryId)->get();
-        }
+        //
     }
 
     /**
@@ -98,6 +81,6 @@ class ShopController extends Controller
      */
     public function destroy($id)
     {
-        Item::where('id', $id)->delete();
+        //
     }
 }
