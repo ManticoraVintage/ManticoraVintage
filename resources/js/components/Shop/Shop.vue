@@ -117,6 +117,7 @@
             <div class="price">Quality: {{ item.quality }}</div>
             <div class="price">Made in {{ item.country }}</div>
             <div class="price">{{ item.size }}</div>
+            <div v-if="item.type_id === 1">SELECTED <i class="fas fa-fire"></i></div>
           </div>
         </div>
       </div>
@@ -133,6 +134,9 @@
 }
 .items-row img {
   height: 400px;
+}
+.fa-fire{
+  color: #777777;
 }
 </style>
 
