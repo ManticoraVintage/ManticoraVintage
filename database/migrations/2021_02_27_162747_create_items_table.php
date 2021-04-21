@@ -19,7 +19,7 @@ class CreateItemsTable extends Migration
 
             $table->string('name');
             $table->string('photo');
-            $table->string('quality')->nullable();
+            $table->integer('quality')->nullable();
             $table->string('country');
 
             //create foreign key column

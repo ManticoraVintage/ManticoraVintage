@@ -117,7 +117,12 @@
             <div class="price">Quality: {{ item.quality }}</div>
             <div class="price">Made in {{ item.country }}</div>
             <div class="price">{{ item.size }}</div>
-            <div v-if="item.type_id === 1">SELECTED <i class="fas fa-fire"></i></div>
+            <div class="d-flex">
+              <i v-for="i in item.quality" :key="i" class="fas fa-star"></i>
+            </div>
+            <div v-if="item.type_id === 1">
+              SELECTED <i class="fas fa-fire"></i>
+            </div>
           </div>
         </div>
       </div>
@@ -135,7 +140,7 @@
 .items-row img {
   height: 400px;
 }
-.fa-fire{
+.fa-fire {
   color: #777777;
 }
 </style>
@@ -155,11 +160,11 @@ export default {
   async mounted() {
     try {
       (await axios.get(`/api/shop`)).data.forEach((element, i) => {
-        this.items[i] = {...element, ...element.item};
+        this.items[i] = { ...element, ...element.item };
         delete this.items[i].item;
         delete this.items[i].id;
       });
-      console.log(this.items)
+      console.log(this.items);
       this.categories = (await axios.get(`/api/categories`)).data;
       this.types = (await axios.get(`/api/types`)).data;
     } catch (err) {
@@ -169,8 +174,8 @@ export default {
   methods: {
     async getFilteredItems() {
       const url = `/api/shop/category/${
-        this.currentCategory ? this.currentCategory.id : 'null'
-      }/type/${this.currentType ? this.currentType.id : 'null'}`;
+        this.currentCategory ? this.currentCategory.id : "null"
+      }/type/${this.currentType ? this.currentType.id : "null"}`;
 
       this.items = (await axios.get(url)).data;
     },
