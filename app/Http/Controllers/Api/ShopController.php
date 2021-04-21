@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\ItemAttributes;
 use Illuminate\Support\Facades\DB;
 
 
@@ -17,7 +18,7 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return Item::findAll();
+        return ItemAttributes::with('item')->get(); 
     }
 
     /**

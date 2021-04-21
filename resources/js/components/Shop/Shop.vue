@@ -114,6 +114,9 @@
           <div class="itemData d-flex align-items-center flex-column">
             <div class="itemName">{{ item.name }}</div>
             <div class="price">{{ item.price }}€</div>
+            <div class="price">Quality: {{ item.quality }}</div>
+            <div class="price">Made in {{ item.country }}</div>
+            <div class="price">{{ item.size }}</div>
           </div>
         </div>
       </div>
@@ -138,7 +141,7 @@ export default {
   //data to save response and add items to template
   data() {
     return {
-      items: null,
+      items: [],
       categories: null,
       currentCategory: null,
       types: null,
@@ -147,7 +150,12 @@ export default {
   },
   async mounted() {
     try {
-      this.items = (await axios.get(`/api/shop`)).data;
+      (await axios.get(`/api/shop`)).data.forEach((element, i) => {
+        this.items[i] = {...element, ...element.item};
+        delete this.items[i].item;
+        delete this.items[i].id;
+      });
+      console.log(this.items)
       this.categories = (await axios.get(`/api/categories`)).data;
       this.types = (await axios.get(`/api/types`)).data;
     } catch (err) {

@@ -11,12 +11,17 @@ class Item extends Model
 
     public function category()
     {
-        return $this->hasOne(Category::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function type()
     {
-        return $this->hasOne(Type::class);
+        return $this->belongsTo(Type::class);
+    }
+    
+    public function itemAttributes()
+    {
+        return $this->hasMany(ItemAttributes::class);
     }
 
     public static function findAll()
