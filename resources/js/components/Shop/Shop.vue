@@ -123,6 +123,12 @@
             <div v-if="item.type_id === 1">
               SELECTED <i class="fas fa-fire"></i>
             </div>
+            <div v-if="!item.available">
+              <div v-if="item.type_id === 3">
+                OUT OF STOCK <i class="fas fa-shipping-fast"></i>
+              </div>
+              <div v-else>SOLD OUT <i class="fas fa-shopping-basket"></i></div>
+            </div>
           </div>
         </div>
       </div>
