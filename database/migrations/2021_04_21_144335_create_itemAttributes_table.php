@@ -17,7 +17,7 @@ class CreateItemAttributesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->float('price');
-            $table->integer('units_in_stock');
+            $table->integer('available');
             $table->string('size');
 
             //create foreign key column
