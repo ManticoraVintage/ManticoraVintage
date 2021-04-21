@@ -29,7 +29,7 @@ class ItemAttributesFactory extends Factory
         echo $strings[$key];
         return [
             'price' => $this->faker->numberBetween(1,100),
-            'available' => (bool)random_int(0, 1),
+            'available' => random_int(0, 1),
             'size' => 'M',
             'item_id' => $this->faker->numberBetween(1, 30),
         ];

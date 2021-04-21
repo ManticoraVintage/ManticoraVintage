@@ -14,9 +14,9 @@ class TypeSeeder extends Seeder
      */
     public function run()
     {
-        $types = array('Selected','TangasCompany','Standard');
-        
-        foreach($types as $type) {
+        $types = array('Selected', 'Standard', 'Tangas');
+
+        foreach ($types as $type) {
             Type::factory()->count(1)->create(['name' => $type]);
         }
     }
