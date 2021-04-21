@@ -83,7 +83,7 @@
                                     <th scope="col">VIEWALL</th>
                                     <th scope="col">name</th>
                                     <th scope="col">price</th>
-                                    <th scope="col">stock</th>
+                                    <th scope="col">available</th>
                                     <th scope="col">photo</th>
                                     <th scope="col">categoryid</th>
                                     <th scope="col">typeid</th>
@@ -101,7 +101,7 @@
                                     <td>{{ cloth.id }}</td>
                                     <td>{{ cloth.name }}</td>
                                     <td>{{ cloth.price }}</td>
-                                    <td>{{ cloth.units_in_stock }}</td>
+                                    <td>{{ cloth.available }}</td>
                                     <td>{{ cloth.photo }}</td>
                                     <td>{{ cloth.category_id }}</td>
                                     <td>{{ cloth.type_id }}</td>
@@ -122,7 +122,7 @@
                                     <th scope="col">MODIFY</th>
                                     <th scope="col">name</th>
                                     <th scope="col">price</th>
-                                    <th scope="col">stock</th>
+                                    <th scope="col">available</th>
                                     <th scope="col">photo</th>
                                     <th scope="col">categoryid</th>
                                     <th scope="col">typeid</th>
@@ -140,7 +140,7 @@
                                     <td>{{ cloth.id }}</td>
                                     <td>{{ cloth.name }}</td>
                                     <td>{{ cloth.price }}</td>
-                                    <td>{{ cloth.units_in_stock }}</td>
+                                    <td>{{ cloth.available }}</td>
                                     <td>{{ cloth.photo }}</td>
                                     <td>{{ cloth.category_id }}</td>
                                     <td>{{ cloth.type_id }}</td>
@@ -161,7 +161,7 @@
                                     <th scope="col">DELETE</th>
                                     <th scope="col">name</th>
                                     <th scope="col">price</th>
-                                    <th scope="col">stock</th>
+                                    <th scope="col">available</th>
                                     <th scope="col">photo</th>
                                     <th scope="col">categoryid</th>
                                     <th scope="col">typeid</th>
@@ -180,7 +180,7 @@
                                     <td>{{ cloth.id }}</td>
                                     <td>{{ cloth.name }}</td>
                                     <td>{{ cloth.price }}</td>
-                                    <td>{{ cloth.units_in_stock }}</td>
+                                    <td>{{ cloth.available }}</td>
                                     <td>{{ cloth.photo }}</td>
                                     <td>{{ cloth.category_id }}</td>
                                     <td>{{ cloth.type_id }}</td>

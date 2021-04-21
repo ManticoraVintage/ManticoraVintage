@@ -21,9 +21,15 @@ class ItemAttributesFactory extends Factory
      */
     public function definition()
     {
+        $strings = array(
+            'Red',
+            'Blue',
+        );
+        $key = array_rand($strings);
+        echo $strings[$key];
         return [
             'price' => $this->faker->numberBetween(1,100),
-            'units_in_stock' => $this->faker->numberBetween(1,100),
+            'available' => (bool)random_int(0, 1),
             'size' => 'M',
             'item_id' => $this->faker->numberBetween(1, 30),
         ];
