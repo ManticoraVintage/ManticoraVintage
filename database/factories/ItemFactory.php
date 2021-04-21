@@ -23,11 +23,11 @@ class ItemFactory extends Factory
     {
         return [
             'name' => $this->faker->realText($maxNbChars = 20, $indexSize = 2),
-            'price' => $this->faker->numberBetween(1,100),
-            'units_in_stock' => $this->faker->numberBetween(1,100),
+            'quality' => $this->faker->numberBetween(1, 5),
+            'country' => 'China',
             'photo' => 'overridden',
-            'category_id' => $this->faker->numberBetween(1,12),
-            'type_id' => $this->faker->numberBetween(1,3),
+            'category_id' => $this->faker->numberBetween(1, 12),
+            'type_id' => $this->faker->numberBetween(1, 3),
         ];
     }
 }

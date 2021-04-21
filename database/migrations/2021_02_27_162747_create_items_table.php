@@ -18,9 +18,9 @@ class CreateItemsTable extends Migration
             $table->timestamps();
 
             $table->string('name');
-            $table->float('price');
-            $table->integer('units_in_stock');
             $table->string('photo');
+            $table->string('quality')->nullable();
+            $table->string('country');
 
             //create foreign key column
             $table->unsignedBigInteger('category_id')->index();
