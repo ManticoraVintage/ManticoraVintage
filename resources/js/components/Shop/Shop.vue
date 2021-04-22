@@ -114,10 +114,10 @@
           <div class="itemData d-flex align-items-center flex-column">
             <div class="itemName">{{ item.name }}</div>
             <div class="price">{{ item.price }}€</div>
-            <div class="price">Quality: {{ item.quality }}</div>
-            <div class="price">Made in {{ item.country }}</div>
-            <div class="price">{{ item.size }}</div>
-            <div class="d-flex">
+            <div class="country">Made in {{ item.country }}</div>
+            <div class="size">{{ item.size }}</div>
+            <div class="d-flex align-items-center">
+              Quality
               <i v-for="i in item.quality" :key="i" class="fas fa-star"></i>
             </div>
             <div v-if="item.type_id === 1">
@@ -146,14 +146,13 @@
 .items-row img {
   height: 400px;
 }
-.fa-fire {
+.fas {
   color: #777777;
 }
 </style>
 
 <script>
 export default {
-  //data to save response and add items to template
   data() {
     return {
       items: [],
@@ -165,11 +164,7 @@ export default {
   },
   async mounted() {
     try {
-      (await axios.get(`/api/shop`)).data.forEach((element, i) => {
-        this.items[i] = { ...element, ...element.item };
-        delete this.items[i].item;
-        delete this.items[i].id;
-      });
+      this.items = await this.fetchItemData("/api/shop");
       console.log(this.items);
       this.categories = (await axios.get(`/api/categories`)).data;
       this.types = (await axios.get(`/api/types`)).data;
@@ -182,8 +177,22 @@ export default {
       const url = `/api/shop/category/${
         this.currentCategory ? this.currentCategory.id : "null"
       }/type/${this.currentType ? this.currentType.id : "null"}`;
-
-      this.items = (await axios.get(url)).data;
+      this.items = await this.fetchItemData(url);
+      console.log(this.items);
+    },
+    async fetchItemData(url) {
+      return (await axios.get(url)).data.map((element) => {
+        // We merge nested objects for easier access to item properties
+        element = {
+          ...element,
+          ...element.item,
+          ...element.item_attributes?.[0],
+        };
+        delete element.item;
+        delete element.item_attributes;
+        delete element.id;
+        return element;
+      });
     },
     setCurrentCategory(category) {
       this.currentCategory = category;

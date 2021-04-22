@@ -51,20 +51,18 @@ class ShopController extends Controller
     public function show($categoryId, $typeId)
     {
         if ($categoryId == 'null' && $typeId == 'null') {
-            return Item::findAll();
+            return ItemAttributes::with('item')->get(); 
         }
         if ($categoryId !== 'null' && $typeId !== 'null') {
-            return DB::table('items')
+            return Item::with('itemAttributes')
                 ->where('category_id', '=', $categoryId)
                 ->where('type_id', '=', $typeId)->get();
         }
         if ($categoryId !== 'null') {
-            return DB::table('items')
-                ->where('category_id', '=', $categoryId)->get();
+            return Item::with('itemAttributes')->where('category_id', '=', $categoryId)->get();
         }
         if ($typeId !== 'null') {
-            return DB::table('items')
-                ->where('category_id', '=', $categoryId)->get();
+            return Item::with('itemAttributes')->where('type_id', '=', $typeId)->get();
         }
     }
 
