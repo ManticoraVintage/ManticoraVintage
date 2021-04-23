@@ -353,11 +353,19 @@ export default {
       this.items = await this.fetchItemData(url);
       console.log(this.items);
     },
-    setCurrentCategory(category) {
-      this.currentCategory = category;
+    components: {
+        Carousel,
+        Slide
     },
-    setCurrentType(type) {
-      this.currentType = type;
+
+    async mounted() {
+        try {
+            this.items = (await axios.get(`/api/shop`)).data;
+            this.categories = (await axios.get(`/api/categories`)).data;
+            this.types = (await axios.get(`/api/types`)).data;
+        } catch (err) {
+            console.log(err);
+        }
     },
   },
     data: () => ({
