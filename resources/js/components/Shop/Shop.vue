@@ -175,6 +175,13 @@
     margin-top: 100px;
 }
 
+.carousel {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .carousel-container {
     display: flex;
     justify-content: center;
@@ -198,11 +205,18 @@
 
 .slider-image {
     max-width: 100%;
-    height: 100%;
+    height: 250px; /*Media query añadir */
     max-height: 100vh;
     margin: 0 auto;
-}
+} 
 
+/* Header */
+
+header {
+    max-width: 1600px;
+    margin: 0 auto;
+    
+}
 /* Category Dropdown */
 
 .category-dropdown,
@@ -217,8 +231,7 @@
 .category-dropdown:hover,
 .filter-dropdown:focus,
 .filter-dropdown:active,
-.filter-dropdown:hover
- {
+.filter-dropdown:hover {
     background: #f522e4;
     border: 1px solid #f522e4;
     color: white;
@@ -241,12 +254,11 @@ form button {
     margin-left: 10px;
 }
 
-input:focus, input:active {
+input:focus,
+input:active {
     box-shadow: none !important;
     border: 1px solid #f522e4;
 }
-
-
 
 form button {
     background: transparent;
