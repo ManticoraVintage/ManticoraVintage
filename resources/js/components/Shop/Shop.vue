@@ -24,9 +24,11 @@
                 ></slide>
             </carousel>
         </div>
-        <header class="d-flex justify-content-around px-4 row">
-            <div class="col-4 dropdowns-container d-flex">
-                <div class="dropdown mx-2 ">
+        <header class="d-flex justify-content-between px-4 row">
+            <div
+                class="col-12 col-sm-4 col-md-4  order-md-1 order-2 order-sm-1 dropdowns-container d-flex"
+            >
+                <div class="dropdown mx-2">
                     <button
                         class="btn btn-secondary dropdown-toggle category-dropdown"
                         type="button"
@@ -75,7 +77,7 @@
                 </div>
                 <div class="dropdown mx-2">
                     <button
-                        class="btn btn-secondary dropdown-toggle filter-dropdown"
+                        class="btn btn-secondary dropdown-toggle category-dropdown"
                         type="button"
                         id="dropdownTypeButton"
                         data-toggle="dropdown"
@@ -119,7 +121,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4 text-center">
+            <div
+                class="col-12 col-sm-4 col-md-4 col-xs-12 order-sm-2 order-md-2 order-1 mx-100 text-center text-container"
+            >
                 <h4>
                     {{ currentType ? currentType.name : "EVERY COLLECTION" }}
                 </h4>
@@ -128,76 +132,69 @@
                 </h6>
             </div>
             <nav
-                class="col-4 navbar navbar-light justify-content-end align-items-start p-0"
+                class="col-12 col-md-4 col-sm-4 order-3 col-xs-12 navbar navbar-light  align-items-start p-0 search-container"
             >
-            <hr />
-            <a
-              v-for="type in types"
-              :key="type.id"
-              class="dropdown-item"
-              :class="{
-                active:
-                  currentType !== null ? currentType.name === type.name : false,
-              }"
-              href="#"
-              @click="
-                setCurrentType(type);
-                getFilteredItems();
-              "
-              >{{ type.name }}</a
-            >
-          </div>
-        </div>
-      </div>
-      <div class="col-4 text-center">
-        <h4>{{ currentType ? currentType.name : "EVERY COLLECTION" }}</h4>
-        <h6>{{ currentCategory ? currentCategory.name : "ALL ITEMS" }}</h6>
-      </div>
-      <nav
-        class="col-4 navbar navbar-light justify-content-end align-items-start p-0"
-      >
-        <form class="form-inline d-flex">
-          <input
-            class="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-            Search
-          </button>
-        </form>
-      </nav>
-    </header>
-    <section>
-      <div class="row items-row">
-        <div class="col-4" v-for="item in items" :key="item.id">
-          <div class="d-flex justify-content-center">
-            <img src="images/fake_clothes/34GQ8uAugoE.jpg" alt="" />
-          </div>
-          <div class="itemData d-flex align-items-center flex-column">
-            <div class="itemName">{{ item.name }}</div>
-            <div class="price">{{ item.price }}€</div>
-            <div class="country">Made in {{ item.country }}</div>
-            <div class="size">{{ item.size }}</div>
-            <div class="d-flex align-items-center">
-              Quality
-              <i v-for="i in item.quality" :key="i" class="fas fa-star"></i>
+                <form class="form-inline d-flex">
+                    <input
+                        class="form-control mr-sm-2"
+                        type="search"
+                        placeholder="Search"
+                        aria-label="Search"
+                    />
+                    <button
+                        class="btn btn-outline-success my-2 my-sm-0"
+                        type="submit"
+                    >
+                        Search
+                    </button>
+                </form>
+            </nav>
+        </header>
+        <section>
+            <div class="row items-row">
+                <div
+                    class="col-lg-4 col-md-6 col-sm-12"
+                    v-for="item in items"
+                    :key="item.id"
+                >
+                    <div class="d-flex justify-content-center">
+                        <img src="images/fake_clothes/34GQ8uAugoE.jpg" alt="" />
+                    </div>
+                    <div class="itemData d-flex align-items-center flex-column">
+                        <div class="item-info-container">
+                            <div class="itemName">{{ item.name }}</div>
+                            <div class="price">{{ item.price }}€</div>
+                            <div class="country">
+                                Made in {{ item.country }}
+                            </div>
+                            <div class="size">{{ item.size }}</div>
+                            <div class="d-flex align-items-center quality">
+                                Quality
+                                <i
+                                    v-for="i in item.quality"
+                                    :key="i"
+                                    class="fas fa-star"
+                                ></i>
+                            </div>
+                            <div v-if="item.type_id === 1">
+                                SELECTED <i class="fas fa-fire"></i>
+                            </div>
+                            <div v-if="!item.available">
+                                <div v-if="item.type_id === 3">
+                                    OUT OF STOCK
+                                    <i class="fas fa-shipping-fast"></i>
+                                </div>
+                                <div v-else>
+                                    SOLD OUT
+                                    <i class="fas fa-shopping-basket"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div v-if="item.type_id === 1">
-              SELECTED <i class="fas fa-fire"></i>
-            </div>
-            <div v-if="!item.available">
-              <div v-if="item.type_id === 3">
-                OUT OF STOCK <i class="fas fa-shipping-fast"></i>
-              </div>
-              <div v-else>SOLD OUT <i class="fas fa-shopping-basket"></i></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+        </section>
+    </div>
 </template>
 
 <style scoped>
@@ -210,6 +207,7 @@
 }
 
 .carousel {
+    width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -239,17 +237,16 @@
 
 .slider-image {
     max-width: 100%;
-    height: 250px; /*Media query añadir */
+    height: 900px; /*Media query añadir */
     max-height: 100vh;
     margin: 0 auto;
-} 
+}
 
 /* Header */
 
 header {
-    max-width: 1600px;
+    max-width: 1650px;
     margin: 0 auto;
-    
 }
 /* Category Dropdown */
 
@@ -281,6 +278,19 @@ header {
     color: white;
 }
 
+.dropdowns-container {
+    margin: 10px 0px;
+}
+
+.text-container {
+    margin-top: 10px;
+}
+
+.search-container {
+    margin-top: 10px;
+    justify-content: flex-end;
+}
+
 /* search filter */
 
 input,
@@ -309,16 +319,71 @@ form button:hover {
     box-shadow: none !important;
 }
 
+/* Items */
+
 .items-row {
     margin-top: 100px;
 }
 .items-row img {
     margin: 30px 10px;
-    height: 500px;
+    height: 450px;
     width: auto;
 }
+
+.item-info-container{
+        min-width: 300px;
+}
 .fas {
-  color: #777777;
+    color: #f522e4;
+    margin-left: 5px;
+}
+
+.itemName {
+    color: #8a8a8a;
+}
+
+.price {
+    font-weight: bold;
+}
+
+.country {
+}
+
+.quality {
+}
+
+.size {
+    font-weight: bold;
+}
+
+@media (max-width: 1066px) {
+    .carousel {
+        height: auto;
+        margin-top: 40px;
+    }
+    .slider-image {
+        height: 450px;
+    }
+    .dropdowns-container {
+        justify-content: center;
+    }
+    .search-container {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 786px) {
+    .slider-image {
+        height: 250px;
+    }
+    .dropsdown-content {
+        justify-content: center;
+    }
+    .search-container {
+        justify-content: center;
+        align-items: center;
+    }
 }
 </style>
 
@@ -326,65 +391,53 @@ form button:hover {
 import { Carousel, Slide } from "vue-carousel";
 
 export default {
-  data() {
-    return {
-      items: [],
-      categories: null,
-      currentCategory: null,
-      types: null,
-      currentType: null,
-    };
-  },
-  async mounted() {
-    try {
-      this.items = await this.fetchItemData("/api/shop");
-      console.log(this.items);
-      this.categories = (await axios.get(`/api/categories`)).data;
-      this.types = (await axios.get(`/api/types`)).data;
-    } catch (err) {
-      console.log(err);
-    }
-  },
-  methods: {
-    async getFilteredItems() {
-      const url = `/api/shop/category/${
-        this.currentCategory ? this.currentCategory.id : "null"
-      }/type/${this.currentType ? this.currentType.id : "null"}`;
-      this.items = await this.fetchItemData(url);
-      console.log(this.items);
+    data() {
+        return {
+            items: [],
+            categories: null,
+            currentCategory: null,
+            types: null,
+            currentType: null,
+            images: [
+                "images/main_slider/01-26.jpg",
+                "images/main_slider/01-31.jpg",
+                "images/main_slider/02-4.jpg",
+                "images/main_slider/02-10.jpg",
+                "images/main_slider/02-28.jpg",
+                "images/main_slider/02-30.jpg",
+                "images/main_slider/02-34.jpg",
+                "images/main_slider/03-20.jpg",
+                "images/main_slider/03-21.jpg",
+                "images/main_slider/03-25.jpg",
+                "images/main_slider/03-32.jpg"
+            ]
+        };
     },
-    components: {
-        Carousel,
-        Slide
-    },
-
     async mounted() {
         try {
-            this.items = (await axios.get(`/api/shop`)).data;
+            this.items = await this.fetchItemData("/api/shop");
+            console.log(this.items);
             this.categories = (await axios.get(`/api/categories`)).data;
             this.types = (await axios.get(`/api/types`)).data;
         } catch (err) {
             console.log(err);
         }
     },
-  },
-    data: () => ({
-        images: [
-            "images/main_slider/01-26.jpg",
-            "images/main_slider/01-31.jpg",
-            "images/main_slider/02-4.jpg",
-            "images/main_slider/02-10.jpg",
-            "images/main_slider/02-28.jpg",
-            "images/main_slider/02-30.jpg",
-            "images/main_slider/02-34.jpg",
-            "images/main_slider/03-20.jpg",
-            "images/main_slider/03-21.jpg",
-            "images/main_slider/03-25.jpg",
-            "images/main_slider/03-32.jpg",
-          
-            
-        ]
-    }),
+    methods: {
+        async getFilteredItems() {
+            const url = `/api/shop/category/${
+                this.currentCategory ? this.currentCategory.id : "null"
+            }/type/${this.currentType ? this.currentType.id : "null"}`;
+            this.items = await this.fetchItemData(url);
+            console.log(this.items);
+        },
+        setCurrentCategory(category) {
+            this.currentCategory = category;
+        },
+        setCurrentType(type) {
+            this.currentType = type;
+        }
+    },
 
     components: {
         Carousel,
