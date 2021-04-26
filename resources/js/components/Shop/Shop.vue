@@ -130,8 +130,12 @@
         </form>
       </nav>
     </header>
-    <section>
-      <div class="row items-row">
+    <section class="items-section">
+      <div v-if="!items.length" class="d-flex flex-column align-items-center">
+        <span>THERE ARE CURRENTLY NO ITEMS THAT MATCH YOUR SEARCH</span
+        ><i class="fas fa-tshirt"></i>
+      </div>
+      <div v-else class="row">
         <div
           class="col-lg-4 col-md-6 col-sm-12"
           v-for="item in items"
@@ -176,9 +180,7 @@
   margin: 0 auto;
   padding: 0 5%;
 }
-.items-row {
-  margin-top: 100px;
-}
+
 
 .carousel {
   width: 100vw;
@@ -256,7 +258,7 @@ header {
   margin: 10px 0px;
 }
 
-.dropdown-menu span{
+.dropdown-menu span {
   cursor: pointer;
 }
 
@@ -299,13 +301,21 @@ form button:hover {
 
 /* Items */
 
-.items-row {
+.items-section {
   margin-top: 100px;
 }
-.items-row img {
+.items-section img {
   margin: 30px 10px;
   height: 450px;
   width: auto;
+}
+.items-section span {
+  font-size: 30px;
+  margin-bottom: 50px;
+}
+.items-section .fa-tshirt {
+  font-size: 140px;
+  color: #a5a5a577;
 }
 
 .item-info-container {
