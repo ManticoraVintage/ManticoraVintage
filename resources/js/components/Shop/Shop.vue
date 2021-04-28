@@ -150,11 +150,25 @@
             <div class="row items-row">
                 <div
                     class="col-lg-4 col-md-6 col-sm-12"
-                    v-for="item in items"
+                    v-for="(item, key) in items"
                     :key="item.id"
                 >
+                    <!--  -->
                     <div class="d-flex justify-content-center">
-                        <img src="images/fake_clothes/34GQ8uAugoE.jpg" alt="" />
+                        <img
+                            class="test"
+                            :src="
+                                hovered === key
+                                    ? `images/shop/${
+                                          item.photo.split(',')[1]
+                                      }.jpg`
+                                    : `images/shop/${
+                                          item.photo.split(',')[0]
+                                      }.jpg`
+                            "
+                            @mouseover="hovered = key"
+                            @mouseleave="hovered = null"
+                        />
                     </div>
                     <div class="itemData d-flex align-items-center flex-column">
                         <div class="item-info-container">
@@ -200,6 +214,11 @@
 }
 .items-row {
     margin-top: 100px;
+}
+
+.test:hover {
+    transition: 0.1s ease-in-out;
+    cursor: pointer;
 }
 
 .carousel {
@@ -259,18 +278,18 @@ header {
 .filter-dropdown:focus,
 .filter-dropdown:active,
 .filter-dropdown:hover {
-    background: #f522e4;
-    border: 1px solid #f522e4;
+    background: #ee2a7b;
+    border: 1px solid #ee2a7b;
     color: white;
     box-shadow: none !important;
 }
 
 .dropdown-item.active {
-    background: #f522e4;
+    background: #ee2a7b;
 }
 
 .dropdown-item:hover {
-    background: #f522e4;
+    background: #ee2a7b;
     color: white;
 }
 
@@ -301,7 +320,7 @@ form button {
 input:focus,
 input:active {
     box-shadow: none !important;
-    border: 1px solid #f522e4;
+    border: 1px solid #ee2a7b;
 }
 
 form button {
@@ -313,8 +332,8 @@ form button {
 form button:focus,
 form button:active,
 form button:hover {
-    background: #f522e4;
-    border: 1px solid #f522e4;
+    background: #ee2a7b;
+    border: 1px solid #ee2a7b;
     color: white;
     box-shadow: none !important;
 }
@@ -334,7 +353,7 @@ form button:hover {
     min-width: 300px;
 }
 .fas {
-    color: #f522e4;
+    color: #ee2a7b;
     margin-left: 5px;
 }
 
@@ -398,8 +417,6 @@ export default {
             currentCategory: null,
             types: null,
             currentType: null,
-            shopImages: [],
-            imagesFormatted: [],
             images: [
                 "images/main_slider/01-26.jpg",
                 "images/main_slider/01-31.jpg",
@@ -412,7 +429,12 @@ export default {
                 "images/main_slider/03-21.jpg",
                 "images/main_slider/03-25.jpg",
                 "images/main_slider/03-32.jpg"
-            ]
+            ],
+            hoverState: 0,
+            hovered: null,
+            shownImage: "",
+            shopImages: [],
+            imagesFormatted: []
         };
     },
     async mounted() {
@@ -421,24 +443,6 @@ export default {
             console.log(this.items);
             this.categories = (await axios.get(`/api/categories`)).data;
             this.types = (await axios.get(`/api/types`)).data;
-
-            //Formatting images string
-            for (let i = 0; i < this.items.length; i++) {
-                this.shopImages.push(this.items[i].photo);
-                console.log(
-                    this.shopImages[i] +
-                        " Array de imagenes vuelta numero " +
-                        (i + 1)
-                );
-                for (let x = 0; x < this.shopImages.length; x++) {
-                    console.log(this.shopImages + " =  this.images ");
-                    this.imagesFormatted.push(this.shopImages[x].split(","));
-                    console.log(this.imagesFormatted[x]);
-                }
-                // this.imagesFormatted = this.items[i].photo.split(',');
-                // this.images.push("images/" + this.imagesFormatted[i] + ".jpg");
-                // alert(this.images[i]+ " Insert " + (i+1));
-            }
         } catch (err) {
             console.log(err);
         }
@@ -465,15 +469,12 @@ export default {
                 return element;
             });
         },
+
         setCurrentCategory(category) {
             this.currentCategory = category;
         },
         setCurrentType(type) {
             this.currentType = type;
-        },
-
-        formatPhoto() {
-            alert("gola");
         }
     },
 

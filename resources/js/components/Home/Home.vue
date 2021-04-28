@@ -21,7 +21,7 @@
   position: absolute;
   top: 40px;
   padding: 0 25px;
-  color: #f522e4;
+  color: #ee2a7b;
   letter-spacing: 5px;
 }
 
@@ -29,7 +29,7 @@
 .logo-container {
   width: 400px;
   height: 400px;
-  background-color: #f522e4;
+  background-color: #ee2a7b;
   border-radius: 100%;
   position: absolute;
   top: 50%;
