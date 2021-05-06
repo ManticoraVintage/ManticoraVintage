@@ -186,7 +186,7 @@
                                     class="fas fa-star"
                                 ></i>
                             </div>
-                            <div v-if="item.type_id === 1">
+                            <div v-if="item.type_id === 2">
                                 SELECTED <i class="fas fa-fire"></i>
                             </div>
                             <div v-if="!item.available">
