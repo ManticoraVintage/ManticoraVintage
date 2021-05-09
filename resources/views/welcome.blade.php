@@ -420,14 +420,14 @@
     Admin Page: Roboto
 
     | COLOR |
-    Primary: #f522e4; -> Pink
+    Primary: #ee2a7b; -> Pink
     Secondary: #ffffff; -> White
     Tertiary: #3a3a3a; -> Light Black
     */
 
         body {
             font-family: 'Canela', 'Quicksand';
-            font-size: 18px
+            font-size: 18px;
         }
 
         h1{

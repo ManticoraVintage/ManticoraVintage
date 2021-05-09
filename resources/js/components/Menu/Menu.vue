@@ -51,7 +51,7 @@
     top: 10px;
     width: 30px;
     height: 4px;
-    background: #f522e4;
+    background: #ee2a7b;
     transition: 0.5s;
     z-index: 1001;
 }
@@ -101,7 +101,7 @@ ul.menuOpen {
 ul li {
     text-align: right;
     margin: 5px 0px;
-    color: #f522e4;
+    color: #ee2a7b;
 }
 
 ul li:hover {
