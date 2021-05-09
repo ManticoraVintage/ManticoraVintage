@@ -212,6 +212,7 @@
     margin: 0 auto;
     padding: 0 5%;
 }
+
 .items-row {
     margin-top: 100px;
 }
@@ -220,6 +221,7 @@
     transition: 0.1s ease-in-out;
     cursor: pointer;
 }
+
 
 .carousel {
     width: 100vw;
@@ -298,7 +300,9 @@ header {
 }
 
 .dropdown-menu span {
+
     cursor: pointer;
+
 }
 
 .text-container {
@@ -347,6 +351,15 @@ form button:hover {
     margin: 30px 10px;
     height: 450px;
     width: auto;
+
+}
+.items-section span {
+  font-size: 30px;
+  margin-bottom: 50px;
+}
+.items-section .fa-tshirt {
+  font-size: 140px;
+  color: #a5a5a577;
 }
 
 .item-info-container {
