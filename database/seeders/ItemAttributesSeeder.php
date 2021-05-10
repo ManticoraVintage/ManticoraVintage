@@ -65,9 +65,28 @@ class ItemAttributesSeeder extends Seeder
             // ['id' => 45, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 50.00, 'available' => 1, 'size' => 'M/38/10', 'item_id' => 45,],
             ['id' => 46, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 35.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 46,],
             ['id' => 47, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 40.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 47,],
-
-            
-
+            ['id' => 48, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 25.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 48,],
+            ['id' => 49, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 40.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 49,],
+            ['id' => 50, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 55.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 50,],
+            ['id' => 51, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 85.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 51,],
+            ['id' => 52, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 70.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 52,],
+            ['id' => 53, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 40.00, 'available' => 0, 'size' => 'No Size', 'item_id' => 53,],
+            ['id' => 54, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 70.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 54,],
+            ['id' => 55, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 120.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 55,],
+            ['id' => 56, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 75.00, 'available' => 1, 'size' => 'M/38/10', 'item_id' => 56,],
+            ['id' => 57, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 45.00, 'available' => 1, 'size' => 'XS/34/6', 'item_id' => 57,],
+            ['id' => 58, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 40.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 58,],
+            ['id' => 59, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 45.00, 'available' => 1, 'size' => 'S/36/8', 'item_id' => 59,],
+            ['id' => 60, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 30.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 60,],
+            ['id' => 61, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 40.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 61,],
+            ['id' => 62, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 70.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 62,],
+            ['id' => 63, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 40.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 63,],
+            ['id' => 64, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 40.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 64,],
+            ['id' => 65, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 40.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 65,],
+            ['id' => 66, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 50.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 66,],
+            ['id' => 67, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 40.00, 'available' => 0, 'size' => 'No Size', 'item_id' => 67,],
+            ['id' => 68, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 30.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 68,],
+            ['id' => 69, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 40.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 69,],           
         ]);
         // $itemAttributes = ItemAttributes::factory()->count(30)->create();
     }
