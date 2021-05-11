@@ -200,6 +200,13 @@
                                 </div>
                             </div>
                         </div>
+                        <router-link
+                            :to="{
+                                name: 'ShopItemDetails',
+                                params: { id: item.item_id }
+                            }"
+                            >xd</router-link
+                        >
                     </div>
                 </div>
             </div>
@@ -221,7 +228,6 @@
     transition: 0.1s ease-in-out;
     cursor: pointer;
 }
-
 
 .carousel {
     width: 100vw;
@@ -300,9 +306,7 @@ header {
 }
 
 .dropdown-menu span {
-
     cursor: pointer;
-
 }
 
 .text-container {
@@ -351,15 +355,14 @@ form button:hover {
     margin: 30px 10px;
     height: 450px;
     width: auto;
-
 }
 .items-section span {
-  font-size: 30px;
-  margin-bottom: 50px;
+    font-size: 30px;
+    margin-bottom: 50px;
 }
 .items-section .fa-tshirt {
-  font-size: 140px;
-  color: #a5a5a577;
+    font-size: 140px;
+    color: #a5a5a577;
 }
 
 .item-info-container {
@@ -421,6 +424,7 @@ form button:hover {
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
+import ShopItemDetails from "./ShopItemDetails";
 
 export default {
     data() {
@@ -493,7 +497,8 @@ export default {
 
     components: {
         Carousel,
-        Slide
+        Slide,
+        ShopItemDetails
     }
 };
 </script>

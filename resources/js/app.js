@@ -8,6 +8,7 @@ import VueCarousel from 'vue-carousel';
 
 
 
+
 Vue.use(Modal, {
   componentName: "ModalVue"
 });
