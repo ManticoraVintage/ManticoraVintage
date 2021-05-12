@@ -205,7 +205,7 @@
                                 name: 'ShopItemDetails',
                                 params: { id: item.item_id }
                             }"
-                            >xd</router-link
+                            >DETALLES</router-link
                         >
                     </div>
                 </div>
@@ -350,6 +350,8 @@ form button:hover {
 
 .items-row {
     margin-top: 100px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 .items-row img {
     margin: 30px 10px;

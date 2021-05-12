@@ -1,40 +1,42 @@
 <template>
-  <div class="main">
-    <Menu></Menu>
-    <div class="page-title-container d-flex align-items-center">
-      <h1>Manticora Vintage</h1>
-    </div>
+    <div class="main">
+        <Menu></Menu>
+        <div class="page-title-container d-flex align-items-center">
+            <h1>Manticora Vintage</h1>
+        </div>
 
-    <div class="logo-container"></div>
-    <!-- <Shop></Shop> -->
-  </div>
+        <div class="logo-container d-flex justify-content-center align-items-center">
+            <img src="images/LOGO NEGRO (1).jpg" />
+        </div>
+    </div>
 </template>
 
 <style scoped>
 /* Main component style */
 .main {
-  width: 100vw;
+    width: 100vw;
 }
 
 /* Main title style */
 .page-title-container {
-  position: absolute;
-  top: 40px;
-  padding: 0 25px;
-  color: #ee2a7b;
-  letter-spacing: 5px;
+    position: absolute;
+    top: 40px;
+    padding: 0 25px;
+    color: #ffffff;
+    letter-spacing: 5px;
 }
 
 /* Logo style */
 .logo-container {
-  width: 400px;
-  height: 400px;
-  background-color: #ee2a7b;
-  border-radius: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+}
+
+.logo-container img {
+    width: 600px;
+    height: 600px;
+   
 }
 </style>
 
@@ -43,11 +45,11 @@ import Menu from "../Menu/Menu";
 import Shop from "../Shop/Shop.vue";
 
 export default {
-  name: "Home",
+    name: "Home",
 
-  components: {
-    Menu,
-    Shop,
-  },
+    components: {
+        Menu,
+        Shop
+    }
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div class="main">
+    <div class="main" >
         <div class="main-container row">
             <div
                 class="information-container d-flex justify-content-center flex-column col-12 col-sm-12 col-lg-6"
@@ -32,7 +32,7 @@
                     <br />
                 </div>
 
-                <div class="type-description">
+                <div class="type-description" style="font-size:16px">
                     Los dosmiles siempre han sido criticados en el mundo de la
                     moda por sus combinaciones arriesgadas y conjuntos
                     “estrambóticos”; pantalones de tiro bajo, mini-faldas,
