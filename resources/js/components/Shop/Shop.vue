@@ -430,6 +430,7 @@ export default {
       console.log(this.items);
       this.categories = (await axios.get(`/api/categories`)).data;
       this.types = (await axios.get(`/api/types`)).data;
+      console.log(this.types)
     } catch (err) {
       console.log(err);
     }
