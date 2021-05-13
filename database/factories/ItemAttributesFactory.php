@@ -31,6 +31,7 @@ class ItemAttributesFactory extends Factory
             'price' => $this->faker->numberBetween(1,100),
             'available' => random_int(0, 1),
             'size' => 'M',
+            'gender' => 'M',
             'item_id' => $this->faker->numberBetween(1, 30),
         ];
     }

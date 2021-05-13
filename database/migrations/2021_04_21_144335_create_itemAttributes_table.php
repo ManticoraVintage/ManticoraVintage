@@ -19,6 +19,7 @@ class CreateItemAttributesTable extends Migration
             $table->float('price');
             $table->integer('available');
             $table->string('size');
+            $table->string('gender')->nullable();
 
             //create foreign key column
             $table->unsignedBigInteger('item_id')->index();
