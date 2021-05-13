@@ -182,7 +182,7 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .main {
   margin: 0 auto;
   padding: 0 5%;
@@ -319,10 +319,12 @@ form button:hover {
 .items-row {
   margin-top: 100px;
 }
-.items-row img {
-  margin: 30px 10px;
-  height: 450px;
-  width: auto;
+.items-row {
+  img {
+    margin: 30px 10px;
+    height: 450px;
+    width: auto;
+  }
 }
 .items-section span {
   font-size: 30px;
