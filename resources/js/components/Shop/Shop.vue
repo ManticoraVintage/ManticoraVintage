@@ -136,6 +136,7 @@
                         type="search"
                         placeholder="Search"
                         aria-label="Search"
+                        v-model="itemSearched"
                     />
                     <button
                         class="btn btn-outline-success my-2 my-sm-0"
@@ -149,12 +150,15 @@
         <section>
             <div class="row items-row">
                 <div
-                    class="col-lg-4 col-md-6 col-sm-12"
+                    class="col-lg-4 col-md-6 col-sm-12 item"
                     v-for="(item, key) in items"
                     :key="item.id"
                 >
                     <!--  -->
-                    <div class="d-flex justify-content-center">
+                    <div
+                        class="d-flex justify-content-center justify-content-md-start"
+                        style="margin-top:20px"
+                    >
                         <img
                             class="test"
                             :src="
@@ -170,7 +174,7 @@
                             @mouseleave="hovered = null"
                         />
                     </div>
-                    <div class="itemData d-flex align-items-center flex-column">
+                    <div class="itemData d-flex align-items-start flex-column">
                         <div class="item-info-container">
                             <div class="itemName">{{ item.name }}</div>
                             <div class="price">{{ item.price }}€</div>
@@ -201,11 +205,12 @@
                             </div>
                         </div>
                         <router-link
+                            class="d-flex justify-content-center align-items-center detail-button"
                             :to="{
                                 name: 'ShopItemDetails',
                                 params: { id: item.item_id }
                             }"
-                            >DETALLES</router-link
+                            >DETAILS</router-link
                         >
                     </div>
                 </div>
@@ -218,6 +223,7 @@
 .main {
     margin: 0 auto;
     padding: 0 5%;
+    background: #f2f3f5;
 }
 
 .items-row {
@@ -268,7 +274,7 @@
 /* Header */
 
 header {
-    max-width: 1650px;
+    max-width: 1250px;
     margin: 0 auto;
 }
 /* Category Dropdown */
@@ -318,6 +324,19 @@ header {
     justify-content: flex-end;
 }
 
+.detail-button {
+    background-color: #ee2a7c1e;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.detail-button:hover {
+    color: white;
+    background-color: #ee2a7c;
+}
+
 /* search filter */
 
 input,
@@ -350,11 +369,12 @@ form button:hover {
 
 .items-row {
     margin-top: 100px;
-    max-width: 1200px;
+    max-width: 1250px;
     margin: 0 auto;
 }
+
 .items-row img {
-    margin: 30px 10px;
+    margin: 5px 0px;
     height: 450px;
     width: auto;
 }
@@ -369,6 +389,7 @@ form button:hover {
 
 .item-info-container {
     min-width: 300px;
+    min-height: 170px;
 }
 .fas {
     color: #ee2a7b;
@@ -453,7 +474,8 @@ export default {
             hovered: null,
             shownImage: "",
             shopImages: [],
-            imagesFormatted: []
+            imagesFormatted: [],
+            itemSearched: null
         };
     },
     async mounted() {
@@ -494,6 +516,19 @@ export default {
         },
         setCurrentType(type) {
             this.currentType = type;
+        }
+    },
+
+    computed: {
+        filteredList() {
+            if (this.itemSearched) {
+                return this.items.filter(item => {
+                    return item.name
+                        .toLowerCase()
+                        .includes(this.itemSearched.toLowerCase());
+                });
+            }
+            return this.items;
         }
     },
 
