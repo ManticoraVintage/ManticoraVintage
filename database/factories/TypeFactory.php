@@ -23,6 +23,7 @@ class TypeFactory extends Factory
     {
         return [
             'name' => 'overridden',
+            'description' => 'overridden',
         ];
     }
 }
