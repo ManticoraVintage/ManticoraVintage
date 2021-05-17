@@ -147,17 +147,24 @@
                 </form>
             </nav>
         </header>
-        <section>
-            <div class="row items-row">
+        <section class="item-section d-flex justify-content-center align-items-center">
+            <div
+                v-if="!filteredList.length"
+                class="d-flex flex-column align-items-center"
+            >
+                <span>THERE ARE CURRENTLY NO ITEMS THAT MATCH YOUR SEARCH</span
+                ><i class="fas fa-tshirt"></i>
+            </div>
+            
+            <div v-else class="row items-row">
                 <div
                     class="col-lg-4 col-md-6 col-sm-12 item"
-                    v-for="(item, key) in items"
+                    v-for="(item, key) in filteredList"
                     :key="item.id"
                 >
                     <!--  -->
                     <div
-                        class="d-flex justify-content-center justify-content-md-start"
-                        style="margin-top:20px"
+                        class="d-flex justify-content-center justify-content-md-center"
                     >
                         <img
                             class="test"
@@ -174,7 +181,7 @@
                             @mouseleave="hovered = null"
                         />
                     </div>
-                    <div class="itemData d-flex align-items-start flex-column">
+                    <div class="itemData d-flex align-items-center flex-column">
                         <div class="item-info-container">
                             <div class="itemName">{{ item.name }}</div>
                             <div class="price">{{ item.price }}€</div>
@@ -226,8 +233,8 @@
     background: #f2f3f5;
 }
 
-.items-row {
-    margin-top: 100px;
+.item-section{
+    min-height: 700px;
 }
 
 .test:hover {
@@ -326,7 +333,7 @@ header {
 
 .detail-button {
     background-color: #ee2a7c1e;
-    width: 100%;
+    width: 80%;
     padding: 10px;
     margin-top: 10px;
     transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -368,13 +375,12 @@ form button:hover {
 /* Items */
 
 .items-row {
-    margin-top: 100px;
     max-width: 1250px;
-    margin: 0 auto;
 }
 
 .items-row img {
     margin: 5px 0px;
+    margin-top: 80px;
     height: 450px;
     width: auto;
 }
@@ -389,7 +395,7 @@ form button:hover {
 
 .item-info-container {
     min-width: 300px;
-    min-height: 170px;
+    min-height: 200px;
 }
 .fas {
     color: #ee2a7b;
