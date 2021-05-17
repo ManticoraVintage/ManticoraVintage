@@ -51,7 +51,7 @@
     top: 10px;
     width: 30px;
     height: 4px;
-    background: #ee2a7b;
+    background: #ffffff;
     transition: 0.5s;
     z-index: 1001;
 }
@@ -101,7 +101,7 @@ ul.menuOpen {
 ul li {
     text-align: right;
     margin: 5px 0px;
-    color: #ee2a7b;
+    color: #ffffff;
 }
 
 ul li:hover {
@@ -112,7 +112,7 @@ ul li:hover {
 
 .menu-opened-layout {
     position: absolute;
-    background-color: rgba(36, 36, 36, 0.755);
+    background-color: #d12a704a;
     width: 0vw;
     height: 100%;
     top: 0;

@@ -66,6 +66,12 @@ class ShopController extends Controller
         }
     }
 
+    public function showOne($item_id){
+        return ItemAttributes::with('item')->where('id', '=', $item_id)->get();
+    }
+
+    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -99,4 +105,6 @@ class ShopController extends Controller
     {
         Item::where('id', $id)->delete();
     }
+
+
 }

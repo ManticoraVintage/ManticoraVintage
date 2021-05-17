@@ -165,16 +165,24 @@
                 SELECTED <i class="fas fa-fire"></i>
               </div>
               <div v-if="!item.available">
-                <div v-if="item.type_id === 3">
-                  OUT OF STOCK
-                  <i class="fas fa-shipping-fast"></i>
-                </div>
-                <div v-else>
-                  SOLD OUT
-                  <i class="fas fa-shopping-basket"></i>
-                </div>
-              </div>
-            </div>
+                                <div v-if="item.type_id === 3">
+                                    OUT OF STOCK
+                                    <i class="fas fa-shipping-fast"></i>
+                                </div>
+                                <div v-else>
+                                    SOLD OUT
+                                    <i class="fas fa-shopping-basket"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <router-link
+                            class="d-flex justify-content-center align-items-center detail-button"
+                            :to="{
+                                name: 'ShopItemDetails',
+                                params: { id: item.item_id }
+                            }"
+                            >DETAILS</router-link
+                        >
           </div>
         </div>
       </div>
@@ -184,8 +192,14 @@
 
 <style lang="scss" scoped>
 .main {
-  margin: 0 auto;
-  padding: 0 5%;
+    margin: 0 auto;
+    padding: 0 5%;
+    background: #f2f3f5;
+}
+
+.item-section{
+    min-height: 700px;
+    padding: 0 5%;
 }
 
 .items-row {
@@ -236,8 +250,8 @@
 /* Header */
 
 header {
-  max-width: 1650px;
-  margin: 0 auto;
+    max-width: 1250px;
+    margin: 0 auto;
 }
 /* Category Dropdown */
 
@@ -274,16 +288,30 @@ header {
 }
 
 .dropdown-menu span {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .text-container {
   margin-top: 10px;
 }
 
-.search-container {
+.
+-container {
   margin-top: 10px;
   justify-content: flex-end;
+}
+
+.detail-button {
+    background-color: #ee2a7c1e;
+    width: 80%;
+    padding: 10px;
+    margin-top: 10px;
+    transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.detail-button:hover {
+    color: white;
+    background-color: #ee2a7c;
 }
 
 /* search filter */
@@ -317,26 +345,26 @@ form button:hover {
 /* Items */
 
 .items-row {
-  margin-top: 100px;
-}
-.items-row {
+max-width: 1250px;
   img {
-    margin: 30px 10px;
+    margin: 5px 0px;
+    margin-top: 80px;
     height: 450px;
     width: auto;
   }
 }
 .items-section span {
-  font-size: 30px;
-  margin-bottom: 50px;
+    font-size: 30px;
+    margin-bottom: 50px;
 }
 .items-section .fa-tshirt {
-  font-size: 140px;
-  color: #a5a5a577;
+    font-size: 140px;
+    color: #a5a5a577;
 }
 
 .item-info-container {
-  min-width: 300px;
+    min-width: 300px;
+   min-height: 200px;
 }
 .fas {
   color: #ee2a7b;
@@ -394,6 +422,7 @@ form button:hover {
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
+import ShopItemDetails from "./ShopItemDetails";
 
 export default {
   data() {
@@ -464,22 +493,24 @@ export default {
     setCurrentType(type) {
       this.currentType = type;
     },
-  },
-  computed: {
-    filteredList() {
-      if (this.itemSearched) {
-        return this.items.filter((item) => {
-          return item.name
-            .toLowerCase()
-            .includes(this.itemSearched.toLowerCase());
-        });
-      }
-      return this.items;
+
+    computed: {
+        filteredList() {
+            if (this.itemSearched) {
+                return this.items.filter(item => {
+                    return item.name
+                        .toLowerCase()
+                        .includes(this.itemSearched.toLowerCase());
+                });
+            }
+            return this.items;
+        }
     },
-  },
-  components: {
-    Carousel,
-    Slide,
-  },
+
+    components: {
+        Carousel,
+        Slide,
+        ShopItemDetails
+    }
 };
 </script>

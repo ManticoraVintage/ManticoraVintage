@@ -2,6 +2,7 @@
 import Index from "./components/Index.vue";
 import Admin from "./components/Admin/Admin.vue";
 import Shop from "./components/Shop/Shop.vue";
+import ShopItemDetails from "./components/Shop/ShopItemDetails.vue";
 import VueRouter from "vue-router";
 
 const routes = [
@@ -16,12 +17,16 @@ const routes = [
         name: "admin",
     },
 
-        
     {
         path: "/shop",
         component: Shop,
         name: "shop"
     },
+    {
+        path: "/shopItemDetails/:id",
+        component: ShopItemDetails,
+        name: "ShopItemDetails"
+    }
 ];
 
 const router = new VueRouter({
