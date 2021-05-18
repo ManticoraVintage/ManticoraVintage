@@ -1,12 +1,11 @@
 <template>
     <div class="main">
-        <div class="navbar d-flex flex-column">
+        <div class="navbar d-flex flex-column" :style="cssVars">
             <div
                 class="toggle"
                 v-on:click="menuOpen"
                 v-bind:class="{ active: isActive }"
             >
-              
                 <span></span>
                 <span></span>
                 <span></span>
@@ -18,7 +17,10 @@
                 <li>Zozobra</li>
             </ul>
         </div>
-        <div v-bind:class="{layoutOpen: isLayoutOpen}" class="menu-opened-layout"></div>
+        <div
+            v-bind:class="{ layoutOpen: isLayoutOpen }"
+            class="menu-opened-layout"
+        ></div>
     </div>
 </template>
 
@@ -51,7 +53,7 @@
     top: 10px;
     width: 30px;
     height: 4px;
-    background: #ffffff;
+    background: var(--color);
     transition: 0.5s;
     z-index: 1001;
 }
@@ -101,7 +103,7 @@ ul.menuOpen {
 ul li {
     text-align: right;
     margin: 5px 0px;
-    color: #ffffff;
+    color: var(--color);
 }
 
 ul li:hover {
@@ -112,7 +114,7 @@ ul li:hover {
 
 .menu-opened-layout {
     position: absolute;
-    background-color: #d12a704a;
+    background-color: var(--bgColor);
     width: 0vw;
     height: 100%;
     top: 0;
@@ -129,11 +131,22 @@ ul li:hover {
 export default {
     name: "Menu",
 
+    props: { menuColor: String, backgroundColor: String },
+
     data: () => ({
         isActive: false,
         isMenuOpen: false,
-        isLayoutOpen: false,
+        isLayoutOpen: false
     }),
+    computed: {
+        cssVars() {
+            return {
+                /* variables you want to pass to css */
+                "--color": this.menuColor,
+                "--bgColor": this.backgroundColor
+            };
+        }
+    },
 
     methods: {
         menuOpen: function() {

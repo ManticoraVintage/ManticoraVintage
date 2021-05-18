@@ -14,13 +14,13 @@ const routes = [
     {
         path: "/admin",
         component: Admin,
-        name: "admin",
+        name: "Admin",
     },
 
     {
         path: "/shop",
         component: Shop,
-        name: "shop"
+        name: "Shop"
     },
     {
         path: "/shopItemDetails/:id",
