@@ -34,9 +34,7 @@
             </div>
         </div>
 
-        <div
-            class="information-container d-flex flex-column justify-content-around"
-        >
+        <div class="information-container d-flex flex-column">
             <modal-vue
                 class="deletePopup"
                 @on-close="$vm2.close('modal-1')"
@@ -66,7 +64,7 @@
             >
                 <h1>Estadisticas Manticora Vintage</h1>
             </div>
-            <div class="chart-container d-flex justify-content-around">
+            <div class="chart-container d-flex justify-content-around d-none">
                 <div class="chart"></div>
                 <div class="chart"></div>
                 <div class="chart"></div>
@@ -80,13 +78,23 @@
                         <table class="table table-hover">
                             <thead class="thead-light">
                                 <tr class="d-flex">
-                                    <th scope="col">VIEWALL</th>
-                                    <th scope="col">name</th>
-                                    <th scope="col">price</th>
-                                    <th scope="col">available</th>
-                                    <th scope="col">photo</th>
-                                    <th scope="col">categoryid</th>
-                                    <th scope="col">typeid</th>
+                                    <th scope="col" style="width: 100px">ID</th>
+                                    <th scope="col" style="width: 250px">
+                                        NOMBRE
+                                    </th>
+                                    <th scope="col" style="width: 100px">
+                                        PRECIO
+                                    </th>
+                                    <!-- <th scope="col" style="width: 100px">STOCK</th> -->
+                                    <th scope="col" style="width: 150px">
+                                        THUMBNAIL
+                                    </th>
+                                    <th scope="col" style="width: 150px">
+                                        CATEGORIA
+                                    </th>
+                                    <th scope="col" style="width: 150px">
+                                        TIPO
+                                    </th>
                                 </tr>
                             </thead>
                         </table>
@@ -98,13 +106,30 @@
                                     v-for="(cloth, index) in cloths"
                                     :key="index"
                                 >
-                                    <td>{{ cloth.id }}</td>
-                                    <td>{{ cloth.name }}</td>
-                                    <td>{{ cloth.price }}</td>
-                                    <td>{{ cloth.available }}</td>
-                                    <td>{{ cloth.photo }}</td>
-                                    <td>{{ cloth.category_id }}</td>
-                                    <td>{{ cloth.type_id }}</td>
+                                    <td style="width: 100px">
+                                        {{ cloth.item.id }}
+                                    </td>
+                                    <td style="width: 250px">
+                                        {{ cloth.item.name }}
+                                    </td>
+                                    <td style="width: 100px">
+                                        {{ cloth.price }}
+                                    </td>
+                                    <td style="width: 150px">
+                                        {{ cloth.item.photo }}
+                                    </td>
+
+                                    <td style="width: 150px">
+                                        {{ cloth.item.category_id }}
+                                    </td>
+
+                                    <td v-if="cloth.item.type_id === 1">
+                                        VINTAGE
+                                    </td>
+                                    <td v-if="cloth.item.type_id === 2">
+                                        SELECTED
+                                    </td>
+                                    
                                 </tr>
                             </tbody>
                         </table>
@@ -281,7 +306,7 @@
 .table-container {
     border: 2px solid rgb(221, 221, 221);
 
-    margin: 0 auto;
+    margin: 40px auto;
 }
 
 .table-header {
@@ -290,14 +315,16 @@
 }
 
 .table-body {
-    height: 400px;
+    height: 680px;
     width: 100%;
     overflow: auto;
 }
 
+thead tr th {
+}
+
 th,
 td {
-    min-width: 170px;
     padding: 20px !important;
     border-color: 2px solid rgb(221, 221, 221);
 }
