@@ -69,7 +69,27 @@
                 <div class="chart"></div>
                 <div class="chart"></div>
             </div>
+
             <div class="table-container">
+                <form
+                    class="form-inline d-flex justify-content-end align-items-center"
+                >
+                    <input
+                        style="height:35px; width:200px; margin:10px 0px"
+                        class="form-control mr-sm-2"
+                        type="search"
+                        placeholder="Search"
+                        aria-label="Search"
+                        v-model="itemSearched"
+                    />
+                    <button
+                        style="height:35px; padding:0px 20px; margin-right:30px"
+                        class="btn btn-outline-success my-2 my-sm-0"
+                        type="submit"
+                    >
+                        Search
+                    </button>
+                </form>
                 <div
                     class="view-all-table"
                     v-bind:class="{ active: isViewAllActive }"
@@ -79,7 +99,7 @@
                             <thead class="thead-light">
                                 <tr class="d-flex">
                                     <th scope="col" style="width: 100px">ID</th>
-                                    <th scope="col" style="width: 250px">
+                                    <th scope="col" style="width: 300px">
                                         NOMBRE
                                     </th>
                                     <th scope="col" style="width: 100px">
@@ -103,20 +123,29 @@
                         <table>
                             <tbody>
                                 <tr
-                                    v-for="(cloth, index) in cloths"
+                                    v-for="(cloth, index) in filteredList"
                                     :key="index"
                                 >
                                     <td style="width: 100px">
                                         {{ cloth.item.id }}
                                     </td>
-                                    <td style="width: 250px">
+                                    <td style="width: 300px">
                                         {{ cloth.item.name }}
                                     </td>
                                     <td style="width: 100px">
                                         {{ cloth.price }}
                                     </td>
                                     <td style="width: 150px">
-                                        {{ cloth.item.photo }}
+                                        <img
+                                            class="thumbnail"
+                                            :src="
+                                                `images/shop/${
+                                                    cloth.item.photo.split(
+                                                        ','
+                                                    )[1]
+                                                }.jpg`
+                                            "
+                                        />
                                     </td>
 
                                     <td style="width: 150px">
@@ -129,7 +158,6 @@
                                     <td v-if="cloth.item.type_id === 2">
                                         SELECTED
                                     </td>
-                                    
                                 </tr>
                             </tbody>
                         </table>
@@ -166,7 +194,9 @@
                                     <td>{{ cloth.name }}</td>
                                     <td>{{ cloth.price }}</td>
                                     <td>{{ cloth.available }}</td>
-                                    <td>{{ cloth.photo }}</td>
+                                    <td>
+                                        {{ cloth.photo }}
+                                    </td>
                                     <td>{{ cloth.category_id }}</td>
                                     <td>{{ cloth.type_id }}</td>
                                 </tr>
@@ -299,14 +329,43 @@
     display: none;
 }
 
+.thumbnail {
+    width: 50px;
+}
+
+input,
+form button {
+    margin-left: 10px;
+}
+
+input:focus,
+input:active {
+    box-shadow: none !important;
+    border: 1px solid #ee2a7b;
+}
+
+form button {
+    background: transparent;
+    border: 1px solid #3a3a3a;
+    color: #3a3a3a;
+}
+
+form button:focus,
+form button:active,
+form button:hover {
+    background: #ee2a7b;
+    border: 1px solid #ee2a7b;
+    color: white;
+    box-shadow: none !important;
+}
+
 .modify-table {
     display: none;
 }
 
 .table-container {
     border: 2px solid rgb(221, 221, 221);
-
-    margin: 40px auto;
+    margin: 50px auto;
 }
 
 .table-header {
@@ -354,7 +413,9 @@ export default {
         isDeleteActive: false,
         tabType: 0,
         selectedId: 0,
-        selectedIndex: 0
+        selectedIndex: 0,
+        itemSearched: null,
+        cloth:null
     }),
 
     mounted() {
@@ -399,6 +460,18 @@ export default {
             this.cloths.splice(this.selectedIndex, 1);
 
             this.$vm2.close("modal-1");
+        }
+    },
+    computed: {
+        filteredList() {
+            if (this.itemSearched) {
+                return this.cloths.filter(cloth => {
+                    return cloth.name
+                        .toLowerCase()
+                        .includes(this.itemSearched.toLowerCase());
+                });
+            }
+            return this.cloths;
         }
     }
 };
