@@ -13,21 +13,32 @@
                 class="vertical-navbar-menu d-flex flex-column align-items-center "
             >
                 <ul
-                    class="dashboard-options d-flex align-items-center justify-content-center" style="margin:20px 0"
+                    class="dashboard-options d-flex align-items-center justify-content-center"
+                    style="margin:20px 0"
                 >
                     <li>Dashboard</li>
                 </ul>
 
                 <ul
-                    class="vertical-navbar-options d-flex flex-column align-items-center justify-content-center" style="width:100%"
+                    class="vertical-navbar-options d-flex flex-column align-items-center justify-content-center"
+                    style="width:100%"
                 >
-                    <li class="left-menu-list d-flex justify-content-center align-items-center" v-on:click="openTab(0)">
+                    <li
+                        class="left-menu-list d-flex justify-content-center align-items-center"
+                        v-on:click="openTab(0)"
+                    >
                         View All
                     </li>
-                    <li class="left-menu-list d-flex justify-content-center align-items-center" v-on:click="openTab(1)">
+                    <li
+                        class="left-menu-list d-flex justify-content-center align-items-center"
+                        v-on:click="openTab(1)"
+                    >
                         Modify
                     </li>
-                    <li class="left-menu-list d-flex justify-content-center align-items-center" v-on:click="openTab(2)">
+                    <li
+                        class="left-menu-list d-flex justify-content-center align-items-center"
+                        v-on:click="openTab(2)"
+                    >
                         Delete
                     </li>
                 </ul>
@@ -105,6 +116,15 @@
                                     <th scope="col" style="width: 100px">
                                         PRECIO
                                     </th>
+                                    <th scope="col" style="width: 100px">
+                                        SIZE
+                                    </th>
+                                    <th scope="col" style="width: 130px">
+                                        QUALITY
+                                    </th>
+                                    <th scope="col" style="width: 150px">
+                                        COUNTRY
+                                    </th>
                                     <!-- <th scope="col" style="width: 100px">STOCK</th> -->
                                     <th scope="col" style="width: 150px">
                                         THUMBNAIL
@@ -133,8 +153,19 @@
                                         {{ cloth.item.name }}
                                     </td>
                                     <td style="width: 100px">
-                                        {{ cloth.price }}
+                                        {{ cloth.price }}€
                                     </td>
+                                    <td style="width: 100px">
+                                        {{ cloth.size }}
+                                    </td>
+                                    <td style="width: 130px">
+                                        {{ cloth.item.quality }}
+                                        <i class="fas fa-star"></i>
+                                    </td>
+                                    <td style="width: 150px">
+                                        {{ cloth.item.country }}
+                                    </td>
+
                                     <td style="width: 150px">
                                         <img
                                             class="thumbnail"
@@ -213,13 +244,32 @@
                         <table class="table table-hover">
                             <thead class="thead-light">
                                 <tr class="d-flex">
-                                    <th scope="col">DELETE</th>
-                                    <th scope="col">name</th>
-                                    <th scope="col">price</th>
-                                    <th scope="col">available</th>
-                                    <th scope="col">photo</th>
-                                    <th scope="col">categoryid</th>
-                                    <th scope="col">typeid</th>
+                                    <th scope="col" style="width: 100px">ID</th>
+                                    <th scope="col" style="width: 300px">
+                                        NOMBRE
+                                    </th>
+                                    <th scope="col" style="width: 100px">
+                                        PRECIO
+                                    </th>
+                                    <th scope="col" style="width: 100px">
+                                        SIZE
+                                    </th>
+                                    <th scope="col" style="width: 130px">
+                                        QUALITY
+                                    </th>
+                                    <th scope="col" style="width: 150px">
+                                        COUNTRY
+                                    </th>
+                                    <!-- <th scope="col" style="width: 100px">STOCK</th> -->
+                                    <th scope="col" style="width: 150px">
+                                        THUMBNAIL
+                                    </th>
+                                    <th scope="col" style="width: 150px">
+                                        CATEGORIA
+                                    </th>
+                                    <th scope="col" style="width: 150px">
+                                        TIPO
+                                    </th>
                                     <th scope="col">ACTION</th>
                                 </tr>
                             </thead>
@@ -229,18 +279,61 @@
                         <table>
                             <tbody>
                                 <tr
-                                    v-for="(cloth, index) in cloths"
+                                    v-for="(cloth, index) in filteredList"
                                     :key="index"
                                 >
-                                    <td>{{ cloth.id }}</td>
-                                    <td>{{ cloth.name }}</td>
-                                    <td>{{ cloth.price }}</td>
-                                    <td>{{ cloth.available }}</td>
-                                    <td>{{ cloth.photo }}</td>
-                                    <td>{{ cloth.category_id }}</td>
-                                    <td>{{ cloth.type_id }}</td>
-                                    <td v-on:click="showDeletePopup(id, index)">
-                                        Delete
+                                    <td style="width: 100px">
+                                        {{ cloth.item.id }}
+                                    </td>
+                                    <td style="width: 300px">
+                                        {{ cloth.item.name }}
+                                    </td>
+                                    <td style="width: 100px">
+                                        {{ cloth.price }}€
+                                    </td>
+                                    <td style="width: 100px">
+                                        {{ cloth.size }}
+                                    </td>
+                                    <td style="width: 130px">
+                                        {{ cloth.item.quality }}
+                                        <i class="fas fa-star"></i>
+                                    </td>
+                                    <td style="width: 150px">
+                                        {{ cloth.item.country }}
+                                    </td>
+
+                                    <td style="width: 150px">
+                                        <img
+                                            class="thumbnail"
+                                            :src="
+                                                `images/shop/${
+                                                    cloth.item.photo.split(
+                                                        ','
+                                                    )[1]
+                                                }.jpg`
+                                            "
+                                        />
+                                    </td>
+
+                                    <td style="width: 150px">
+                                        {{ cloth.item.category_id }}
+                                    </td>
+
+                                    <td v-if="cloth.item.type_id === 1">
+                                        VINTAGE
+                                    </td>
+                                    <td v-if="cloth.item.type_id === 2">
+                                        SELECTED
+                                    </td>
+                                    <td>
+                                        <button
+                                            class="remove-button"
+                                            v-on:click="
+                                                showDeletePopup(id, index)
+                                            "
+                                        >
+                                            REMOVE
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -292,14 +385,13 @@
     width: 100%;
     background-color: rgb(240, 240, 240);
 }
-.left-menu-list{
-   
+.left-menu-list {
     padding: 10px;
-  
+
     border-bottom: 1px solid #ee2a7b;
     width: 100%;
 }
-.left-menu-list:hover{
+.left-menu-list:hover {
     cursor: pointer;
     background-color: #ee2a7b;
     color: white;
@@ -411,6 +503,15 @@ tr:hover {
 
 .modal-body {
     padding: 20px;
+}
+
+.remove-button {
+    width: 100%;
+    border-radius: 3px;
+    padding: 8px;
+    background-color: #ee2a7b;
+    color: white;
+
 }
 </style>
 
