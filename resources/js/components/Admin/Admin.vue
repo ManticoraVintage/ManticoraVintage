@@ -406,17 +406,19 @@ tr:hover {
 export default {
     name: "Admin",
 
-    data: () => ({
-        cloths: [],
-        isViewAllActive: true,
-        isModifyActive: false,
-        isDeleteActive: false,
-        tabType: 0,
-        selectedId: 0,
-        selectedIndex: 0,
-        itemSearched: null,
-        cloth:null
-    }),
+    data() {
+        return {
+            cloths: [],
+            isViewAllActive: true,
+            isModifyActive: false,
+            isDeleteActive: false,
+            tabType: 0,
+            selectedId: 0,
+            selectedIndex: 0,
+            itemSearched: null,
+            cloth: null
+        };
+    },
 
     mounted() {
         axios
