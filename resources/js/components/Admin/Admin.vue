@@ -13,21 +13,21 @@
                 class="vertical-navbar-menu d-flex flex-column align-items-center "
             >
                 <ul
-                    class="dashboard-options d-flex align-items-center justify-content-center"
+                    class="dashboard-options d-flex align-items-center justify-content-center" style="margin:20px 0"
                 >
                     <li>Dashboard</li>
                 </ul>
 
                 <ul
-                    class="vertical-navbar-options d-flex flex-column align-items-center justify-content-center"
+                    class="vertical-navbar-options d-flex flex-column align-items-center justify-content-center" style="width:100%"
                 >
-                    <li v-on:click="openTab(0)">
+                    <li class="left-menu-list d-flex justify-content-center align-items-center" v-on:click="openTab(0)">
                         View All
                     </li>
-                    <li v-on:click="openTab(1)">
+                    <li class="left-menu-list d-flex justify-content-center align-items-center" v-on:click="openTab(1)">
                         Modify
                     </li>
-                    <li v-on:click="openTab(2)">
+                    <li class="left-menu-list d-flex justify-content-center align-items-center" v-on:click="openTab(2)">
                         Delete
                     </li>
                 </ul>
@@ -273,7 +273,7 @@
 .vertical-navbar {
     height: 100%;
     width: 275px;
-    background-color: #f522e4;
+    background-color: #ee2a7b;
     position: fixed;
     z-index: 2;
 }
@@ -291,6 +291,18 @@
     height: calc(100% - 250px);
     width: 100%;
     background-color: rgb(240, 240, 240);
+}
+.left-menu-list{
+   
+    padding: 10px;
+  
+    border-bottom: 1px solid #ee2a7b;
+    width: 100%;
+}
+.left-menu-list:hover{
+    cursor: pointer;
+    background-color: #ee2a7b;
+    color: white;
 }
 
 /* Information container */
