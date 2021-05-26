@@ -148,36 +148,80 @@
           v-for="(item, key) in filteredList"
           :key="item.id"
         >
-          <!--  -->
-          <div class="d-flex justify-content-center">
-            <img
-              class="test"
-              :src="
-                hovered === key
-                  ? `images/shop/${item.photo.split(',')[1]}.jpg`
-                  : `images/shop/${item.photo.split(',')[0]}.jpg`
-              "
-              @mouseover="hovered = key"
-              @mouseleave="hovered = null"
-            />
-          </div>
-          <div class="itemData d-flex align-items-center flex-column">
-            <div class="item-info-container">
-              <div class="itemName">{{ item.name }}</div>
-              <div class="price">{{ item.price }}€</div>
-              <div class="country">Made in {{ item.country }}</div>
-              <div class="size">{{ item.size }}</div>
-              <div class="d-flex align-items-center quality">
-                Quality
-                <i v-for="i in item.quality" :key="i" class="fas fa-star"></i>
-              </div>
-              <div v-if="item.type_id === 2">
-                SELECTED <i class="fas fa-fire"></i>
-              </div>
-              <div v-if="!item.available">
-                <div v-if="item.type_id === 3">
-                  OUT OF STOCK
-                  <i class="fas fa-shipping-fast"></i>
+            <div
+                v-if="!filteredList.length"
+                class="d-flex flex-column align-items-center"
+            >
+                <span>THERE ARE CURRENTLY NO ITEMS THAT MATCH YOUR SEARCH</span
+                ><i class="fas fa-tshirt"></i>
+            </div>
+            <div v-else class="row items-row">
+                <div
+                    class="col-lg-4 col-md-6 col-sm-12"
+                    v-for="(item, key) in filteredList"
+                    :key="item.id"
+                >
+                    <!--  -->
+                    <div class="d-flex justify-content-center">
+                        <img
+                            class="test"
+                            :src="
+                                hovered === key
+                                    ? `images/shop/${
+                                          item.photo.split(',')[1]
+                                      }.jpg`
+                                    : `images/shop/${
+                                          item.photo.split(',')[0]
+                                      }.jpg`
+                            "
+                            @mouseover="hovered = key"
+                            @mouseleave="hovered = null"
+                        />
+                    </div>
+                    <div class="itemData d-flex align-items-center flex-column">
+                        <div class="item-info-container">
+                            <div class="itemName">{{ item.name }}</div>
+                            <div class="price">{{ item.price }}€</div>
+                            <div class="country">
+                                Made in {{ item.country }}
+                            </div>
+                            <div class="size">{{ item.size }}</div>
+                            <div class="d-flex align-items-center quality">
+                                Quality
+                                <i
+                                    v-for="i in item.quality"
+                                    :key="i"
+                                    class="fas fa-star"
+                                ></i>
+                            </div>
+                            <div v-if="item.type_id === 2">
+                                SELECTED <i class="fas fa-fire"></i>
+                            </div>
+                            <div v-if="!item.available">
+                                <div v-if="item.type_id === 3">
+                                    OUT OF STOCK
+                                    <i class="fas fa-shipping-fast"></i>
+                                </div>
+                                <div v-else>
+                                    SOLD OUT
+                                    <i class="fas fa-shopping-basket"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="link-section d-flex justify-content-center align-items-between" style="width:80%">
+                            <router-link
+                                class="d-flex justify-content-center align-items-center detail-button"
+                                :to="{
+                                    name: 'ShopItemDetails',
+                                    params: { id: item.item_id }
+                                }"
+                                ><i class="fas fa-list-ul"></i
+                            ></router-link>
+                            <a href="www.google.com" class="d-flex justify-content-center align-items-center detail-button"
+                                ><i class="fas fa-shopping-cart"></i
+                            ></a>
+                        </div>
+                    </div>
                 </div>
                 <div v-else>
                   SOLD OUT
@@ -313,16 +357,24 @@ header {
 }
 
 .detail-button {
-  background-color: #ee2a7c1e;
-  width: 80%;
-  padding: 10px;
-  margin-top: 10px;
-  transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    background-color: #ee2a7c1e;
+    width: 50%;
+    padding: 10px;
+    margin-top: 10px;
+    transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .detail-button:hover {
   color: white;
   background-color: #ee2a7c;
+}
+
+.detail-button:hover .fas{
+    color: white;
+}
+a{
+    padding: 0;
+    margin: 0;
 }
 
 /* search filter */
@@ -356,13 +408,13 @@ form button:hover {
 /* Items */
 
 .items-row {
-  max-width: 1250px;
-  img {
-    margin: 5px 0px;
-    margin-top: 80px;
-    height: 450px;
-    width: auto;
-  }
+    max-width: 1250px;
+    img {
+        margin: 5px 0px;
+        margin-top: 100px;
+        height: 450px;
+        width: auto;
+    }
 }
 .items-section span {
   font-size: 30px;
@@ -378,8 +430,10 @@ form button:hover {
   min-height: 200px;
 }
 .fas {
-  color: #ee2a7b;
-  margin-left: 5px;
+    color: #ee2a7b;
+    margin-left: 5px;
+    width: 18px;
+    height: 18px;
 }
 
 .itemName {
