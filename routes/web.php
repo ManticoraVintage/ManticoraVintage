@@ -15,14 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
 
 //Returns the user authenticated if authentication was successful
 Route::middleware('auth')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('Admin', 'App\Http\Controllers\UserController@dashboard')->middleware('auth');
 
 //If the input is a link starting with anything but 'api' return the main view.
 Route::get('/{any?}', function () {
     return view('welcome');
 })->where('any', '^(?!api\/)[\/\w\.-]*');
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
