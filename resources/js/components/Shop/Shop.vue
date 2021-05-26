@@ -211,19 +211,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="link-section d-flex justify-content-center align-items-between" style="width:80%">
-                            <router-link
-                                class="d-flex justify-content-center align-items-center detail-button"
-                                :to="{
-                                    name: 'ShopItemDetails',
-                                    params: { id: item.item_id }
-                                }"
-                                ><i class="fas fa-list-ul"></i
-                            ></router-link>
-                            <a href="www.google.com" class="d-flex justify-content-center align-items-center detail-button"
-                                ><i class="fas fa-shopping-cart"></i
-                            ></a>
-                        </div>
+                        <router-link
+                            class="d-flex justify-content-center align-items-center detail-button"
+                            :to="{
+                                name: 'ShopItemDetails',
+                                params: { id: item.item_id }
+                            }"
+                            >DETAILS</router-link
+                        >
                     </div>
                 </div>
             </div>
@@ -344,7 +339,7 @@ header {
 
 .detail-button {
     background-color: #ee2a7c1e;
-    width: 50%;
+    width: 80%;
     padding: 10px;
     margin-top: 10px;
     transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -353,14 +348,6 @@ header {
 .detail-button:hover {
     color: white;
     background-color: #ee2a7c;
-}
-
-.detail-button:hover .fas{
-    color: white;
-}
-a{
-    padding: 0;
-    margin: 0;
 }
 
 /* search filter */
@@ -397,7 +384,7 @@ form button:hover {
     max-width: 1250px;
     img {
         margin: 5px 0px;
-        margin-top: 100px;
+        margin-top: 80px;
         height: 450px;
         width: auto;
     }
@@ -418,8 +405,6 @@ form button:hover {
 .fas {
     color: #ee2a7b;
     margin-left: 5px;
-    width: 18px;
-    height: 18px;
 }
 
 .itemName {

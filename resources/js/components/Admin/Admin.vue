@@ -581,7 +581,7 @@ export default {
         filteredList() {
             if (this.itemSearched) {
                 return this.cloths.filter(cloth => {
-                    return cloth.item.name
+                    return cloth.name
                         .toLowerCase()
                         .includes(this.itemSearched.toLowerCase());
                 });
