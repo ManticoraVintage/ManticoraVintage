@@ -14,29 +14,38 @@
             >
                 <ul
                     class="dashboard-options d-flex align-items-center justify-content-center"
+                    style="margin:20px 0"
                 >
                     <li>Dashboard</li>
                 </ul>
 
                 <ul
                     class="vertical-navbar-options d-flex flex-column align-items-center justify-content-center"
+                    style="width:100%"
                 >
-                    <li v-on:click="openTab(0)">
+                    <li
+                        class="left-menu-list d-flex justify-content-center align-items-center"
+                        v-on:click="openTab(0)"
+                    >
                         View All
                     </li>
-                    <li v-on:click="openTab(1)">
+                    <li
+                        class="left-menu-list d-flex justify-content-center align-items-center"
+                        v-on:click="openTab(1)"
+                    >
                         Modify
                     </li>
-                    <li v-on:click="openTab(2)">
+                    <li
+                        class="left-menu-list d-flex justify-content-center align-items-center"
+                        v-on:click="openTab(2)"
+                    >
                         Delete
                     </li>
                 </ul>
             </div>
         </div>
 
-        <div
-            class="information-container d-flex flex-column justify-content-around"
-        >
+        <div class="information-container d-flex flex-column">
             <modal-vue
                 class="deletePopup"
                 @on-close="$vm2.close('modal-1')"
@@ -66,12 +75,32 @@
             >
                 <h1>Estadisticas Manticora Vintage</h1>
             </div>
-            <div class="chart-container d-flex justify-content-around">
+            <div class="chart-container d-flex justify-content-around d-none">
                 <div class="chart"></div>
                 <div class="chart"></div>
                 <div class="chart"></div>
             </div>
+
             <div class="table-container">
+                <form
+                    class="form-inline d-flex justify-content-end align-items-center"
+                >
+                    <input
+                        style="height:35px; width:200px; margin:10px 0px"
+                        class="form-control mr-sm-2"
+                        type="search"
+                        placeholder="Search"
+                        aria-label="Search"
+                        v-model="itemSearched"
+                    />
+                    <button
+                        style="height:35px; padding:0px 20px; margin-right:30px"
+                        class="btn btn-outline-success my-2 my-sm-0"
+                        type="submit"
+                    >
+                        Search
+                    </button>
+                </form>
                 <div
                     class="view-all-table"
                     v-bind:class="{ active: isViewAllActive }"
@@ -80,13 +109,32 @@
                         <table class="table table-hover">
                             <thead class="thead-light">
                                 <tr class="d-flex">
-                                    <th scope="col">VIEWALL</th>
-                                    <th scope="col">name</th>
-                                    <th scope="col">price</th>
-                                    <th scope="col">available</th>
-                                    <th scope="col">photo</th>
-                                    <th scope="col">categoryid</th>
-                                    <th scope="col">typeid</th>
+                                    <th scope="col" style="width: 100px">ID</th>
+                                    <th scope="col" style="width: 300px">
+                                        NOMBRE
+                                    </th>
+                                    <th scope="col" style="width: 100px">
+                                        PRECIO
+                                    </th>
+                                    <th scope="col" style="width: 100px">
+                                        SIZE
+                                    </th>
+                                    <th scope="col" style="width: 130px">
+                                        QUALITY
+                                    </th>
+                                    <th scope="col" style="width: 150px">
+                                        COUNTRY
+                                    </th>
+                                    <!-- <th scope="col" style="width: 100px">STOCK</th> -->
+                                    <th scope="col" style="width: 150px">
+                                        THUMBNAIL
+                                    </th>
+                                    <th scope="col" style="width: 150px">
+                                        CATEGORIA
+                                    </th>
+                                    <th scope="col" style="width: 150px">
+                                        TIPO
+                                    </th>
                                 </tr>
                             </thead>
                         </table>
@@ -95,16 +143,52 @@
                         <table>
                             <tbody>
                                 <tr
-                                    v-for="(cloth, index) in cloths"
+                                    v-for="(cloth, index) in filteredList"
                                     :key="index"
                                 >
-                                    <td>{{ cloth.id }}</td>
-                                    <td>{{ cloth.name }}</td>
-                                    <td>{{ cloth.price }}</td>
-                                    <td>{{ cloth.available }}</td>
-                                    <td>{{ cloth.photo }}</td>
-                                    <td>{{ cloth.category_id }}</td>
-                                    <td>{{ cloth.type_id }}</td>
+                                    <td style="width: 100px">
+                                        {{ cloth.item.id }}
+                                    </td>
+                                    <td style="width: 300px">
+                                        {{ cloth.item.name }}
+                                    </td>
+                                    <td style="width: 100px">
+                                        {{ cloth.price }}€
+                                    </td>
+                                    <td style="width: 100px">
+                                        {{ cloth.size }}
+                                    </td>
+                                    <td style="width: 130px">
+                                        {{ cloth.item.quality }}
+                                        <i class="fas fa-star"></i>
+                                    </td>
+                                    <td style="width: 150px">
+                                        {{ cloth.item.country }}
+                                    </td>
+
+                                    <td style="width: 150px">
+                                        <img
+                                            class="thumbnail"
+                                            :src="
+                                                `images/shop/${
+                                                    cloth.item.photo.split(
+                                                        ','
+                                                    )[1]
+                                                }.jpg`
+                                            "
+                                        />
+                                    </td>
+
+                                    <td style="width: 150px">
+                                        {{ cloth.item.category_id }}
+                                    </td>
+
+                                    <td v-if="cloth.item.type_id === 1">
+                                        VINTAGE
+                                    </td>
+                                    <td v-if="cloth.item.type_id === 2">
+                                        SELECTED
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -141,7 +225,9 @@
                                     <td>{{ cloth.name }}</td>
                                     <td>{{ cloth.price }}</td>
                                     <td>{{ cloth.available }}</td>
-                                    <td>{{ cloth.photo }}</td>
+                                    <td>
+                                        {{ cloth.photo }}
+                                    </td>
                                     <td>{{ cloth.category_id }}</td>
                                     <td>{{ cloth.type_id }}</td>
                                 </tr>
@@ -158,13 +244,32 @@
                         <table class="table table-hover">
                             <thead class="thead-light">
                                 <tr class="d-flex">
-                                    <th scope="col">DELETE</th>
-                                    <th scope="col">name</th>
-                                    <th scope="col">price</th>
-                                    <th scope="col">available</th>
-                                    <th scope="col">photo</th>
-                                    <th scope="col">categoryid</th>
-                                    <th scope="col">typeid</th>
+                                    <th scope="col" style="width: 100px">ID</th>
+                                    <th scope="col" style="width: 300px">
+                                        NOMBRE
+                                    </th>
+                                    <th scope="col" style="width: 100px">
+                                        PRECIO
+                                    </th>
+                                    <th scope="col" style="width: 100px">
+                                        SIZE
+                                    </th>
+                                    <th scope="col" style="width: 130px">
+                                        QUALITY
+                                    </th>
+                                    <th scope="col" style="width: 150px">
+                                        COUNTRY
+                                    </th>
+                                    <!-- <th scope="col" style="width: 100px">STOCK</th> -->
+                                    <th scope="col" style="width: 150px">
+                                        THUMBNAIL
+                                    </th>
+                                    <th scope="col" style="width: 150px">
+                                        CATEGORIA
+                                    </th>
+                                    <th scope="col" style="width: 150px">
+                                        TIPO
+                                    </th>
                                     <th scope="col">ACTION</th>
                                 </tr>
                             </thead>
@@ -174,18 +279,61 @@
                         <table>
                             <tbody>
                                 <tr
-                                    v-for="(cloth, index) in cloths"
+                                    v-for="(cloth, index) in filteredList"
                                     :key="index"
                                 >
-                                    <td>{{ cloth.id }}</td>
-                                    <td>{{ cloth.name }}</td>
-                                    <td>{{ cloth.price }}</td>
-                                    <td>{{ cloth.available }}</td>
-                                    <td>{{ cloth.photo }}</td>
-                                    <td>{{ cloth.category_id }}</td>
-                                    <td>{{ cloth.type_id }}</td>
-                                    <td v-on:click="showDeletePopup(id, index)">
-                                        Delete
+                                    <td style="width: 100px">
+                                        {{ cloth.item.id }}
+                                    </td>
+                                    <td style="width: 300px">
+                                        {{ cloth.item.name }}
+                                    </td>
+                                    <td style="width: 100px">
+                                        {{ cloth.price }}€
+                                    </td>
+                                    <td style="width: 100px">
+                                        {{ cloth.size }}
+                                    </td>
+                                    <td style="width: 130px">
+                                        {{ cloth.item.quality }}
+                                        <i class="fas fa-star"></i>
+                                    </td>
+                                    <td style="width: 150px">
+                                        {{ cloth.item.country }}
+                                    </td>
+
+                                    <td style="width: 150px">
+                                        <img
+                                            class="thumbnail"
+                                            :src="
+                                                `images/shop/${
+                                                    cloth.item.photo.split(
+                                                        ','
+                                                    )[1]
+                                                }.jpg`
+                                            "
+                                        />
+                                    </td>
+
+                                    <td style="width: 150px">
+                                        {{ cloth.item.category_id }}
+                                    </td>
+
+                                    <td v-if="cloth.item.type_id === 1">
+                                        VINTAGE
+                                    </td>
+                                    <td v-if="cloth.item.type_id === 2">
+                                        SELECTED
+                                    </td>
+                                    <td>
+                                        <button
+                                            class="remove-button"
+                                            v-on:click="
+                                                showDeletePopup(id, index)
+                                            "
+                                        >
+                                            REMOVE
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -218,7 +366,7 @@
 .vertical-navbar {
     height: 100%;
     width: 275px;
-    background-color: #f522e4;
+    background-color: #ee2a7b;
     position: fixed;
     z-index: 2;
 }
@@ -236,6 +384,17 @@
     height: calc(100% - 250px);
     width: 100%;
     background-color: rgb(240, 240, 240);
+}
+.left-menu-list {
+    padding: 10px;
+
+    border-bottom: 1px solid #ee2a7b;
+    width: 100%;
+}
+.left-menu-list:hover {
+    cursor: pointer;
+    background-color: #ee2a7b;
+    color: white;
 }
 
 /* Information container */
@@ -274,14 +433,43 @@
     display: none;
 }
 
+.thumbnail {
+    width: 50px;
+}
+
+input,
+form button {
+    margin-left: 10px;
+}
+
+input:focus,
+input:active {
+    box-shadow: none !important;
+    border: 1px solid #ee2a7b;
+}
+
+form button {
+    background: transparent;
+    border: 1px solid #3a3a3a;
+    color: #3a3a3a;
+}
+
+form button:focus,
+form button:active,
+form button:hover {
+    background: #ee2a7b;
+    border: 1px solid #ee2a7b;
+    color: white;
+    box-shadow: none !important;
+}
+
 .modify-table {
     display: none;
 }
 
 .table-container {
     border: 2px solid rgb(221, 221, 221);
-
-    margin: 0 auto;
+    margin: 50px auto;
 }
 
 .table-header {
@@ -290,14 +478,16 @@
 }
 
 .table-body {
-    height: 400px;
+    height: 680px;
     width: 100%;
     overflow: auto;
 }
 
+thead tr th {
+}
+
 th,
 td {
-    min-width: 170px;
     padding: 20px !important;
     border-color: 2px solid rgb(221, 221, 221);
 }
@@ -314,21 +504,34 @@ tr:hover {
 .modal-body {
     padding: 20px;
 }
+
+.remove-button {
+    width: 100%;
+    border-radius: 3px;
+    padding: 8px;
+    background-color: #ee2a7b;
+    color: white;
+
+}
 </style>
 
 <script>
 export default {
     name: "Admin",
 
-    data: () => ({
-        cloths: [],
-        isViewAllActive: true,
-        isModifyActive: false,
-        isDeleteActive: false,
-        tabType: 0,
-        selectedId: 0,
-        selectedIndex: 0
-    }),
+    data() {
+        return {
+            cloths: [],
+            isViewAllActive: true,
+            isModifyActive: false,
+            isDeleteActive: false,
+            tabType: 0,
+            selectedId: 0,
+            selectedIndex: 0,
+            itemSearched: null,
+            cloth: null
+        };
+    },
 
     mounted() {
         axios
@@ -372,6 +575,18 @@ export default {
             this.cloths.splice(this.selectedIndex, 1);
 
             this.$vm2.close("modal-1");
+        }
+    },
+    computed: {
+        filteredList() {
+            if (this.itemSearched) {
+                return this.cloths.filter(cloth => {
+                    return cloth.item.name
+                        .toLowerCase()
+                        .includes(this.itemSearched.toLowerCase());
+                });
+            }
+            return this.cloths;
         }
     }
 };
