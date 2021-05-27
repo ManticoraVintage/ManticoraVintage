@@ -418,14 +418,6 @@ a{
     margin: 0;
 }
 
-.detail-button:hover .fas{
-    color: white;
-}
-a{
-    padding: 0;
-    margin: 0;
-}
-
 /* search filter */
 
 input,
@@ -497,6 +489,7 @@ form button:hover {
     margin-left: 5px;
     width: 18px;
     height: 18px;
+>>>>>>> Details buttons added
 }
 
 .itemName {
