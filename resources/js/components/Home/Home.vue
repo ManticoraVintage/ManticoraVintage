@@ -102,7 +102,7 @@
 
 <script>
 import Menu from "../Menu/Menu";
-import Shop from "../Shop/Shop.vue";
+import Shop from "../Shop/Shop";
 
 export default {
     name: "Home",
