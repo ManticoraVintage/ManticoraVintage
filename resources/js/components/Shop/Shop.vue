@@ -1,5 +1,3 @@
-
-  
 <template>
     <div class="main">
         <Menu menuColor="#ee2a7b" backgroundColor="#3c3c3c"></Menu>
@@ -213,7 +211,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="link-section d-flex justify-content-center align-items-between" style="width:80%">
+                        <div
+                            class="link-section d-flex justify-content-center align-items-between"
+                            style="width:80%"
+                        >
                             <router-link
                                 class="d-flex justify-content-center align-items-center detail-button"
                                 :to="{
@@ -222,7 +223,9 @@
                                 }"
                                 ><i class="fas fa-list-ul"></i
                             ></router-link>
-                            <a href="www.google.com" class="d-flex justify-content-center align-items-center detail-button"
+                            <a
+                                href="www.google.com"
+                                class="d-flex justify-content-center align-items-center detail-button"
                                 ><i class="fas fa-shopping-cart"></i
                             ></a>
                         </div>
@@ -230,6 +233,7 @@
                 </div>
             </div>
         </section>
+        <Footer class="footer"></Footer>
     </div>
 </template>
 
@@ -238,6 +242,11 @@
     margin: 0 auto;
     padding: 0 5%;
     background: #f2f3f5;
+}
+
+.footer {
+    flex-shrink: 0;
+    margin-top: 100px;
 }
 .item-section {
     min-height: 700px;
@@ -336,10 +345,10 @@ header {
     color: white;
     background-color: #ee2a7c;
 }
-.detail-button:hover .fas{
+.detail-button:hover .fas {
     color: white;
 }
-a{
+a {
     padding: 0;
     margin: 0;
 }
@@ -441,6 +450,7 @@ form button:hover {
 import { Carousel, Slide } from "vue-carousel";
 import ShopItemDetails from "./ShopItemDetails";
 import Menu from "../Menu/Menu";
+import Footer from "../Footer/Footer";
 export default {
     data() {
         return {
@@ -525,7 +535,8 @@ export default {
         Carousel,
         Slide,
         ShopItemDetails,
-        Menu
+        Menu,
+        Footer
     }
 };
 </script>
