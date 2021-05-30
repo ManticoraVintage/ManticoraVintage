@@ -23,7 +23,7 @@
                     />
                 </div>
 
-                <button @click="checkCredentials()" class="btn btn-primary">
+                <button style="background:#ee2a7b; border:transparent" @click="checkCredentials()" class="btn btn-primary">
                     Conectar
                 </button>
             </form>
