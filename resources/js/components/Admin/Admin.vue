@@ -1,5 +1,6 @@
 <template>
     <div class="main d-flex">
+        <Login></Login>
         <div class="vertical-navbar d-flex flex-column">
             <div
                 class="main-title d-flex justify-content-center align-items-center"
@@ -516,6 +517,8 @@ tr:hover {
 </style>
 
 <script>
+import Login from '../Login/Login';
+
 export default {
     name: "Admin",
 
@@ -531,6 +534,9 @@ export default {
             itemSearched: null,
             cloth: null
         };
+    },
+    components:{
+        Login
     },
 
     mounted() {
