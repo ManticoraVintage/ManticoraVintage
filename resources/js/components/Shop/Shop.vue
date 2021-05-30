@@ -163,6 +163,7 @@
                     class="col-lg-4 col-md-6 col-sm-12"
                     v-for="(item, key) in filteredList"
                     :key="item.id"
+                    style="min-width: 300px;"
                 >
                     <!--  -->
                     <div class="d-flex justify-content-center">
@@ -213,7 +214,7 @@
                         </div>
                         <div
                             class="link-section d-flex justify-content-center align-items-between"
-                            style="width:80%"
+                            style="width:100%"
                         >
                             <router-link
                                 class="d-flex justify-content-center align-items-center detail-button"
@@ -253,6 +254,7 @@
     padding: 0 5%;
 }
 .items-row {
+    justify-content: space-around;
     margin-top: 100px;
     margin: 0 auto;
 }

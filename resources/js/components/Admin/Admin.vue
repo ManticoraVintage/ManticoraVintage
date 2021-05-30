@@ -367,6 +367,7 @@
 .vertical-navbar {
     height: 100%;
     width: 275px;
+    border-right: 1px solid #ee2a7b;
     background-color: #ee2a7b;
     position: fixed;
     z-index: 2;
@@ -388,8 +389,6 @@
 }
 .left-menu-list {
     padding: 10px;
-
-    border-bottom: 1px solid #ee2a7b;
     width: 100%;
 }
 .left-menu-list:hover {
