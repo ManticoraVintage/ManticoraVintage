@@ -1,6 +1,7 @@
 <template>
     <div class="main">
-        <Menu menuColor="#ee2a7b" backgroundColor="#3c3c3c"></Menu>
+        <Logo></Logo>
+       
         <div class="carousel-container">
             <carousel
                 class="carousel"
@@ -453,6 +454,7 @@ import { Carousel, Slide } from "vue-carousel";
 import ShopItemDetails from "./ShopItemDetails";
 import Menu from "../Menu/Menu";
 import Footer from "../Footer/Footer";
+import Logo from "../Logo/Logo";
 export default {
     data() {
         return {
@@ -538,7 +540,8 @@ export default {
         Slide,
         ShopItemDetails,
         Menu,
-        Footer
+        Footer,
+        Logo
     }
 };
 </script>

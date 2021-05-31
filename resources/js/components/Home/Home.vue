@@ -1,8 +1,8 @@
 <template>
     <div class="main">
-        <Menu menuColor="#ffffff" backgroundColor="#d12a704a"></Menu>
+      
         <div class="page-title-container d-flex align-items-center">
-            <h1 class="main-title">Manticora Vintage</h1>
+            <h1 class="main-title d-none d-lg-block">Manticora Vintage</h1>
         </div>
 
         <div
@@ -34,6 +34,8 @@
 /* Main component style */
 .main {
     width: 100vw;
+   
+    background: black;
 }
 
 /* Main title style */
@@ -52,7 +54,6 @@
 .logo-container {
     width: 100vw;
     height: 100vh;
-    background-color: #000000;
 }
 
 .logo-container img {
@@ -82,7 +83,6 @@
 }
 
 @media (max-width: 1386px) {
-
     .logo-container img {
         width: 400px;
         height: 400px;

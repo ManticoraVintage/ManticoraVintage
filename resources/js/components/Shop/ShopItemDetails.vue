@@ -1,5 +1,6 @@
 <template>
-    <div class="main" >
+    <div class="main">
+        <Logo></Logo>
         <div class="main-container row">
             <div
                 class="information-container d-flex justify-content-center flex-column col-12 col-sm-12 col-lg-6"
@@ -20,15 +21,31 @@
                     <div class="quality">
                         <span class="d-title"> Quality: </span>
                         <br />
-                        <span>{{ item[0].item.quality }}</span>
+
+                        <span
+                            >{{ item[0].item.quality }}
+                            <i class="fas fa-star"></i
+                        ></span>
                     </div>
                     <br />
 
-                    <div class="stock">
-                        <span class="d-title">Available:</span>
+                    <div class="price">
+                        <span class="d-title">Price:</span>
                         <br />
-                        <span>{{ item[0].available }}</span>
+                        <span>{{ item[0].price }}€</span>
                     </div>
+                    <div class="collection">
+                        <br />
+                        <span class="d-title">Collection:</span>
+                        <br />
+                        <span v-if="item[0].item.type_id === 1">
+                            VINTAGE
+                        </span>
+                        <span v-if="item[0].item.type_id === 2">
+                            SELECTED
+                        </span>
+                    </div>
+
                     <br />
                 </div>
 
@@ -55,9 +72,18 @@
                     estigmas creados por la ropa dividida por géneros y que cada
                     cual arriesgue y provoque como más le plazca.
                 </div>
+                <div class="cta-container">
+                    <router-link
+                        class="d-flex justify-content-center align-items-center detail-button order-5"
+                        :to="{
+                            name: 'Shop'
+                        }"
+                        ><i class="fas fa-arrow-left"></i>
+                    </router-link>
+                </div>
             </div>
             <div
-                class="media-container col-12  col-sm-12 col-lg-6  d-flex justify-content-center align-items-center row"
+                class="media-container col-12  col-sm-12 col-lg-6  d-flex justify-content-center align-items-center row order-4"
             >
                 <div class="img-1 col-12  col-md-12 col-xl-6">
                     <img
@@ -107,6 +133,26 @@
 .details {
     margin-top: 50px;
 }
+.detail-button {
+    background-color: #ee2a7c1e;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.detail-button:hover {
+    color: white;
+    background-color: #ee2a7c;
+}
+.detail-button:hover .fas {
+    color: white;
+}
+.fas {
+    color: #ee2a7b;
+    margin-left: 5px;
+    width: 18px;
+    height: 18px;
+}
 
 img {
     width: 100%;
@@ -130,14 +176,18 @@ img {
 }
 </style>
 <script>
+import Logo from "../Logo/Logo";
 export default {
     name: "ShopItemDetails",
 
     data() {
         return {
-            item: "",
+            item: [],
             item_id: this.$route.params.id
         };
+    },
+    components: {
+        Logo
     },
 
     async mounted() {
