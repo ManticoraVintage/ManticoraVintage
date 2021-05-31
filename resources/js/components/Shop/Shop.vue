@@ -1,6 +1,7 @@
 <template>
     <div class="main">
-        <Menu menuColor="#ee2a7b" backgroundColor="#3c3c3c"></Menu>
+        <Logo></Logo>
+       
         <div class="carousel-container">
             <carousel
                 class="carousel"
@@ -163,6 +164,7 @@
                     class="col-lg-4 col-md-6 col-sm-12"
                     v-for="(item, key) in filteredList"
                     :key="item.id"
+                    style="min-width: 300px;"
                 >
                     <!--  -->
                     <div class="d-flex justify-content-center">
@@ -213,7 +215,7 @@
                         </div>
                         <div
                             class="link-section d-flex justify-content-center align-items-between"
-                            style="width:80%"
+                            style="width:100%"
                         >
                             <router-link
                                 class="d-flex justify-content-center align-items-center detail-button"
@@ -253,6 +255,7 @@
     padding: 0 5%;
 }
 .items-row {
+    justify-content: space-around;
     margin-top: 100px;
     margin: 0 auto;
 }
@@ -451,6 +454,7 @@ import { Carousel, Slide } from "vue-carousel";
 import ShopItemDetails from "./ShopItemDetails";
 import Menu from "../Menu/Menu";
 import Footer from "../Footer/Footer";
+import Logo from "../Logo/Logo";
 export default {
     data() {
         return {
@@ -536,7 +540,8 @@ export default {
         Slide,
         ShopItemDetails,
         Menu,
-        Footer
+        Footer,
+        Logo
     }
 };
 </script>

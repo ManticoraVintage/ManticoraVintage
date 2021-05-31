@@ -1,0 +1,28 @@
+<template>
+    <div class="main-logo-container">
+       <router-link :to="{
+                            name: 'index'
+                        }"> <img src="images/LOGO PNG (1).png"></router-link>
+    </div>
+
+</template>
+
+<style scoped>
+.main-logo-container{
+    width: 75px;
+    height:75px;
+    position: fixed;
+    left: 20px;
+    top: 20px;
+}
+img{
+    width: 100%;
+    height: 100%;
+}
+
+</style>
+<script>
+export default {
+    name:"Logo"
+}
+</script>
