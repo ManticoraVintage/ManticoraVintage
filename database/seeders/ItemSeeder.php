@@ -102,6 +102,7 @@ class ItemSeeder extends Seeder
             ['id' => 67, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'name' => '2000´s Guess pink Mini Bag', 'photo' => "67a,67b", 'quality' => 5, 'country' => 'China', 'category_id' => 6, 'type_id' => 1],
             ['id' => 68, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'name' => 'Miss sixty metallic pink mini bag', 'photo' => "68a,68b", 'quality' => 4, 'country' => 'China', 'category_id' => 6, 'type_id' => 1],
             ['id' => 69, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'name' => 'Vintage fake fur cardigan', 'photo' => "69a,69b", 'quality' => 4, 'country' => 'China', 'category_id' => 11, 'type_id' => 1],
+            ['id' => 70, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'name' => 'TEST', 'photo' => "69a,69b", 'quality' => 4, 'country' => 'TEST', 'category_id' => 11, 'type_id' => 3],
         ]);
 
 

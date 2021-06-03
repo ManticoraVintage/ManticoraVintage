@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <Logo></Logo>
-       
+
         <div class="carousel-container">
             <carousel
                 class="carousel"
@@ -201,6 +201,13 @@
                             </div>
                             <div v-if="item.type_id === 2">
                                 SELECTED <i class="fas fa-fire"></i>
+                            </div>
+                            <div v-if="item.type_id === 3">
+                                ZOZOBRA
+                                <img
+                                    src="images/logo zozo4.png"
+                                    style="width:15px; height:15px; margin:0; padding:0; margin-left:5px"
+                                />
                             </div>
                             <div v-if="!item.available">
                                 <div v-if="item.type_id === 3">
@@ -473,7 +480,12 @@ export default {
                 "images/main_slider/03-20.jpg",
                 "images/main_slider/03-21.jpg",
                 "images/main_slider/03-25.jpg",
-                "images/main_slider/03-32.jpg"
+                "images/main_slider/03-32.jpg",
+                "images/main_slider/SCANN_DEF_2.jpg",
+                "images/main_slider/SCANN_DEF_3.jpg",
+                "images/main_slider/SCANN_DEF_5.jpg",
+                "images/main_slider/SCANN_DEF_7.jpg",
+                "images/main_slider/SCANN_DEF_8.jpg"
             ],
             hoverState: 0,
             hovered: null,

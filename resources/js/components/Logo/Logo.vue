@@ -14,6 +14,7 @@
     position: fixed;
     left: 20px;
     top: 20px;
+    z-index: 10000;
 }
 img{
     width: 100%;
