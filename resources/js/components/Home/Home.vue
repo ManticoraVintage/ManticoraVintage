@@ -1,14 +1,18 @@
 <template>
     <div class="main">
-      
-        <div class="page-title-container d-flex align-items-center">
-            <h1 class="main-title d-none d-lg-block">Manticora Vintage</h1>
+        <div
+            class="page-title-container d-flex align-items-center justify-content-center"
+        >
+            <h1 class="main-title d-none">Manticora Vintage</h1>
         </div>
 
         <div
             class="logo-container d-flex flex-column justify-content-center align-items-center"
         >
-            <img src="images/LOGO NEGRO (1).jpg" />
+            <div class="logos d-flex flex-column">
+                <img src="images/LOGO NEGRO (1).jpg" class="coin" />
+                <img src="images/logo zozo3.png" />
+            </div>
             <div class="button-container">
                 <router-link
                     class="d-flex justify-content-center align-content-center shop-button button"
@@ -34,7 +38,6 @@
 /* Main component style */
 .main {
     width: 100vw;
-   
     background: black;
 }
 
@@ -45,9 +48,14 @@
     padding: 0 25px;
     color: #ffffff;
     letter-spacing: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .main-title {
     font-size: 30px;
+    width: 100%;
 }
 
 /* Logo style */
@@ -57,8 +65,11 @@
 }
 
 .logo-container img {
-    width: 600px;
-    height: 600px;
+    width: 425px;
+}
+
+.coin {
+    animation: coin-flip 2.5s alternate infinite;
 }
 
 .button {
@@ -84,18 +95,28 @@
 
 @media (max-width: 1386px) {
     .logo-container img {
-        width: 400px;
-        height: 400px;
+        width: 275px;
     }
 }
 
 @media (max-width: 786px) {
     .logo-container img {
-        width: 300px;
-        height: 300px;
+        width: 200px;
     }
     .main-title {
         font-size: 18px !important;
+    }
+}
+
+@keyframes coin-flip {
+    from {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+
+    to {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
     }
 }
 </style>
