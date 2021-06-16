@@ -12,7 +12,7 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/resources/views/welcome.blade.php"
+        "destination": "/index.html"
       }
     ]
   }
