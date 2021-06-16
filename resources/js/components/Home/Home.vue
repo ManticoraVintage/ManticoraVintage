@@ -69,7 +69,7 @@
 }
 
 .coin {
-    animation: coin-flip 2.5s alternate infinite;
+    /* animation: coin-flip 2.5s alternate infinite; */
 }
 
 .button {
