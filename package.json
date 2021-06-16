@@ -16,7 +16,6 @@
         "jquery": "^3.2",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "node-sass": "^6.0.0",
         "popper.js": "^1.12",
         "postcss": "^8.1.14",
         "resolve-url-loader": "^2.3.1",
@@ -30,6 +29,7 @@
     "dependencies": {
         "@burhanahmeed/vue-modal-2": "^1.1.9",
         "fix": "0.0.6",
+        "node-sass": "^4.14.1",
         "vue-carousel": "^0.18.0",
         "vue-flux": "^5.1.9",
         "vue-router": "^3.5.1"
