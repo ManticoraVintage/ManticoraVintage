@@ -33,5 +33,9 @@
         "vue-carousel": "^0.18.0",
         "vue-flux": "^5.1.9",
         "vue-router": "^3.5.1"
-    }
+    },
+    "post-install-cmd": [
+        "php artisan clear-compiled",
+        "chmod -R 777 public/"
+    ]
 }
