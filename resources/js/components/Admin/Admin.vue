@@ -315,31 +315,61 @@
           style="display: none"
           v-bind:class="{ active: isInsertActive }"
         >
-          <div><label for="name">Name</label> <input type="text" /></div>
-          <div><label for="name">Foto name</label> <input type="text" /></div>
-          <div><label for="name">Quality</label> <input type="text" /></div>
-          <div><label for="name">Country</label> <input type="text" /></div>
           <div>
-            <label for="name">Category</label>
-            <select name="" id="">
-              <!-- create for with the option from DB -->
-              <option value=""></option>
+            <label for="name">Name</label> <input type="text" name="name" />
+          </div>
+          <div>
+            <label for="price">Price</label> <input type="text" name="price" />
+          </div>
+          <div>
+            <label for="size">Size</label> <input type="text" name="size" />
+          </div>
+          <div>
+            <label for="quality">Quality</label>
+            <input type="text" name="quality" />
+          </div>
+          <div>
+            <label for="country">Country</label>
+            <input type="text" name="country" />
+          </div>
+          <div>
+            <label for="photoName">Foto name</label>
+            <input type="text" name="photoName" />
+          </div>
+          <div>
+            <label for="availability"
+              >Available: Yes<input type="radio" name="availability" />No<input
+                type="radio"
+                name="availability"
+            /></label>
+          </div>
+          <div>
+            <label for="categoryDropdown">Category</label>
+            <select name="categoryDropdown" id="categoryDropdown">
+              <option value="">--Select the category--</option>
+              <option
+                :value="category.name"
+                v-for="(category, index) in categories"
+                :key="index"
+              >
+                {{ category.name }}
+              </option>
             </select>
           </div>
           <div>
-            <label for="name">Type</label>
-            <select name="" id="">
-              <!-- create for with the option from DB -->
-              <option value=""></option>
+            <label for="typeDropdown">Type</label>
+            <select name="typeDropdown" id="typeDropdown">
+              <option value="">--Selecciona the type--</option>
+              <option
+                :value="type.name"
+                v-for="(type, index) in types"
+                :key="index"
+              >
+                {{ type.name }}
+              </option>
             </select>
           </div>
-          <div><label for="name">Price</label> <input type="text" /></div>
-          <div>
-            <label for="name">Available: </label>Yes<input
-              type="checkbox"
-            />No<input type="checkbox" />
-          </div>
-          <div><label for="name">Size</label> <input type="text" /></div>
+          <button v-on:click="addItem()">Add Item</button>
         </div>
       </div>
     </div>
@@ -525,6 +555,10 @@ import Login from "../Login/Login";
 export default {
   name: "Admin",
 
+  components: {
+    Login,
+  },
+
   data() {
     return {
       items: [],
@@ -539,6 +573,12 @@ export default {
       selectedIndex: 0,
       itemSearched: null,
       cloth: null,
+      itemToAdd: {
+        name: null,
+        email: null,
+        password: null,
+        password_confirmation: null
+      },
     };
   },
 
@@ -584,14 +624,21 @@ export default {
           break;
       }
     },
-    components: {
-      Login,
-    },
 
     showDeletePopup: function (id, index) {
       this.$vm2.open("modal-1");
       this.selectedId = id;
       this.selectedIndex = index;
+    },
+
+    async addItem() {
+      try {
+        const response = await axios.post("/api/addItem", this.itemToAdd);
+        // acceder a response .data ??
+        console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
     },
 
     doDelete: function () {
