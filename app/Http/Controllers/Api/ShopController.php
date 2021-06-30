@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\ItemAttributes;
@@ -18,7 +20,7 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return ItemAttributes::with('item')->get(); 
+        return ItemAttributes::with('item')->get();
     }
 
     /**
@@ -39,7 +41,30 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Create item
+        $item = new Item();
+        $item->name = $request->name;
+        $item->photo = $request->photo_name;
+        $item->quality = $request->quality;
+        $item->country = $request->country;
+
+        //get category and type id from string name
+        $categoryId = Category::select('id')->where('name', '=', $request->category)->get()[0]->id;
+        $typeId = Type::select('id')->where('name', '=', $request->type)->get()[0]->id;
+        $item->category_id = $categoryId;
+        $item->type_id = $typeId;
+
+        $item->save();
+
+        //Create item attributes
+        $itemAttributes = new ItemAttributes();
+        $itemAttributes->price = $request->price;
+        $itemAttributes->available = $request->available;
+        $itemAttributes->size = $request->size;
+        $itemAttributes->item_id = $item->id;
+
+        $itemAttributes->save();
+        return $item;
     }
 
     /**
@@ -51,7 +76,7 @@ class ShopController extends Controller
     public function show($categoryId, $typeId)
     {
         if ($categoryId == 'null' && $typeId == 'null') {
-            return ItemAttributes::with('item')->get(); 
+            return ItemAttributes::with('item')->get();
         }
         if ($categoryId !== 'null' && $typeId !== 'null') {
             return Item::with('itemAttributes')
@@ -66,11 +91,12 @@ class ShopController extends Controller
         }
     }
 
-    public function showOne($item_id){
+    public function showOne($item_id)
+    {
         return ItemAttributes::with('item')->where('id', '=', $item_id)->get();
     }
 
-    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -103,8 +129,8 @@ class ShopController extends Controller
      */
     public function destroy($id)
     {
+        $itemAttributeId = ItemAttributes::where('item_id', $id)->get()[0]->id;
+        ItemAttributes::where('id', $itemAttributeId)->delete();
         Item::where('id', $id)->delete();
     }
-
-
 }

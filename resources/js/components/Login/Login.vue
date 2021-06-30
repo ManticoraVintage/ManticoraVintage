@@ -62,8 +62,8 @@ export default {
 
     data() {
         return {
-            usuario: "manticoravintage",
-            password: "manticora123"
+            usuario: "",
+            password: ""
         };
     },
     methods: {

@@ -300,7 +300,7 @@
                   <td>
                     <button
                       class="remove-button"
-                      v-on:click="showDeletePopup(id, index)"
+                      v-on:click="showDeletePopup(cloth.item.id, index)"
                     >
                       REMOVE
                     </button>
@@ -316,36 +316,53 @@
           v-bind:class="{ active: isInsertActive }"
         >
           <div>
-            <label for="name">Name</label> <input type="text" name="name" />
+            <label for="name">Name</label>
+            <input v-model="itemToAdd.name" type="text" name="name" />
           </div>
           <div>
-            <label for="price">Price</label> <input type="text" name="price" />
+            <label for="price">Price</label>
+            <input v-model="itemToAdd.price" type="text" name="price" />
           </div>
           <div>
-            <label for="size">Size</label> <input type="text" name="size" />
+            <label for="size">Size</label>
+            <input type="text" v-model="itemToAdd.size" name="size" />
           </div>
           <div>
             <label for="quality">Quality</label>
-            <input type="text" name="quality" />
+            <input type="text" name="quality" v-model="itemToAdd.quality" />
           </div>
           <div>
             <label for="country">Country</label>
-            <input type="text" name="country" />
+            <input type="text" name="country" v-model="itemToAdd.country" />
           </div>
           <div>
-            <label for="photoName">Foto name</label>
-            <input type="text" name="photoName" />
+            <label for="photoName">Photo name</label>
+            <input
+              type="text"
+              name="photoName"
+              v-model="itemToAdd.photo_name"
+            />
           </div>
           <div>
-            <label for="availability"
-              >Available: Yes<input type="radio" name="availability" />No<input
+            <label for="available"
+              >Available: Yes<input
                 type="radio"
-                name="availability"
+                name="available"
+                value="1"
+                v-model="itemToAdd.available" />No<input
+                v-model="itemToAdd.available"
+                type="radio"
+                name="available"
+                value="0"
             /></label>
           </div>
           <div>
             <label for="categoryDropdown">Category</label>
-            <select name="categoryDropdown" id="categoryDropdown">
+            <select
+              name="categoryDropdown"
+              id="categoryDropdown"
+              v-model="itemToAdd.category"
+            >
               <option value="">--Select the category--</option>
               <option
                 :value="category.name"
@@ -358,7 +375,11 @@
           </div>
           <div>
             <label for="typeDropdown">Type</label>
-            <select name="typeDropdown" id="typeDropdown">
+            <select
+              name="typeDropdown"
+              id="typeDropdown"
+              v-model="itemToAdd.type"
+            >
               <option value="">--Selecciona the type--</option>
               <option
                 :value="type.name"
@@ -575,9 +596,14 @@ export default {
       cloth: null,
       itemToAdd: {
         name: null,
-        email: null,
-        password: null,
-        password_confirmation: null
+        price: null,
+        size: null,
+        quality: null,
+        country: null,
+        photo_name: null,
+        available: null,
+        category: null,
+        type: null,
       },
     };
   },
@@ -633,11 +659,10 @@ export default {
 
     async addItem() {
       try {
-        const response = await axios.post("/api/addItem", this.itemToAdd);
-        // acceder a response .data ??
-        console.log(response)
+        const response = await axios.post("api/admin", this.itemToAdd);
+        console.log(response);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     },
 
