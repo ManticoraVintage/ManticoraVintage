@@ -21,6 +21,13 @@ img{
     height: 100%;
 }
 
+@media (max-width: 1066px) {
+   .main-logo-container{
+       display: none;
+   }
+    }
+
+
 </style>
 <script>
 export default {
