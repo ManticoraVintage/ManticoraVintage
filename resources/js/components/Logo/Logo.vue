@@ -24,11 +24,19 @@ img {
     height: 100%;
 }
 
-@media (max-width: 1066px) {
+@media (max-width: 1366px) {
     .main-logo-container {
         display: none;
         width: 0px;
         height: 0px;
+    }
+}
+
+@media (max-width: 1566px) {
+    .main-logo-container {
+       
+        width: 50px;
+        height: 50px;
     }
 }
 </style>

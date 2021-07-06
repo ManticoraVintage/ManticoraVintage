@@ -112,7 +112,7 @@
 <style scoped>
 .main {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
 }
 .main-container {
     height: 100%;
