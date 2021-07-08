@@ -87,7 +87,7 @@ class ItemAttributesSeeder extends Seeder
             ['id' => 67, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 40.00, 'available' => 0, 'size' => 'No Size', 'item_id' => 67,],
             ['id' => 68, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 30.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 68,],
             ['id' => 69, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 40.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 69,],   
-            ['id' => 70, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'price' => 40.00, 'available' => 1, 'size' => 'No Size', 'item_id' => 69,],            
+             
         ]);
         // $itemAttributes = ItemAttributes::factory()->count(30)->create();
     }
