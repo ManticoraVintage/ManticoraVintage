@@ -1,123 +1,73 @@
 <template>
-    <div class="main">
-        <div
-            class="page-title-container d-flex align-items-center justify-content-center"
-        >
-            <h1 class="main-title d-none">Manticora Vintage</h1>
-        </div>
-
-        <div
-            class="logo-container d-flex flex-column justify-content-center align-items-center"
-        >
-            <div class="logos d-flex flex-column">
-                <img src="images/LOGO NEGRO (1).jpg" class="coin" />
-                <img src="images/logo zozo3.png" />
-            </div>
-            <div class="button-container">
-                <router-link
-                    class="d-flex justify-content-center align-content-center shop-button button"
-                    :to="{
-                        name: 'Shop'
-                    }"
-                    >SHOP</router-link
-                >
-
-                <router-link
-                    class="d-flex justify-content-center align-content-center about-button button"
-                    :to="{
-                        name: 'Shop'
-                    }"
-                    >ABOUT US</router-link
-                >
-            </div>
-        </div>
+  <div class="main">
+    <h1 class="text-center">MANTICORA</h1>
+    <div class="row">
+      <div
+        class="
+          col-5
+          d-flex
+          justify-content-center
+          align-items-center
+          flex-column
+          manticora-container
+        "
+      >
+        <img src="images/logo_manticora.jpg" alt="logo_manticora" />
+        <button>
+          <router-link
+            class="d-flex justify-content-center align-content-center"
+            :to="{
+              name: 'Shop',
+            }"
+            >MANTICORA</router-link
+          >
+        </button>
+      </div>
+      <div class="col-2"><img src="images/output-onlinepngtools.png" alt="and"></div>
+      <div class="col-5"></div>
     </div>
+  </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 /* Main component style */
 .main {
-    width: 100vw;
-    background: black;
-}
+  width: 100%;
+  background: black;
+  height: 100vh;
+  h1 {
+    padding-top: 90px;
+    color: rgb(218, 218, 218);
+  }
+  .manticora-container {
+    button {
+      margin-top: 70px;
+      padding: 10px 50px;
+      border: 1px solid white;
+      transition: all 0.3s ease-in-out;
+      color: white;
+      background: transparent;
+      &:hover {
+        background: #ee2a7b;
+      }
+      a{
+          text-decoration: none;
+          color: white;
+      }
+    }
+    img {
+      width: 300px;
+    }
+  }
 
-/* Main title style */
-.page-title-container {
-    position: absolute;
-    top: 40px;
-    padding: 0 25px;
-    color: #ffffff;
-    letter-spacing: 5px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.main-title {
-    font-size: 30px;
-    width: 100%;
-}
+  .col-5,
+  .col-2 {
+    border: 1px solid blue;
+  }
 
-/* Logo style */
-.logo-container {
-    width: 100vw;
-    height: 100vh;
-}
-
-.logo-container img {
-    width: 425px;
-}
-
-.coin {
-    /* animation: coin-flip 2.5s alternate infinite; */
-}
-
-.button {
-    padding: 10px;
-    border: 1px solid white;
-    margin: 0 auto;
-    margin-top: 25px;
-    transition: all 0.3s ease-in-out;
-    color: white;
-}
-
-.button:hover {
-    background: #ee2a7b;
-    color: white;
-}
-
-.shop-button {
+  .shop-button {
     width: 200px;
-}
-.about-button {
-    width: 250px;
-}
-
-@media (max-width: 1386px) {
-    .logo-container img {
-        width: 275px;
-    }
-}
-
-@media (max-width: 786px) {
-    .logo-container img {
-        width: 200px;
-    }
-    .main-title {
-        font-size: 18px !important;
-    }
-}
-
-@keyframes coin-flip {
-    from {
-        -webkit-transform: scaleX(1);
-        transform: scaleX(1);
-    }
-
-    to {
-        -webkit-transform: scaleX(-1);
-        transform: scaleX(-1);
-    }
+  }
 }
 </style>
 
@@ -126,11 +76,11 @@ import Menu from "../Menu/Menu";
 import Shop from "../Shop/Shop";
 
 export default {
-    name: "Home",
+  name: "Home",
 
-    components: {
-        Menu,
-        Shop
-    }
+  components: {
+    Menu,
+    Shop,
+  },
 };
 </script>
