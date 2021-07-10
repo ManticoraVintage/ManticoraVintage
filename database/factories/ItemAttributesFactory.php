@@ -32,6 +32,7 @@ class ItemAttributesFactory extends Factory
             'available' => random_int(0, 1),
             'size' => 'M',
             'gender' => 'M',
+            'url' => 'url',
             'item_id' => $this->faker->numberBetween(1, 30),
         ];
     }

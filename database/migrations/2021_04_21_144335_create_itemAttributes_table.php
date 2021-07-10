@@ -20,6 +20,8 @@ class CreateItemAttributesTable extends Migration
             $table->integer('available');
             $table->string('size');
             $table->string('gender')->nullable();
+            $table->string('url');
+
 
             //create foreign key column
             $table->unsignedBigInteger('item_id')->index();
