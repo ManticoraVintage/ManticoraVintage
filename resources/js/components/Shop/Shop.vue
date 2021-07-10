@@ -233,7 +233,8 @@
                                 ><i class="fas fa-list-ul"></i
                             ></router-link>
                             <a
-                                href="www.google.com"
+                                :href="item.url"
+                                target="_blank"
                                 class="d-flex justify-content-center align-items-center detail-button"
                                 ><i class="fas fa-shopping-cart"></i
                             ></a>

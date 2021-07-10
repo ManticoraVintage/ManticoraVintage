@@ -61,6 +61,7 @@ class ShopController extends Controller
         $itemAttributes->price = $request->price;
         $itemAttributes->available = $request->available;
         $itemAttributes->size = $request->size;
+        $itemAttributes->url = $request->url;
         $itemAttributes->item_id = $item->id;
 
         $itemAttributes->save();

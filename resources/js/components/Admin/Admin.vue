@@ -344,6 +344,10 @@
             />
           </div>
           <div>
+            <label for="photoName">URL</label>
+            <input type="text" name="url" v-model="itemToAdd.url" />
+          </div>
+          <div>
             <label for="available"
               >Available: Yes<input
                 type="radio"
@@ -392,6 +396,7 @@
           </div>
           <button v-on:click="addItem()">Add Item</button>
         </div>
+        <p>{{ showRequestStatus() }}</p>
       </div>
     </div>
   </div>
@@ -539,9 +544,6 @@ form button:hover {
   overflow: auto;
 }
 
-thead tr th {
-}
-
 th,
 td {
   padding: 20px !important;
@@ -601,10 +603,12 @@ export default {
         quality: null,
         country: null,
         photo_name: null,
+        url: null,
         available: null,
         category: null,
         type: null,
       },
+      request_status: null,
     };
   },
 
@@ -660,8 +664,10 @@ export default {
     async addItem() {
       try {
         const response = await axios.post("api/admin", this.itemToAdd);
+        this.request_status = response.status;
         console.log(response);
       } catch (error) {
+        this.request_status = error;
         console.log(error);
       }
     },
@@ -674,6 +680,13 @@ export default {
       this.items.splice(this.selectedIndex, 1);
 
       this.$vm2.close("modal-1");
+    },
+    showRequestStatus() {
+      if (this.request_status) {
+        return this.request_status === 201
+          ? "Item added to the database"
+          : this.request_status;
+      }
     },
   },
   computed: {
