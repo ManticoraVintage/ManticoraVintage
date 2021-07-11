@@ -31,7 +31,7 @@
 
           <router-link
             :to="{
-              name: 'Shop',
+              name: 'ShopZozobra',
             }"
             ><button>ZOZOBRA</button></router-link
           >
@@ -143,6 +143,7 @@
 <script>
 import Menu from "../Menu/Menu";
 import Shop from "../Shop/Shop";
+import ShopZozobra from "../Shop/ShopZozobra";
 
 export default {
   name: "Home",
@@ -150,6 +151,7 @@ export default {
   components: {
     Menu,
     Shop,
+    ShopZozobra,
   },
 };
 </script>
