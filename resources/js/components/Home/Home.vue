@@ -1,136 +1,157 @@
 <template>
-    <div class="main">
-        <div
-            class="page-title-container d-flex align-items-center justify-content-center"
-        >
-            <h1 class="main-title d-none">Manticora Vintage</h1>
-        </div>
+  <div class="main">
+    <div class="row mb-4">
+      <div
+        class="col-12 col-xl-6 d-flex justify-content-end manticora-container"
+      >
+        <div class="flex-column manticora-inner-container">
+          <img src="images/logo_manticora.jpg" alt="logo_manticora" />
 
-        <div
-            class="logo-container d-flex flex-column justify-content-center align-items-center"
-        >
-            <div class="logos d-flex flex-column">
-                <img src="images/LOGO NEGRO (1).jpg" class="coin" />
-                <img src="images/logo zozo3.png" />
-            </div>
-            <div class="button-container">
-                <router-link
-                    class="d-flex justify-content-center align-content-center shop-button button"
-                    :to="{
-                        name: 'Shop'
-                    }"
-                    >SHOP</router-link
-                >
-
-                <router-link
-                    class="d-flex justify-content-center align-content-center about-button button"
-                    :to="{
-                        name: 'Shop'
-                    }"
-                    >ABOUT US</router-link
-                >
-            </div>
+          <router-link
+            :to="{
+              name: 'Shop',
+            }"
+            ><button>MANTICORA</button></router-link
+          >
         </div>
+      </div>
+      <div
+        class="col-12 col-xl-6 d-flex justify-content-start zozobra-container"
+      >
+        <div
+          class="
+            d-flex
+            flex-column
+            justify-content-between
+            align-items-center
+            zozobra-inner-container
+          "
+        >
+          <img src="images/logo_zozobra.png" alt="logo_zozobra" />
+
+          <router-link
+            :to="{
+              name: 'ShopZozobra',
+            }"
+            ><button>ZOZOBRA</button></router-link
+          >
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
-<style scoped>
-/* Main component style */
+<style lang="scss" scoped>
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .main {
-    width: 100vw;
-    background: black;
-}
-
-/* Main title style */
-.page-title-container {
-    position: absolute;
-    top: 40px;
-    padding: 0 25px;
-    color: #ffffff;
-    letter-spacing: 5px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.main-title {
-    font-size: 30px;
-    width: 100%;
-}
-
-/* Logo style */
-.logo-container {
-    width: 100vw;
-    height: 100vh;
-}
-
-.logo-container img {
-    width: 425px;
-}
-
-.coin {
-    /* animation: coin-flip 2.5s alternate infinite; */
-}
-
-.button {
-    padding: 10px;
-    border: 1px solid white;
-    margin: 0 auto;
-    margin-top: 25px;
-    transition: all 0.3s ease-in-out;
-    color: white;
-}
-
-.button:hover {
-    background: #ee2a7b;
-    color: white;
-}
-
-.shop-button {
-    width: 200px;
-}
-.about-button {
-    width: 250px;
-}
-
-@media (max-width: 1386px) {
-    .logo-container img {
-        width: 275px;
-    }
-}
-
-@media (max-width: 786px) {
-    .logo-container img {
+  @include flex-center();
+  width: 100%;
+  background: black;
+  height: 100vh;
+  overflow: hidden;
+  .manticora-container,
+  .zozobra-container {
+    a {
+      @include flex-center();
+      text-decoration: none;
+      color: #e2e2e2;
+      button {
+        margin-top: 70px;
+        padding: 10px 50px;
+        border: 1px solid #e2e2e2;
+        transition: all 0.3s ease-in-out;
+        color: #e2e2e2;
+        background: transparent;
         width: 200px;
+        &:hover {
+          background: #ee2a7b;
+        }
+      }
     }
-    .main-title {
-        font-size: 18px !important;
+  }
+  .manticora-container {
+    padding-right: 200px;
+    .manticora-inner-container {
+      @include flex-center();
     }
-}
+    img {
+      width: 300px;
+    }
+  }
+  .zozobra-container {
+    padding-left: 135px;
+    .zozobra-inner-container img {
+      padding-top: 70px;
+      width: 400px;
+    }
+  }
+  .logo-divider-container {
+    @include flex-center();
+    i {
+      font-size: 50px;
+      color: #e2e2e2;
+    }
+  }
 
-@keyframes coin-flip {
-    from {
-        -webkit-transform: scaleX(1);
-        transform: scaleX(1);
+  @media only screen and (max-width: 1200px) {
+    .row {
+      height: 100%;
+      .zozobra-container,
+      .manticora-container {
+        padding: 0;
+        justify-content: center !important;
+        button {
+          margin-top: 20px;
+        }
+      }
+      .zozobra-container {
+        .zozobra-inner-container {
+          justify-content: initial !important;
+          img {
+            padding: 0;
+          }
+        }
+      }
     }
-
-    to {
-        -webkit-transform: scaleX(-1);
-        transform: scaleX(-1);
+  }
+  @media only screen and (max-width: 768px) {
+    .manticora-container,
+    .zozobra-container {
+      button {
+        font-size: 16px;
+      }
     }
+    .manticora-container {
+      img {
+        width: 200px;
+      }
+    }
+    .zozobra-container {
+      img {
+        width: 270px !important;
+      }
+    }
+  }
 }
 </style>
 
 <script>
 import Menu from "../Menu/Menu";
 import Shop from "../Shop/Shop";
+import ShopZozobra from "../Shop/ShopZozobra";
 
 export default {
-    name: "Home",
+  name: "Home",
 
-    components: {
-        Menu,
-        Shop
-    }
+  components: {
+    Menu,
+    Shop,
+    ShopZozobra,
+  },
 };
 </script>
