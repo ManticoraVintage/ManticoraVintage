@@ -6,14 +6,13 @@
       >
         <div class="flex-column manticora-inner-container">
           <img src="images/logo_manticora.jpg" alt="logo_manticora" />
-          <button>
-            <router-link
-              :to="{
-                name: 'Shop',
-              }"
-              >MANTICORA</router-link
-            >
-          </button>
+
+          <router-link
+            :to="{
+              name: 'Shop',
+            }"
+            ><button>MANTICORA</button></router-link
+          >
         </div>
       </div>
       <div
@@ -29,14 +28,13 @@
           "
         >
           <img src="images/logo_zozobra.png" alt="logo_zozobra" />
-          <button>
-            <router-link
-              :to="{
-                name: 'Shop',
-              }"
-              >ZOZOBRA</router-link
-            >
-          </button>
+
+          <router-link
+            :to="{
+              name: 'Shop',
+            }"
+            ><button>ZOZOBRA</button></router-link
+          >
         </div>
       </div>
     </div>
@@ -58,21 +56,21 @@
   overflow: hidden;
   .manticora-container,
   .zozobra-container {
-    button {
-      margin-top: 70px;
-      padding: 10px 50px;
-      border: 1px solid #e2e2e2;
-      transition: all 0.3s ease-in-out;
+    a {
+      @include flex-center();
+      text-decoration: none;
       color: #e2e2e2;
-      background: transparent;
-      width: 200px;
-      &:hover {
-        background: #ee2a7b;
-      }
-      a {
-        @include flex-center();
-        text-decoration: none;
+      button {
+        margin-top: 70px;
+        padding: 10px 50px;
+        border: 1px solid #e2e2e2;
+        transition: all 0.3s ease-in-out;
         color: #e2e2e2;
+        background: transparent;
+        width: 200px;
+        &:hover {
+          background: #ee2a7b;
+        }
       }
     }
   }
