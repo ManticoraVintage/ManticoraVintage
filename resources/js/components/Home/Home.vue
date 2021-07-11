@@ -1,13 +1,13 @@
 <template>
   <div class="main">
-    <h1 class="text-center">MANTICORA</h1>
-    <div class="row">
-      <div class="col-6 manticora-container">
-        <div class="manticora-inner-container">
+    <div class="row mb-4">
+      <div
+        class="col-12 col-xl-6 d-flex justify-content-end manticora-container"
+      >
+        <div class="flex-column manticora-inner-container">
           <img src="images/logo_manticora.jpg" alt="logo_manticora" />
           <button>
             <router-link
-              class="d-flex justify-content-center align-content-center"
               :to="{
                 name: 'Shop',
               }"
@@ -16,16 +16,21 @@
           </button>
         </div>
       </div>
-
-      <!-- <div class="col-2 logo-divider-container">
-         <i class="fab fa-xbox"></i>
-      </div> -->
-      <div class="col-6 zozobra-container">
-        <div class="zozobra-inner-container">
+      <div
+        class="col-12 col-xl-6 d-flex justify-content-start zozobra-container"
+      >
+        <div
+          class="
+            d-flex
+            flex-column
+            justify-content-between
+            align-items-center
+            zozobra-inner-container
+          "
+        >
           <img src="images/logo_zozobra.png" alt="logo_zozobra" />
           <button>
             <router-link
-              class="d-flex justify-content-center align-content-center"
               :to="{
                 name: 'Shop',
               }"
@@ -34,17 +39,6 @@
           </button>
         </div>
       </div>
-    </div>
-
-    <div class="footer-container">
-      <p class="footer-text">
-        Los dosmiles siempre han sido criticados en el mundo de la moda por sus
-        combinaciones arriesgadas y conjuntos “estrambóticos”, pantalones de
-        tiro bajo, mini-faldas, colores llamativos... Manticora tiene como meta
-        traer de vuelta esa esencia descarada y provocativa, devolviendo el
-        valor a todas esa marcas de ropa con estilo propio que fueron devoradas
-        por multinacionales.
-      </p>
     </div>
   </div>
 </template>
@@ -55,15 +49,13 @@
   justify-content: center;
   align-items: center;
 }
-/* Main component style */
+
 .main {
+  @include flex-center();
   width: 100%;
   background: black;
   height: 100vh;
-  h1 {
-    padding: 80px 0;
-    color: #e2e2e2;
-  }
+  overflow: hidden;
   .manticora-container,
   .zozobra-container {
     button {
@@ -78,36 +70,24 @@
         background: #ee2a7b;
       }
       a {
+        @include flex-center();
         text-decoration: none;
         color: #e2e2e2;
       }
     }
   }
   .manticora-container {
-    display: flex;
-    justify-content: flex-end;
     padding-right: 200px;
     .manticora-inner-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
+      @include flex-center();
     }
     img {
       width: 300px;
     }
   }
   .zozobra-container {
-    display: flex;
-    justify-content: flex-start;
-    padding-left: 150px;
-    .zozobra-inner-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-    }
-    img {
+    padding-left: 135px;
+    .zozobra-inner-container img {
       padding-top: 70px;
       width: 400px;
     }
@@ -120,20 +100,43 @@
     }
   }
 
-  .col-6,
-  .col-2 {
+  @media only screen and (max-width: 1200px) {
+    .row {
+      height: 100%;
+      .zozobra-container,
+      .manticora-container {
+        padding: 0;
+        justify-content: center !important;
+        button {
+          margin-top: 20px;
+        }
+      }
+      .zozobra-container {
+        .zozobra-inner-container {
+          justify-content: initial !important;
+          img {
+            padding: 0;
+          }
+        }
+      }
+    }
   }
-  .footer-container {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    bottom: 40px;
-    width: 100%;
-    .footer-text {
-      color: #e2e2e2;
-      font-size: 13px;
-      text-align: justify;
-      width: 700px;
+  @media only screen and (max-width: 768px) {
+    .manticora-container,
+    .zozobra-container {
+      button {
+        font-size: 16px;
+      }
+    }
+    .manticora-container {
+      img {
+        width: 200px;
+      }
+    }
+    .zozobra-container {
+      img {
+        width: 270px !important;
+      }
     }
   }
 }
