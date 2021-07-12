@@ -2,7 +2,6 @@
 import Index from "./components/Index.vue";
 import Admin from "./components/Admin/Admin.vue";
 import Shop from "./components/Shop/Shop.vue";
-import ShopZozobra from "./components/Shop/ShopZozobra.vue";
 import ShopItemDetails from "./components/Shop/ShopItemDetails.vue";
 import VueRouter from "vue-router";
 
@@ -18,13 +17,13 @@ const routes = [
         name: "Admin",
     },
     {
-        path: "/shop",
+        path: "/shop/manticora",
         component: Shop,
-        name: "Shop"
+        name: "ShopManticora"
     },
     {
         path: "/shop/zozobra",
-        component: ShopZozobra,
+        component: Shop,
         name: "ShopZozobra"
     },
     {

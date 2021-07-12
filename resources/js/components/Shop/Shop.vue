@@ -420,10 +420,7 @@ form button:hover {
 .price {
     font-weight: bold;
 }
-.country {
-}
-.quality {
-}
+
 .size {
     font-weight: bold;
 }
