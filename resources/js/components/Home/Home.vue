@@ -9,7 +9,7 @@
 
           <router-link
             :to="{
-              name: 'ShopManticora',
+              name: 'manticora',
             }"
             ><button>MANTICORA</button></router-link
           >
@@ -31,7 +31,7 @@
 
           <router-link
             :to="{
-              name: 'ShopZozobra',
+              name: 'zozobra',
             }"
             ><button>ZOZOBRA</button></router-link
           >

@@ -19,12 +19,12 @@ const routes = [
     {
         path: "/shop/manticora",
         component: Shop,
-        name: "ShopManticora"
+        name: "manticora"
     },
     {
         path: "/shop/zozobra",
         component: Shop,
-        name: "ShopZozobra"
+        name: "zozobra"
     },
     {
         path: "/shopItemDetails/:id",
