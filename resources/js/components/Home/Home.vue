@@ -9,7 +9,7 @@
 
           <router-link
             :to="{
-              name: 'Shop',
+              name: 'manticora',
             }"
             ><button>MANTICORA</button></router-link
           >
@@ -31,7 +31,7 @@
 
           <router-link
             :to="{
-              name: 'ShopZozobra',
+              name: 'zozobra',
             }"
             ><button>ZOZOBRA</button></router-link
           >
@@ -143,7 +143,6 @@
 <script>
 import Menu from "../Menu/Menu";
 import Shop from "../Shop/Shop";
-import ShopZozobra from "../Shop/ShopZozobra";
 
 export default {
   name: "Home",
@@ -151,7 +150,6 @@ export default {
   components: {
     Menu,
     Shop,
-    ShopZozobra,
   },
 };
 </script>

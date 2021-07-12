@@ -74,7 +74,7 @@ class ShopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($categoryId, $typeId)
+    public function showFilteredItems($categoryId, $typeId)
     {
         if ($categoryId == 'null' && $typeId == 'null') {
             return ItemAttributes::with('item')->get();
@@ -133,5 +133,17 @@ class ShopController extends Controller
         $itemAttributeId = ItemAttributes::where('item_id', $id)->get()[0]->id;
         ItemAttributes::where('id', $itemAttributeId)->delete();
         Item::where('id', $id)->delete();
+    }
+
+
+    public function getManticoraItems()
+    {
+        return Item::with('itemAttributes')->whereIn('type_id', [1, 2])->get();
+    }
+
+
+    public function getZozobraItems()
+    {
+        return Item::with('itemAttributes')->where('type_id', 3)->get();
     }
 }

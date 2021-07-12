@@ -8,10 +8,11 @@ use App\Http\Controllers\Api\TypeController;
 use App\Http\Controllers\Api\AdminController;
 
 
-Route::get('/shop', [ShopController::class, 'index']);
+Route::get('/shop/manticora', [ShopController::class, 'getManticoraItems']);
+Route::get('/shop/zozobra', [ShopController::class, 'getZozobraItems']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/types', [TypeController::class, 'index']);
-Route::get('/shop/category/{categoryId}/type/{typeId}', [ShopController::class, 'show']);
+Route::get('/shop/category/{categoryId}/type/{typeId}', [ShopController::class, 'showFilteredItems']);
 Route::get('/shop/{itemId}', [ShopController::class, 'showOne']);
 
 Route::post('/admin', [ShopController::class, 'store']);
