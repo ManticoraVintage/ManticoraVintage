@@ -40,7 +40,7 @@
             <br />
             <span class="d-title">Collection:</span>
             <br />
-            <span>{{item.typeData.name}}</span>
+            <span>{{ item.typeData.name }}</span>
           </div>
 
           <br />
@@ -183,9 +183,9 @@ export default {
   },
   async mounted() {
     try {
-      this.item = (
-        await axios.get(`/api/shop/${this.$route.params.id}`)
-      ).data[0];
+      this.item = (await axios.get(`/api/shop/${this.$route.params.id}`))
+        .data[0];
+
       // Change type key to typeData instead of '0'
       delete Object.assign(this.item, { ["typeData"]: this.item[0] })[0];
 
@@ -198,16 +198,15 @@ export default {
       delete this.item.id;
       delete this.item.type_id;
 
-      console.log("item", this.item);
+      console.log("itemAfterMerge", this.item);
     } catch (err) {
       console.log(err);
     }
   },
-  computed:{
-//...
+  computed: {
     getItem() {
-       return this.item ? this.item : [];
-    }
-}
+      return this.item ? this.item : [];
+    },
+  },
 };
 </script>
