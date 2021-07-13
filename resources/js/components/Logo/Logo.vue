@@ -2,7 +2,7 @@
     <div class="main-logo-container">
         <router-link
             :to="{
-                name: 'index'
+                name: 'home'
             }"
         >
             <img src="images/LOGO PNG (1).png"

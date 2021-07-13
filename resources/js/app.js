@@ -5,24 +5,25 @@ import VueRouter from "vue-router";
 import Vue from "vue";
 import Modal from "@burhanahmeed/vue-modal-2";
 import VueCarousel from 'vue-carousel';
-
-
-
-
-Vue.use(Modal, {
-  componentName: "ModalVue"
-});
+import Index from "./Index";
+import FooterCustom from "./components/Footer/FooterCustom.vue";
 
 window.Vue = require("vue").default;
 
-Vue.component("index", require("./components/Index.vue").default);
-//Vue.component('admin', require('./components/Admin/Admin.vue'));
-
-Vue.use(VueRouter);
+// Global registration of components here
+//We are importing components on our router so we dont have to declare them here again
+Vue.use(VueRouter); //To enable vue router
+Vue.use(Modal, {
+  componentName: "ModalVue"
+});
 Vue.use(VueCarousel);
+Vue.component("footer-custom", FooterCustom);
 
-
+//Main component of the website that acts as a container
 const app = new Vue({
     el: "#app",
-    router
+    router,
+    components: {
+      index: Index
+  },
 });

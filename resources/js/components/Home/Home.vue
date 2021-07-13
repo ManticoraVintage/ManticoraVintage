@@ -5,7 +5,7 @@
         class="col-12 col-xl-6 d-flex justify-content-end manticora-container"
       >
         <div class="flex-column manticora-inner-container">
-          <img src="images/logo_manticora.jpg" alt="logo_manticora" />
+          <img src="/images/logo_manticora.jpg" alt="logo_manticora" />
 
           <router-link
             :to="{

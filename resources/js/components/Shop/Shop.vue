@@ -258,7 +258,6 @@
         </div>
       </div>
     </section>
-    <Footer class="footer"></Footer>
   </div>
 </template>
 
@@ -269,10 +268,6 @@
   background: #f2f3f5;
 }
 
-.footer {
-  flex-shrink: 0;
-  margin-top: 100px;
-}
 .item-section {
   min-height: 700px;
   padding: 0 5%;
@@ -473,7 +468,6 @@ form button:hover {
 import { Carousel, Slide } from "vue-carousel";
 import ShopItemDetails from "./ShopItemDetails";
 import Menu from "../Menu/Menu";
-import Footer from "../Footer/Footer";
 import Logo from "../Logo/Logo";
 export default {
   data() {
@@ -582,7 +576,6 @@ export default {
     Slide,
     ShopItemDetails,
     Menu,
-    Footer,
     Logo,
   },
 };

@@ -19,8 +19,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Quicksand:wght@300&display=swap"
         rel="stylesheet" meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  
-    <!--Roboto-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet" meta
         http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
@@ -450,7 +448,7 @@
 
 <body class="antialiased">
     <div id="app">
-        <router-view></router-view>
+        <index></index>
     </div>
 </body>
 

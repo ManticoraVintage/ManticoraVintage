@@ -1,5 +1,5 @@
 
-import Index from "./components/Index.vue";
+import Home from "./components/Home/Home.vue";
 import Admin from "./components/Admin/Admin.vue";
 import Shop from "./components/Shop/Shop.vue";
 import ShopItemDetails from "./components/Shop/ShopItemDetails.vue";
@@ -8,8 +8,8 @@ import VueRouter from "vue-router";
 const routes = [
     {
         path: "/",
-        component: Index,
-        name: "index",
+        component: Home,
+        name: "home",
     },
     {
         path: "/admin",
