@@ -12,81 +12,54 @@
         "
       >
         <div class="title">
-          <h1>{{ item[0].item.name }}</h1>
+          <h1>{{ item.name }}</h1>
           <h4>Pants</h4>
-          <!-- If selected -->
         </div>
 
         <div class="details">
           <div class="size">
             <span class="d-title">Size:</span>
             <br />
-            <span>{{ item[0].size }}</span>
+            <span>{{ item.size }}</span>
           </div>
           <br />
           <div class="quality">
             <span class="d-title"> Quality: </span>
             <br />
 
-            <span>{{ item[0].item.quality }} <i class="fas fa-star"></i></span>
+            <span>{{ item.quality }} <i class="fas fa-star"></i></span>
           </div>
           <br />
 
           <div class="price">
             <span class="d-title">Price:</span>
             <br />
-            <span>{{ item[0].price }}€</span>
+            <span>{{ item.price }}€</span>
           </div>
           <div class="collection">
             <br />
             <span class="d-title">Collection:</span>
             <br />
-            <span v-if="item[0].item.type_id === 1"> VINTAGE </span>
-            <span v-if="item[0].item.type_id === 2"> SELECTED </span>
+            <span>{{item.typeData.name}}</span>
           </div>
 
           <br />
         </div>
 
         <div class="type-description" style="font-size: 16px">
-          Los dosmiles siempre han sido criticados en el mundo de la moda por
-          sus combinaciones arriesgadas y conjuntos “estrambóticos”; pantalones
-          de tiro bajo, mini-faldas, colores llamativos... Manticora.Vntg tiene
-          como meta traer de vuelta esa esencia descarada y provocativa,
-          devolviendo el valor a todas esa marcas de ropa con estilo propio que
-          fueron devoradas por multinacionales. Miss Sixty, Morgan de toi, Lois,
-          Baby Phat... Marcas que actualmente han perdido todo lo que fueron
-          para perderse en un estilo comercial y descafeinado.<br />
-          Nuestra labor es encontrar esas piezas únicas que marcaron una década,
-          las cuales la mayoría fabricaban en sus paises de origen ( y no en
-          países donde predomina la producción masiva o la explotación). Además,
-          Manticora.vntg ofrece también una selección de marcas de grandes
-          diseñadores que lo fueron todo en los dosmiles.
-          <br />
-          <br />
-          Manticora aposta por experimentar y dejar al lado los estigmas creados
-          por la ropa dividida por géneros y que cada cual arriesgue y provoque
-          como más le plazca.
+          {{ item.typeData.description }}
         </div>
         <div class="cta-container">
           <router-link
-            class="
-              text-center
-              detail-button
-              order-5
-            "
+            class="text-center detail-button order-5"
             :to="{
-              name: 'Shop',
+              name: 'manticora',
             }"
             ><i class="fas fa-arrow-left"></i>
           </router-link>
           <a
-            class="
-              text-center
-              detail-button
-              order-5
-            "
-            :href="item[0].url"
+            class="text-center detail-button order-5"
+            :href="item.url"
             target="_blank"
           >
             BUY<i class="fas fa-shopping-cart"></i>
@@ -107,13 +80,13 @@
         <div class="img-1 col-12 col-md-12 col-xl-6">
           <img
             class="test"
-            :src="`images/shop/${item[0].item.photo.split(',')[0]}.jpg`"
+            :src="`images/shop/${item.photo.split(',')[0]}.jpg`"
           />
         </div>
         <div class="img-2 col-12 col-md-12 col-xl-6">
           <img
             class="test"
-            :src="`images/shop/${item[0].item.photo.split(',')[1]}.jpg`"
+            :src="`images/shop/${item.photo.split(',')[1]}.jpg`"
           />
         </div>
       </div>
@@ -199,24 +172,42 @@ img {
 import Logo from "../Logo/Logo";
 export default {
   name: "ShopItemDetails",
-
+  components: {
+    Logo,
+  },
   data() {
     return {
       item: [],
       item_id: this.$route.params.id,
     };
   },
-  components: {
-    Logo,
-  },
-
   async mounted() {
     try {
-      this.item = (await axios.get(`/api/shop/${this.item_id}`)).data;
-      console.log(this.item);
+      this.item = (
+        await axios.get(`/api/shop/${this.$route.params.id}`)
+      ).data[0];
+      // Change type key to typeData instead of '0'
+      delete Object.assign(this.item, { ["typeData"]: this.item[0] })[0];
+
+      // Merge inner object "item"
+      this.item = {
+        ...this.item,
+        ...this.item.item,
+      };
+      delete this.item.item;
+      delete this.item.id;
+      delete this.item.type_id;
+
+      console.log("item", this.item);
     } catch (err) {
       console.log(err);
     }
   },
+  computed:{
+//...
+    getItem() {
+       return this.item ? this.item : [];
+    }
+}
 };
 </script>

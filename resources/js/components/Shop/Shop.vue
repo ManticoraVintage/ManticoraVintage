@@ -165,18 +165,24 @@
           :key="item.id"
           style="min-width: 300px"
         >
-          <div class="d-flex justify-content-center">
-            <img
-              class="test"
-              :src="
-                hovered === key
-                  ? `images/shop/${item.photo.split(',')[1]}.jpg`
-                  : `images/shop/${item.photo.split(',')[0]}.jpg`
-              "
-              @mouseover="hovered = key"
-              @mouseleave="hovered = null"
-            />
-          </div>
+          <router-link
+            :to="{
+              name: 'ShopItemDetails',
+              params: { id: item.item_id },
+            }"
+          >
+            <div class="d-flex justify-content-center">
+              <img
+                class="test"
+                :src="
+                  hovered === key
+                    ? `images/shop/${item.photo.split(',')[1]}.jpg`
+                    : `images/shop/${item.photo.split(',')[0]}.jpg`
+                "
+                @mouseover="hovered = key"
+                @mouseleave="hovered = null"
+              /></div
+          ></router-link>
           <div class="itemData d-flex align-items-center flex-column">
             <div class="item-info-container">
               <div class="itemName">{{ item.name }}</div>
@@ -505,15 +511,14 @@ export default {
   },
   async mounted() {
     try {
+      this.categories = (await axios.get(`/api/categories`)).data;
+      this.types = (await axios.get(`/api/types`)).data;
+      console.log("Types: ", this.types);
       if (this.$route.name === this.shopNames.manticora) {
         this.updateItems(this.shopNames.manticora);
       } else if (this.$route.name === this.shopNames.zozobra) {
         this.updateItems(this.shopNames.zozobra);
       }
-      this.categories = (await axios.get(`/api/categories`)).data;
-      this.types = (await axios.get(`/api/types`)).data;
-      console.log(this.items);
-      console.log(this.types);
     } catch (err) {
       console.log(err);
     }
@@ -548,6 +553,7 @@ export default {
     },
     async updateItems(shopName) {
       this.items = await this.fetchItemData(`/api/shop/${shopName}`);
+      console.log(this.items);
     },
   },
   computed: {

@@ -94,7 +94,10 @@ class ShopController extends Controller
 
     public function showOne($item_id)
     {
-        return ItemAttributes::with('item')->where('id', '=', $item_id)->get();
+        $typeData = Type::where('id', $item_id)->get()->toArray();
+        $itemData = ItemAttributes::with('item')->where('id', '=', $item_id)->get()->toArray();
+        // TO-DO: Return the typeData under a specific key 
+        return array_replace_recursive($itemData, array_replace_recursive([$typeData], $itemData));
     }
 
 
