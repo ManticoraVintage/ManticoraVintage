@@ -99,7 +99,7 @@ class ShopController extends Controller
         $itemData = ItemAttributes::with('item')->where('id', '=', $item_id)->get()->toArray();
 
         // TO-DO: Return the typeData under a specific key 
-        //return array_replace_recursive($itemData, array_replace_recursive([$typeData], $itemData));
+        return array_replace_recursive($itemData, array_replace_recursive([$typeData], $itemData));
     }
 
 
