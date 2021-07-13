@@ -29,7 +29,7 @@ const routes = [
     {
         path: "/shopItemDetails/:id",
         component: ShopItemDetails,
-        name: "ShopItemDetails"
+        name: "ShopItemDetails",
     }
 ];
 
