@@ -36,8 +36,13 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        //Create item
+        $item = new Type();
+        $item->name = $request->name;
+    
+        $item->save();
+        return $item;
+}
 
     /**
      * Display the specified resource.
