@@ -92,20 +92,13 @@
                         class="form-inline d-flex justify-content-end align-items-center"
                     >
                         <input
-                            style="height: 35px; width: 200px; margin: 10px 0px; padding 5px !important;"
+                            style="height: 35px; width: 200px; margin: 10px 0px; padding:5px !important;"
                             class="form-control mr-sm-2"
                             type="search"
                             placeholder="Search"
                             aria-label="Search"
                             v-model="itemSearched"
                         />
-                        <button
-                            style="height: 35px; padding: 0px 20px; margin-right: 30px"
-                            class="btn btn-outline-success my-2 my-sm-0"
-                            type="submit"
-                        >
-                            Search
-                        </button>
                     </form>
 
                     <div
@@ -178,7 +171,10 @@
                                     </td>
                                     <td style="width: 130px">
                                         {{ cloth.item.quality }}
-                                        <i class="fas fa-star"></i>
+                                        <i
+                                            class="fas fa-star"
+                                            style="color:#ee2a7b"
+                                        ></i>
                                     </td>
                                     <td style="width: 150px">
                                         {{ cloth.item.country }}
@@ -244,6 +240,9 @@
                         >
                             INSERT CLOTH <i class="fas fa-tshirt"></i>
                         </button>
+                        <button class="cloth-button" v-on:click="openTab(0)">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
                     </div>
                     <div class="second-row d-flex justify-content-arond">
                         <button
@@ -258,7 +257,7 @@
                             v-bind:class="{ active: isTypeInsertActive }"
                             v-on:click="openTab(4)"
                         >
-                             INSERT TYPE <i class="fas fa-star"></i>
+                            INSERT TYPE <i class="fas fa-star"></i>
                         </button>
                     </div>
                 </div>
@@ -403,9 +402,16 @@
                             </option>
                         </select>
                     </div>
+                      <div
+                        class="button-container d-flex justify-content-between"
+                    >
                     <button type="submit" v-on:click="addItem()">
                         Add Item
                     </button>
+                    <button type="submit" v-on:click="openTab(3)">
+                        Return
+                    </button>
+                      </div>
                 </form>
                 <p>{{ showRequestStatus() }}</p>
             </div>
@@ -434,10 +440,53 @@
                             name="name"
                         />
                     </div>
-
-                    <button type="submit" v-on:click="addCategory()">
-                        Add Category
-                    </button>
+                    <div
+                        class="button-container d-flex justify-content-between"
+                    >
+                        <button type="submit" v-on:click="addCategory()">
+                            Add Category
+                        </button>
+                        <button type="submit" v-on:click="openTab(3)">
+                            Return
+                        </button>
+                    </div>
+                </form>
+                <p>{{ showRequestStatus() }}</p>
+            </div>
+            <div
+                class="type-table"
+                style="display: none"
+                v-bind:class="{ active: isTypeInsertActive }"
+            >
+                <form
+                    method="PUT"
+                    class="form"
+                    ref="insertTypeForm"
+                    @submit="preventSubmit"
+                >
+                    <h4
+                        style="margin-botton:10px; width:100%; font-weight:bold;"
+                    >
+                        INSERT A NEW {{ insertItemTitle }}
+                    </h4>
+                    <div>
+                        <label for="name">Name</label>
+                        <input
+                            v-model="typeToAdd.name"
+                            type="text"
+                            name="name"
+                        />
+                    </div>
+                    <div
+                        class="button-container d-flex justify-content-between"
+                    >
+                        <button type="submit" v-on:click="addType()">
+                            Add Type
+                        </button>
+                        <button type="submit" v-on:click="openTab(3)">
+                            Return
+                        </button>
+                    </div>
                 </form>
                 <p>{{ showRequestStatus() }}</p>
             </div>
@@ -539,11 +588,11 @@
 }
 
 .category-button {
-    margin-right: 15px;
+    margin-right: 5px;
 }
 
 .type-button {
-    margin-left: 15px;
+    margin-left: 5px;
 }
 .menu-actions-container form {
     border-right: 2px solid rgb(221, 221, 221);
@@ -576,7 +625,8 @@
 /* Insert table */
 
 .insert-table,
-.category-table {
+.category-table,
+.type-table {
     margin: 0 auto;
     border: 2px solid rgb(221, 221, 221);
     padding: 25px 30px;
@@ -587,31 +637,36 @@
 }
 
 .insert-table div,
-.category-table div {
+.category-table div,
+.type-table div {
     width: 100%;
     margin-top: 10px;
 }
 
 .insert-table div label,
-.category-table div label {
+.category-table div label,
+.type-table div label {
     min-width: 100px;
     color: #ee2a7b;
     font-weight: bold;
 }
 
 .insert-table div input,
-.category-table div input {
+.category-table div input,
+.type-table div input {
     border: 1px solid rgb(179, 179, 179);
     padding: 4px;
 }
 
 .insert-table div input:active,
-.category-table div input:active {
+.category-table div input:active,
+.type-table div input:active {
     outline: 1px solid #ee2a7b;
 }
 
 .insert-table div input:focus,
-.category-table div input:focus {
+.category-table div input:focus,
+.type-table div input:focus {
     outline: 1px solid #ee2a7b;
 }
 
@@ -623,7 +678,8 @@
     margin-top: 10px;
 }
 .insert-table button,
-.category-table button {
+.category-table button,
+.type-table button {
     margin-top: 10px;
     padding: 5px;
     border: 2px solid #ee2a7b;
@@ -635,9 +691,11 @@
 }
 
 .insert-table button:hover,
-.category-table button:hover {
+.category-table button:hover,
+.type-table button:hover {
     background: #ee2a7b;
     color: white;
+    border: 2px solid #ee2a7b;
 }
 
 /* View All Table */
@@ -807,6 +865,9 @@ export default {
             categoryToAdd: {
                 name: null
             },
+            typeToAdd: {
+                name: null
+            },
             request_status: null
         };
     },
@@ -899,6 +960,20 @@ export default {
                 const response = await axios.put(
                     "api/admin/category",
                     this.categoryToAdd
+                );
+                this.request_status = response.status;
+                console.log(response);
+            } catch (error) {
+                this.request_status = error;
+                console.log(error);
+            }
+        },
+
+        async addType() {
+            try {
+                const response = await axios.put(
+                    "api/admin/type",
+                    this.typeToAdd
                 );
                 this.request_status = response.status;
                 console.log(response);
