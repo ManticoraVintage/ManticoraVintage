@@ -36,7 +36,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            //Create item
+            $item = new Category();
+            $item->name = $request->name;
+        
+            $item->save();
+            return $item;
     }
 
     /**

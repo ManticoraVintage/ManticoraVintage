@@ -141,6 +141,11 @@ class ShopController extends Controller
     }
 
 
+    public function getAllItems()
+    {
+        return ItemAttributes::with('item')->get();
+    }
+
     public function getManticoraItems()
     {
         return Item::with('itemAttributes')->whereIn('type_id', [1, 2])->get();
