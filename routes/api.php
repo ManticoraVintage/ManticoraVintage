@@ -18,6 +18,7 @@ Route::get('/shop/{itemId}', [ShopController::class, 'showOne']);
 
 Route::put('/admin/cloth', [ShopController::class, 'store']);
 Route::put('/admin/category', [CategoryController::class, 'store']);
+Route::post('/admin/category/{id}', [CategoryController::class, 'destroy']);
 Route::put('/admin/type', [TypeController::class, 'store']);
 Route::post('/admin/{id}', [ShopController::class, 'destroy']);
 
