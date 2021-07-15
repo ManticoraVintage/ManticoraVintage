@@ -44,7 +44,29 @@
             "
                         v-on:click="openTab(0)"
                     >
-                        View All
+                        View All Cloth
+                    </li>
+                    <li
+                        class="
+              left-menu-list
+              d-flex
+              justify-content-center
+              align-items-center
+            "
+                        v-on:click="openTab(5)"
+                    >
+                        View All Categories
+                    </li>
+                    <li
+                        class="
+              left-menu-list
+              d-flex
+              justify-content-center
+              align-items-center
+            "
+                        v-on:click="openTab(0)"
+                    >
+                        View All Types
                     </li>
                 </ul>
             </div>
@@ -74,6 +96,29 @@
             >
                 This process cannot be undone
             </modal-vue>
+            <modal-vue
+                class="deletePopup2"
+                @on-close="$vm2.close('modal-2')"
+                name="modal-2"
+                :headerOptions="{
+                    title: 'Want to delete this category?'
+                }"
+                :footerOptions="{
+                    btn1: 'Cancel',
+                    btn2: 'Delete',
+                    btn2Style: {
+                        backgroundColor: '#ee2a7b'
+                    },
+                    btn2OnClick: () => {
+                        doDeleteCategory();
+                    },
+                    btn1OnClick: () => {
+                        $vm2.close('modal-2');
+                    }
+                }"
+            >
+                This process cannot be undone
+            </modal-vue>
 
             <div
                 class="
@@ -86,26 +131,33 @@
 
             <div v-if="isTableActive" class="table-container">
                 <div
-                    class="menu-actions-container d-flex justify-content-end align-items-center"
+                    class="menu-actions-container d-flex justify-content-between align-items-center"
                 >
-                    <form
-                        class="form-inline d-flex justify-content-end align-items-center"
-                    >
-                        <input
-                            style="height: 35px; width: 200px; margin: 10px 0px; padding:5px !important; border: 2px solid #ee2a7b;"
-                            class="form-control mr-sm-2"
-                            type="search"
-                            placeholder="Search"
-                            aria-label="Search"
-                            v-model="itemSearched"
-                        />
-                    </form>
-
+                    <h4 style="margin-left:20px; font-weight:bold;">
+                        MANTICORA ITEM LIST
+                    </h4>
                     <div
-                        class="insert-container d-flex justify-content-center align-items-start"
-                        v-on:click="openTab(3)"
+                        class="search-add-container d-flex justify-content-end align-items-center"
                     >
-                        <i class="fas fa-plus-square fa-lg"></i>
+                        <form
+                            class="form-inline d-flex justify-content-end align-items-center"
+                        >
+                            <input
+                                style="height: 35px; width: 200px; margin: 10px 0px; padding:5px !important; border: 2px solid #ee2a7b;"
+                                class="form-control mr-sm-2"
+                                type="search"
+                                placeholder="Search"
+                                aria-label="Search"
+                                v-model="itemSearched"
+                            />
+                        </form>
+
+                        <div
+                            class="insert-container d-flex justify-content-center align-items-start"
+                            v-on:click="openTab(3)"
+                        >
+                            <i class="fas fa-plus-square fa-lg"></i>
+                        </div>
                     </div>
                 </div>
 
@@ -210,6 +262,88 @@
                                                 v-on:click="
                                                     showDeletePopup(
                                                         cloth.item.id,
+                                                        index
+                                                    )
+                                                "
+                                            >
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                            <button class="action-button">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div
+                v-if="isViewCategoryActive"
+                class="table-container"
+                style="width:575px"
+            >
+                <div
+                    class="menu-actions-container d-flex justify-content-between align-items-center"
+                >
+                    <h4 style="margin-left:20px; font-weight:bold;">
+                        MANTICORA ITEM LIST
+                    </h4>
+                    <div
+                        class="search-add-container d-flex justify-content-end align-items-center"
+                    >
+                        <div
+                            class="insert-container d-flex justify-content-center align-items-start"
+                            v-on:click="openTab(3)"
+                        >
+                            <i class="fas fa-plus-square fa-lg"></i>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="view-all-table"
+                    v-bind:class="{ active: isViewCategoryActive }"
+                >
+                    <div class="errorMsg" style="width:100%;">
+                        {{ errorMsg }}
+                        {{ responseMsg }}
+                    </div>
+                    <div class="table-head">
+                        <table class="table table-hover">
+                            <thead class="thead-light">
+                                <tr class="d-flex">
+                                    <th scope="col" style="width: 100px">ID</th>
+                                    <th scope="col" style="width: 300px">
+                                        NOMBRE
+                                    </th>
+                                    <th scope="col" style="width: 150px">
+                                        ACTION
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="table-body">
+                        <table>
+                            <tbody>
+                                <tr
+                                    v-for="(category, index) in categories"
+                                    :key="index"
+                                >
+                                    <td style="width: 100px">
+                                        {{ category.id }}
+                                    </td>
+                                    <td style="width: 300px">
+                                        {{ category.name }}
+                                    </td>
+                                    <td>
+                                        <div class="buttons d-flex flex-row">
+                                            <button
+                                                class="action-button"
+                                                v-on:click="
+                                                    showDeletePopup2(
+                                                        category.id,
                                                         index
                                                     )
                                                 "
@@ -413,7 +547,7 @@
                         </button>
                     </div>
                 </form>
-                <p>{{ showRequestStatus() }}</p>
+                <p style="display:none;">{{ showRequestStatus() }}</p>
             </div>
 
             <div
@@ -451,7 +585,7 @@
                         </button>
                     </div>
                 </form>
-                <p>{{ showRequestStatus() }}</p>
+               <p style="display:none;">{{ showRequestStatus() }}</p>
             </div>
             <div
                 class="type-table"
@@ -488,7 +622,7 @@
                         </button>
                     </div>
                 </form>
-                <p>{{ showRequestStatus() }}</p>
+                 <p style="display:none;">{{ showRequestStatus() }}</p>
             </div>
         </div>
     </div>
@@ -514,7 +648,7 @@
 .vertical-navbar {
     height: 100%;
     width: 275px;
-    border-right: 1px solid #ee2a7b;
+    border-right: 2px solid #ee2a7b;
     background-color: #ee2a7b;
     position: fixed;
     z-index: 2;
@@ -527,6 +661,16 @@
 
 .dashboard-options {
     width: 100%;
+    font-weight: 900;
+    border-bottom: 2px solid #ee2a7b;
+    padding: 20px 5px;
+    margin: 0 !important;
+    font-size: 20px;
+}
+
+.vertical-navbar-options {
+    font-weight: bold;
+    color: rgb(79, 79, 79);
 }
 
 .vertical-navbar-menu {
@@ -536,7 +680,6 @@
 }
 .left-menu-list {
     padding: 10px;
-
     width: 100%;
 }
 .left-menu-list:hover {
@@ -558,6 +701,20 @@
     z-index: -1;
     display: flex;
     justify-content: center;
+}
+
+.errorMsg {
+    color: rgb(205, 38, 38);
+    font-weight: bold;
+    margin: 5px 10px !important;
+    padding: 0 !important;
+}
+
+.responseMsg {
+    color: rgb(58, 210, 42);
+    font-weight: bold;
+    margin: 5px 10px !important;
+    padding: 0 !important;
 }
 
 .menu-actions-container {
@@ -595,14 +752,12 @@
     margin-left: 5px;
 }
 .menu-actions-container form {
-    border-right: 2px solid #ee2a7b;
     margin-right: 10px;
-    padding: 10px;
 }
 
 .insert-container {
-    padding: 15px 15px;
-    margin-right: 10px;
+    padding: 20px;
+    border-left: 2px solid #ee2a7b;
 }
 
 .delete-table,
@@ -842,6 +997,8 @@ export default {
             types: null,
             isTableActive: true,
             isViewAllActive: true,
+            isViewCategoryActive: false,
+            isViewTypeActive: false,
             isInsertMenuActive: false,
             isInsertActive: false,
             isCategoryInsertActive: false,
@@ -849,9 +1006,13 @@ export default {
             tabType: 0,
             selectedId: 0,
             selectedIndex: 0,
+            selectedCategoryId: null,
+            selectedCategoryIndex: null,
             itemSearched: null,
             insertItemTitle: null,
             cloth: null,
+            errorMsg: "",
+            responseMsg: "",
             itemToAdd: {
                 name: null,
                 price: null,
@@ -896,6 +1057,7 @@ export default {
                     this.isInsertActive = false;
                     this.isCategoryInsertActive = false;
                     this.isTypeInsertActive = false;
+                    this.isViewCategoryActive = false;
                     this.request_status = "";
 
                     break;
@@ -905,6 +1067,7 @@ export default {
                     this.isInsertMenuActive = false;
                     this.isCategoryInsertActive = false;
                     this.isTypeInsertActive = false;
+                    this.isViewCategoryActive = false;
                     this.insertItemTitle = "CLOTH";
                     this.request_status = "";
                     break;
@@ -914,6 +1077,7 @@ export default {
                     this.isInsertActive = false;
                     this.isCategoryInsertActive = true;
                     this.isTypeInsertActive = false;
+                    this.isViewCategoryActive = false;
                     this.insertItemTitle = "CATEGORY";
                     this.request_status = "";
                     break;
@@ -923,6 +1087,7 @@ export default {
                     this.isInsertActive = false;
                     this.isCategoryInsertActive = false;
                     this.isTypeInsertActive = false;
+                    this.isViewCategoryActive = false;
                     this.request_status = "";
                     break;
                 case 4:
@@ -931,7 +1096,18 @@ export default {
                     this.isInsertActive = false;
                     this.isCategoryInsertActive = false;
                     this.isTypeInsertActive = true;
+                    this.isViewCategoryActive = false;
                     this.insertItemTitle = "TYPE";
+                    this.request_status = "";
+                    break;
+                case 5:
+                    this.isTableActive = false;
+                    this.isInsertMenuActive = false;
+                    this.isInsertActive = false;
+                    this.isCategoryInsertActive = false;
+                    this.isTypeInsertActive = false;
+                    this.isViewCategoryActive = true;
+                    this.insertItemTitle = "";
                     this.request_status = "";
                     break;
             }
@@ -941,6 +1117,11 @@ export default {
             this.$vm2.open("modal-1");
             this.selectedId = id;
             this.selectedIndex = index;
+        },
+        showDeletePopup2: function(id, index) {
+            this.$vm2.open("modal-2");
+            this.selectedCategoryId = id;
+            this.selectedCategoryIndex = index;
         },
 
         async addItem() {
@@ -1000,6 +1181,26 @@ export default {
             this.items.splice(this.selectedIndex, 1);
 
             this.$vm2.close("modal-1");
+        },
+        doDeleteCategory: function() {
+            axios
+                .post(`api/admin/category/${this.selectedCategoryId}`)
+                .then(
+                    (this.responseMsg = "Deleted correctly"),
+                    (this.errorMsg = "")
+                )
+
+                .catch(
+                    error => (
+                        (this.errorMsg =
+                            "No puedes borrar esta categoria, borra toda la ropa de esta categoria primero"),
+                        (this.responseMsg = "")
+                    )
+                );
+            //  .catch(error => console.log(error.response.data));
+            this.items.splice(this.selectedCategoryIndex, 1);
+
+            this.$vm2.close("modal-2");
         },
         showRequestStatus() {
             if (this.request_status) {
