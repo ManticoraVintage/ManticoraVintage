@@ -92,7 +92,7 @@
                         class="form-inline d-flex justify-content-end align-items-center"
                     >
                         <input
-                            style="height: 35px; width: 200px; margin: 10px 0px; padding:5px !important;"
+                            style="height: 35px; width: 200px; margin: 10px 0px; padding:5px !important; border: 2px solid #ee2a7b;"
                             class="form-control mr-sm-2"
                             type="search"
                             placeholder="Search"
@@ -402,16 +402,16 @@
                             </option>
                         </select>
                     </div>
-                      <div
+                    <div
                         class="button-container d-flex justify-content-between"
                     >
-                    <button type="submit" v-on:click="addItem()">
-                        Add Item
-                    </button>
-                    <button type="submit" v-on:click="openTab(3)">
-                        Return
-                    </button>
-                      </div>
+                        <button type="submit" v-on:click="addItem()">
+                            Add Item
+                        </button>
+                        <button type="submit" v-on:click="openTab(3)">
+                            Return
+                        </button>
+                    </div>
                 </form>
                 <p>{{ showRequestStatus() }}</p>
             </div>
@@ -561,7 +561,7 @@
 }
 
 .menu-actions-container {
-    border-bottom: 2px solid rgb(221, 221, 221);
+    border-bottom: 2px solid #ee2a7b;
 }
 
 .category-button,
@@ -595,7 +595,7 @@
     margin-left: 5px;
 }
 .menu-actions-container form {
-    border-right: 2px solid rgb(221, 221, 221);
+    border-right: 2px solid #ee2a7b;
     margin-right: 10px;
     padding: 10px;
 }
@@ -628,7 +628,7 @@
 .category-table,
 .type-table {
     margin: 0 auto;
-    border: 2px solid rgb(221, 221, 221);
+    border: 2px solid #ee2a7b;
     padding: 25px 30px;
     border-radius: 7px;
     -webkit-box-shadow: 3px 4px 9px -2px rgba(0, 0, 0, 0.75);
@@ -744,10 +744,12 @@ form button:hover {
 
 .table-container {
     border: 2px solid rgb(221, 221, 221);
+    border-radius: 5px;
     margin: 50px auto;
     -webkit-box-shadow: 3px 4px 9px -2px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 3px 4px 9px -2px rgba(0, 0, 0, 0.75);
     box-shadow: 3px 4px 9px -2px rgba(0, 0, 0, 0.75);
+    border: 2px solid #ee2a7b;
 }
 
 .table-header {
@@ -774,8 +776,8 @@ tr {
 }
 
 tr:hover {
-    background-color: #cdcdcd;
-    color: white;
+    background-color: #e8e8e8;
+    color: #ee2a7b;
     font-weight: bold;
 }
 
