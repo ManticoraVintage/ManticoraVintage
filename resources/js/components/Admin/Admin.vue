@@ -64,7 +64,7 @@
               justify-content-center
               align-items-center
             "
-                        v-on:click="openTab(0)"
+                        v-on:click="openTab(6)"
                     >
                         View All Types
                     </li>
@@ -84,7 +84,7 @@
                     btn1: 'Cancel',
                     btn2: 'Delete',
                     btn2Style: {
-                        backgroundColor: 'red'
+                        backgroundColor: '#ee2a7b'
                     },
                     btn2OnClick: () => {
                         doDelete();
@@ -114,6 +114,29 @@
                     },
                     btn1OnClick: () => {
                         $vm2.close('modal-2');
+                    }
+                }"
+            >
+                This process cannot be undone
+            </modal-vue>
+            <modal-vue
+                class="deletePopup3"
+                @on-close="$vm2.close('modal-3')"
+                name="modal-3"
+                :headerOptions="{
+                    title: 'Want to delete this type?'
+                }"
+                :footerOptions="{
+                    btn1: 'Cancel',
+                    btn2: 'Delete',
+                    btn2Style: {
+                        backgroundColor: '#ee2a7b'
+                    },
+                    btn2OnClick: () => {
+                        doDeleteType();
+                    },
+                    btn1OnClick: () => {
+                        $vm2.close('modal-3');
                     }
                 }"
             >
@@ -169,7 +192,6 @@
                         <table class="table table-hover">
                             <thead class="thead-light">
                                 <tr class="d-flex">
-                                    <th scope="col" style="width: 100px">ID</th>
                                     <th scope="col" style="width: 300px">
                                         NOMBRE
                                     </th>
@@ -209,9 +231,6 @@
                                     v-for="(cloth, index) in filteredList"
                                     :key="index"
                                 >
-                                    <td style="width: 100px">
-                                        {{ cloth.item.id }}
-                                    </td>
                                     <td style="width: 300px">
                                         {{ cloth.item.name }}
                                     </td>
@@ -279,20 +298,28 @@
                     </div>
                 </div>
             </div>
-            <div
-                v-if="isViewCategoryActive"
-                class="table-container"
-                style="width:575px"
-            >
+            <div v-if="isViewCategoryActive" class="table-container">
                 <div
                     class="menu-actions-container d-flex justify-content-between align-items-center"
                 >
                     <h4 style="margin-left:20px; font-weight:bold;">
-                        MANTICORA ITEM LIST
+                        MANTICORA CATEGORY LIST
                     </h4>
                     <div
                         class="search-add-container d-flex justify-content-end align-items-center"
                     >
+                        <form
+                            class="form-inline d-flex justify-content-end align-items-center"
+                        >
+                            <input
+                                style="height: 35px; width: 200px; margin: 10px 0px; padding:5px !important; border: 2px solid #ee2a7b;"
+                                class="form-control mr-sm-2"
+                                type="search"
+                                placeholder="Search"
+                                aria-label="Search"
+                                v-model="categorySearched"
+                            />
+                        </form>
                         <div
                             class="insert-container d-flex justify-content-center align-items-start"
                             v-on:click="openTab(3)"
@@ -305,19 +332,21 @@
                     class="view-all-table"
                     v-bind:class="{ active: isViewCategoryActive }"
                 >
-                    <div class="errorMsg" style="width:100%;">
-                        {{ errorMsg }}
+                    <div
+                        class="error"
+                        v-bind:class="{ correct: typeMsg }"
+                        style="width:100%;"
+                    >
                         {{ responseMsg }}
                     </div>
                     <div class="table-head">
                         <table class="table table-hover">
                             <thead class="thead-light">
                                 <tr class="d-flex">
-                                    <th scope="col" style="width: 100px">ID</th>
-                                    <th scope="col" style="width: 300px">
+                                    <th scope="col" style="min-width: 400px">
                                         NOMBRE
                                     </th>
-                                    <th scope="col" style="width: 150px">
+                                    <th scope="col" style="min-width: 200px">
                                         ACTION
                                     </th>
                                 </tr>
@@ -328,19 +357,27 @@
                         <table>
                             <tbody>
                                 <tr
-                                    v-for="(category, index) in categories"
+                                    v-for="(category,
+                                    index) in filteredCategories"
                                     :key="index"
                                 >
-                                    <td style="width: 100px">
-                                        {{ category.id }}
-                                    </td>
-                                    <td style="width: 300px">
+                                    <td style="min-width: 400px;">
                                         {{ category.name }}
                                     </td>
                                     <td>
-                                        <div class="buttons d-flex flex-row">
+                                        <!-- <form
+                                            method="POST"
+                                            class="form"
+                                            ref="insertClothForm"
+                                            @submit="preventSubmit"
+                                        > -->
+                                        <div
+                                            class="buttons d-flex flex-row"
+                                            style="min-width:200px;"
+                                        >
                                             <button
                                                 class="action-button"
+                                                style="border:0px;"
                                                 v-on:click="
                                                     showDeletePopup2(
                                                         category.id,
@@ -350,10 +387,123 @@
                                             >
                                                 <i class="fas fa-trash"></i>
                                             </button>
-                                            <button class="action-button">
+                                            <button
+                                                class="action-button"
+                                                style="border:0px;"
+                                            >
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                         </div>
+                                        <!-- </form> -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div v-if="isViewTypeActive" class="table-container">
+                <div
+                    class="menu-actions-container d-flex justify-content-between align-items-center"
+                >
+                    <h4 style="margin-left:20px; font-weight:bold;">
+                        MANTICORA TYPE LIST
+                    </h4>
+                    <div
+                        class="search-add-container d-flex justify-content-end align-items-center"
+                    >
+                        <form
+                            class="form-inline d-flex justify-content-end align-items-center"
+                        >
+                            <input
+                                style="height: 35px; width: 200px; margin: 10px 0px; padding:5px !important; border: 2px solid #ee2a7b;"
+                                class="form-control mr-sm-2"
+                                type="search"
+                                placeholder="Search"
+                                aria-label="Search"
+                                v-model="typeSearched"
+                            />
+                        </form>
+                        <div
+                            class="insert-container d-flex justify-content-center align-items-start"
+                            v-on:click="openTab(3)"
+                        >
+                            <i class="fas fa-plus-square fa-lg"></i>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="view-all-table"
+                    v-bind:class="{ active: isViewTypeActive }"
+                >
+                    <div
+                        class="error"
+                        v-bind:class="{ correct: typeMsg }"
+                        style="width:100%;"
+                    >
+                        {{ responseMsg }}
+                    </div>
+                    <div class="table-head">
+                        <table class="table table-hover">
+                            <thead class="thead-light">
+                                <tr class="d-flex">
+                                    <th scope="col" style="min-width: 200px">
+                                        NOMBRE
+                                    </th>
+                                     <th scope="col" style="width: 500px">
+                                        DESCRIPCION
+                                    </th>
+                                    <th scope="col" style="min-width: 100px">
+                                        ACTION
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="table-body">
+                        <table>
+                            <tbody>
+                                <tr
+                                    v-for="(type, index) in filteredTypes"
+                                    :key="index"
+                                >
+                                    <td style="min-width: 200px;">
+                                        {{ type.name }}
+                                    </td>
+                                    <td style="max-width: 500px; overflow:auto;">
+                                        {{ type.description }}
+                                    </td>
+                                    <td>
+                                        <!-- <form
+                                            method="POST"
+                                            class="form"
+                                            ref="insertClothForm"
+                                            @submit="preventSubmit"
+                                        > -->
+                                        <div
+                                            class="buttons d-flex flex-row"
+                                            style="min-width:100px;"
+                                        >
+                                            <button
+                                                class="action-button"
+                                                style="border:0px;"
+                                                v-on:click="
+                                                    showDeletePopup3(
+                                                        type.id,
+                                                        index
+                                                    )
+                                                "
+                                            >
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                            <button
+                                                class="action-button"
+                                                style="border:0px;"
+                                            >
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        </div>
+                                        <!-- </form> -->
                                     </td>
                                 </tr>
                             </tbody>
@@ -585,7 +735,7 @@
                         </button>
                     </div>
                 </form>
-               <p style="display:none;">{{ showRequestStatus() }}</p>
+                <p style="display:none;">{{ showRequestStatus() }}</p>
             </div>
             <div
                 class="type-table"
@@ -622,7 +772,7 @@
                         </button>
                     </div>
                 </form>
-                 <p style="display:none;">{{ showRequestStatus() }}</p>
+                <p style="display:none;">{{ showRequestStatus() }}</p>
             </div>
         </div>
     </div>
@@ -703,14 +853,14 @@
     justify-content: center;
 }
 
-.errorMsg {
+.error {
     color: rgb(205, 38, 38);
     font-weight: bold;
     margin: 5px 10px !important;
     padding: 0 !important;
 }
 
-.responseMsg {
+.correct {
     color: rgb(58, 210, 42);
     font-weight: bold;
     margin: 5px 10px !important;
@@ -907,7 +1057,7 @@ form button:hover {
     border: 2px solid #ee2a7b;
 }
 
-.table-header {
+.table-head {
     overflow: hidden;
     width: 100%;
 }
@@ -1003,12 +1153,17 @@ export default {
             isInsertActive: false,
             isCategoryInsertActive: false,
             isTypeInsertActive: false,
+            typeMsg: false,
             tabType: 0,
             selectedId: 0,
             selectedIndex: 0,
             selectedCategoryId: null,
             selectedCategoryIndex: null,
+            selectedTypeId: null,
+            selectedTypeIndex: null,
             itemSearched: null,
+            categorySearched: null,
+            typeSearched: null,
             insertItemTitle: null,
             cloth: null,
             errorMsg: "",
@@ -1026,6 +1181,7 @@ export default {
                 type: null
             },
             categoryToAdd: {
+                id: null,
                 name: null
             },
             typeToAdd: {
@@ -1058,6 +1214,7 @@ export default {
                     this.isCategoryInsertActive = false;
                     this.isTypeInsertActive = false;
                     this.isViewCategoryActive = false;
+                    this.isViewTypeActive = false;
                     this.request_status = "";
 
                     break;
@@ -1068,6 +1225,7 @@ export default {
                     this.isCategoryInsertActive = false;
                     this.isTypeInsertActive = false;
                     this.isViewCategoryActive = false;
+                    this.isViewTypeActive = false;
                     this.insertItemTitle = "CLOTH";
                     this.request_status = "";
                     break;
@@ -1078,6 +1236,7 @@ export default {
                     this.isCategoryInsertActive = true;
                     this.isTypeInsertActive = false;
                     this.isViewCategoryActive = false;
+                    this.isViewTypeActive = false;
                     this.insertItemTitle = "CATEGORY";
                     this.request_status = "";
                     break;
@@ -1088,6 +1247,7 @@ export default {
                     this.isCategoryInsertActive = false;
                     this.isTypeInsertActive = false;
                     this.isViewCategoryActive = false;
+                    this.isViewTypeActive = false;
                     this.request_status = "";
                     break;
                 case 4:
@@ -1097,6 +1257,7 @@ export default {
                     this.isCategoryInsertActive = false;
                     this.isTypeInsertActive = true;
                     this.isViewCategoryActive = false;
+                    this.isViewTypeActive = false;
                     this.insertItemTitle = "TYPE";
                     this.request_status = "";
                     break;
@@ -1107,6 +1268,18 @@ export default {
                     this.isCategoryInsertActive = false;
                     this.isTypeInsertActive = false;
                     this.isViewCategoryActive = true;
+                    this.isViewTypeActive = false;
+                    this.insertItemTitle = "";
+                    this.request_status = "";
+                    break;
+                case 6:
+                    this.isTableActive = false;
+                    this.isInsertMenuActive = false;
+                    this.isInsertActive = false;
+                    this.isCategoryInsertActive = false;
+                    this.isTypeInsertActive = false;
+                    this.isViewCategoryActive = false;
+                    this.isViewTypeActive = true;
                     this.insertItemTitle = "";
                     this.request_status = "";
                     break;
@@ -1124,12 +1297,19 @@ export default {
             this.selectedCategoryIndex = index;
         },
 
+        showDeletePopup3: function(id, index) {
+            this.$vm2.open("modal-3");
+            this.selectedTypeId = id;
+            this.selectedTypeIndex = index;
+        },
+
         async addItem() {
             try {
                 const response = await axios.put(
                     "api/admin/cloth",
                     this.itemToAdd
                 );
+
                 this.request_status = response.status;
                 console.log(response);
             } catch (error) {
@@ -1144,6 +1324,7 @@ export default {
                     "api/admin/category",
                     this.categoryToAdd
                 );
+                this.categories.push(this.categoryToAdd);
                 this.request_status = response.status;
                 console.log(response);
             } catch (error) {
@@ -1176,32 +1357,61 @@ export default {
         doDelete: function() {
             axios
                 .post(`api/admin/${this.selectedId}`)
-                .then(response => console.log(response.data, "de locos"))
+                .then(
+                    response => console.log(response.data, "de locos"),
+                    this.items.splice(this.selectedIndex, 1)
+                )
                 .catch(error => console.log(error.response.data));
-            this.items.splice(this.selectedIndex, 1);
 
             this.$vm2.close("modal-1");
         },
+
         doDeleteCategory: function() {
             axios
                 .post(`api/admin/category/${this.selectedCategoryId}`)
-                .then(
-                    (this.responseMsg = "Deleted correctly"),
-                    (this.errorMsg = "")
-                )
+                .then(response => {
+                    this.responseMsg = "Deleted correctly";
+                    this.typeMsg = true;
+                    this.categories.splice(this.selectedCategoryIndex, 1);
+                })
+                .catch(error => {
+                    this.responseMsg =
+                        "No puedes borrar esta categoria, borra toda la ropa de esta categoria primero";
+                    this.typeMsg = false;
+                });
 
-                .catch(
-                    error => (
-                        (this.errorMsg =
-                            "No puedes borrar esta categoria, borra toda la ropa de esta categoria primero"),
-                        (this.responseMsg = "")
-                    )
-                );
+            //  (this.responseMsg = "Deleted correctly"),
+            //     (this.typeMsg = true),
+            //     (this.categories.splice(this.selectedCategoryIndex, 1))
+
             //  .catch(error => console.log(error.response.data));
-            this.items.splice(this.selectedCategoryIndex, 1);
 
             this.$vm2.close("modal-2");
         },
+
+        doDeleteType: function() {
+            axios
+                .post(`api/admin/type/${this.selectedTypeId}`)
+                .then(response => {
+                    this.responseMsg = "Deleted correctly";
+                    this.typeMsg = true;
+                    this.types.splice(this.selectedTypeIndex, 1);
+                })
+                .catch(error => {
+                    this.responseMsg =
+                        "No puedes borrar este type, borra toda la ropa de este type primero";
+                    this.typeMsg = false;
+                });
+
+            //  (this.responseMsg = "Deleted correctly"),
+            //     (this.typeMsg = true),
+            //     (this.categories.splice(this.selectedCategoryIndex, 1))
+
+            //  .catch(error => console.log(error.response.data));
+
+            this.$vm2.close("modal-3");
+        },
+
         showRequestStatus() {
             if (this.request_status) {
                 return this.request_status === 201
@@ -1220,7 +1430,29 @@ export default {
                 });
             }
             return this.items;
-        }
+        },
+
+        filteredCategories() {
+            if (this.categorySearched) {
+                return this.categories.filter(category => {
+                    return category.name
+                        .toLowerCase()
+                        .includes(this.categorySearched.toLowerCase());
+                });
+            }
+            return this.categories;
+        },
+
+           filteredTypes() {
+            if (this.typeSearched) {
+                return this.types.filter(type => {
+                    return type.name
+                        .toLowerCase()
+                        .includes(this.typeSearched.toLowerCase());
+                });
+            }
+            return this.types;
+        },
     }
 };
 </script>
