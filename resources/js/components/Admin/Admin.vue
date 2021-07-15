@@ -450,7 +450,7 @@
                                     <th scope="col" style="min-width: 200px">
                                         NOMBRE
                                     </th>
-                                     <th scope="col" style="width: 500px">
+                                    <th scope="col" style="width: 500px">
                                         DESCRIPCION
                                     </th>
                                     <th scope="col" style="min-width: 100px">
@@ -470,7 +470,9 @@
                                     <td style="min-width: 200px;">
                                         {{ type.name }}
                                     </td>
-                                    <td style="max-width: 500px; overflow:auto;">
+                                    <td
+                                        style="max-width: 500px; overflow:auto;"
+                                    >
                                         {{ type.description }}
                                     </td>
                                     <td>
@@ -563,6 +565,13 @@
                     >
                         INSERT A NEW {{ insertItemTitle }}
                     </h4>
+                    <div
+                        class="error"
+                        style="width:100%;"
+                        v-bind:class="{ correct: typeMsg }"
+                    >
+                        {{ responseMsg }}
+                    </div>
                     <div>
                         <label for="name">Name</label>
                         <input
@@ -716,6 +725,13 @@
                     >
                         INSERT A NEW {{ insertItemTitle }}
                     </h4>
+                    <div
+                        class="error"
+                        style="width:100%;"
+                        v-bind:class="{ correct: typeMsg }"
+                    >
+                        {{ responseMsg }}
+                    </div>
                     <div>
                         <label for="name">Name</label>
                         <input
@@ -753,12 +769,25 @@
                     >
                         INSERT A NEW {{ insertItemTitle }}
                     </h4>
+                    <div
+                        class="error"
+                        style="width:100%;"
+                        v-bind:class="{ correct: typeMsg }"
+                    >
+                        {{ responseMsg }}
+                    </div>
                     <div>
                         <label for="name">Name</label>
                         <input
                             v-model="typeToAdd.name"
                             type="text"
                             name="name"
+                        />
+                        <label for="description">Description</label>
+                        <textarea
+                            v-model="typeToAdd.description"
+                            type="text"
+                            name="description"
                         />
                     </div>
                     <div
@@ -933,6 +962,7 @@
 .category-table,
 .type-table {
     margin: 0 auto;
+    max-width: 400px;
     border: 2px solid #ee2a7b;
     padding: 25px 30px;
     border-radius: 7px;
@@ -963,15 +993,24 @@
     padding: 4px;
 }
 
+.type-table div textarea {
+    border: 1px solid rgb(179, 179, 179);
+    padding: 4px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
 .insert-table div input:active,
 .category-table div input:active,
-.type-table div input:active {
+.type-table div input:active,
+.type-table div textarea:active {
     outline: 1px solid #ee2a7b;
 }
 
 .insert-table div input:focus,
 .category-table div input:focus,
-.type-table div input:focus {
+.type-table div input:focus,
+.type-table div textarea:focus {
     outline: 1px solid #ee2a7b;
 }
 
@@ -1185,7 +1224,8 @@ export default {
                 name: null
             },
             typeToAdd: {
-                name: null
+                name: null,
+                description: null
             },
             request_status: null
         };
@@ -1216,6 +1256,7 @@ export default {
                     this.isViewCategoryActive = false;
                     this.isViewTypeActive = false;
                     this.request_status = "";
+                    this.responseMsg = "";
 
                     break;
                 case 1:
@@ -1249,6 +1290,7 @@ export default {
                     this.isViewCategoryActive = false;
                     this.isViewTypeActive = false;
                     this.request_status = "";
+                    this.responseMsg = "";
                     break;
                 case 4:
                     this.isTableActive = false;
@@ -1271,6 +1313,7 @@ export default {
                     this.isViewTypeActive = false;
                     this.insertItemTitle = "";
                     this.request_status = "";
+                    this.responseMsg = "";
                     break;
                 case 6:
                     this.isTableActive = false;
@@ -1282,6 +1325,7 @@ export default {
                     this.isViewTypeActive = true;
                     this.insertItemTitle = "";
                     this.request_status = "";
+                    this.responseMsg = "";
                     break;
             }
         },
@@ -1305,10 +1349,17 @@ export default {
 
         async addItem() {
             try {
-                const response = await axios.put(
-                    "api/admin/cloth",
-                    this.itemToAdd
-                );
+                const response = await axios
+                    .put("api/admin/cloth", this.itemToAdd)
+                    .then(response => {
+                        this.responseMsg = "Inserted correctly";
+                        this.typeMsg = true;
+                    })
+                    .catch(error => {
+                        this.responseMsg =
+                            "Some data is invalid, check the inputs and try again";
+                        this.typeMsg = false;
+                    });
 
                 this.request_status = response.status;
                 console.log(response);
@@ -1320,13 +1371,21 @@ export default {
 
         async addCategory() {
             try {
-                const response = await axios.put(
-                    "api/admin/category",
-                    this.categoryToAdd
-                );
-                this.categories.push(this.categoryToAdd);
-                this.request_status = response.status;
-                console.log(response);
+                const response = await axios
+                    .put("api/admin/category", this.categoryToAdd)
+                    .then(response => {
+                        this.responseMsg = "Inserted correctly";
+                        this.typeMsg = true;
+                        // this.categories.push(this.categoryToAdd);
+                        this.request_status = response.status;
+                    })
+                    .catch(error => {
+                        this.responseMsg =
+                            "Some data is invalid, check the inputs and try again";
+                        this.request_status = error;
+                        console.log(error);
+                        this.typeMsg = false;
+                    });
             } catch (error) {
                 this.request_status = error;
                 console.log(error);
@@ -1338,7 +1397,18 @@ export default {
                 const response = await axios.put(
                     "api/admin/type",
                     this.typeToAdd
-                );
+                ).then(response => {
+                        this.responseMsg = "Inserted correctly";
+                        this.typeMsg = true;
+                        // this.categories.push(this.categoryToAdd);
+                        this.request_status = response.status;
+                    }).catch(error => {
+                        this.responseMsg =
+                            "Some data is invalid, check the inputs and try again";
+                        this.request_status = error;
+                        console.log(error);
+                        this.typeMsg = false;
+                    });
                 this.request_status = response.status;
                 console.log(response);
             } catch (error) {
@@ -1443,7 +1513,7 @@ export default {
             return this.categories;
         },
 
-           filteredTypes() {
+        filteredTypes() {
             if (this.typeSearched) {
                 return this.types.filter(type => {
                     return type.name
@@ -1452,7 +1522,7 @@ export default {
                 });
             }
             return this.types;
-        },
+        }
     }
 };
 </script>
