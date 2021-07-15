@@ -39,6 +39,7 @@ class TypeController extends Controller
         //Create item
         $item = new Type();
         $item->name = $request->name;
+        $item->description = $request->description;
     
         $item->save();
         return $item;
