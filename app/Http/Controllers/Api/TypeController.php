@@ -86,6 +86,6 @@ class TypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Type::where('id', $id)->delete();
     }
 }
