@@ -124,7 +124,33 @@ class ShopController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $item = Item::where('id', '=', $id)->first();
+
+        $item->name = $request->name;
+        $item->photo = $request->photo_name;
+        $item->quality = $request->quality;
+        $item->country = $request->country;
+
+        $categoryId = Category::select('id')->where('name', '=', $request->category)->get()[0]->id;
+        $typeId = Type::select('id')->where('name', '=', $request->type)->get()[0]->id;
+        $item->category_id = $categoryId;
+        $item->type_id = $typeId;
+
+
+
+        $itemAttributes =ItemAttributes::where('item_id', '=', $id)->first();
+        $itemAttributes->price = $request->price;
+        $itemAttributes->available = $request->available;
+        $itemAttributes->size = $request->size;
+        $itemAttributes->url = $request->url;
+        $itemAttributes->item_id = $item->id;
+
+       
+            $item->update();
+            $itemAttributes->update();
+            return $item;
+            
     }
 
     /**
