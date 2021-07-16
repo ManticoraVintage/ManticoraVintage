@@ -1,7 +1,5 @@
 <template>
   <div class="main">
-    <Logo></Logo>
-
     <div class="carousel-container">
       <carousel
         class="carousel"
@@ -265,7 +263,6 @@
 .main {
   margin: 0 auto;
   padding: 0 5%;
-  background: #f2f3f5;
 }
 
 .item-section {
