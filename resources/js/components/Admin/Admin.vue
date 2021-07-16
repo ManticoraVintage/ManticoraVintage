@@ -1,4 +1,15 @@
 <template>
+  <div class="main d-flex">
+    <div class="vertical-navbar d-flex flex-column">
+      <div class="main-title d-flex justify-content-center align-items-center">
+        Manticora Vintage Administration
+      </div>
+      <div class="profile-details">
+        <div class="profile-image"></div>
+      </div>
+      <div class="vertical-navbar-menu d-flex flex-column align-items-center">
+        <ul
+          class="
     <div class="main d-flex">
         <Login></Login>
         <div class="vertical-navbar d-flex flex-column">

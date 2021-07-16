@@ -5,7 +5,7 @@
                 name: 'home'
             }"
         >
-            <img src="images/LOGO PNG (1).png"
+            <img src="images/logo_manticora_mini.png"
         /></router-link>
     </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div class="row mb-4">
+    <div class="row">
       <div
         class="col-12 col-xl-6 d-flex justify-content-end manticora-container"
       >
@@ -52,8 +52,8 @@
   @include flex-center();
   width: 100%;
   background: black;
-  height: 100vh;
-  overflow: hidden;
+  /* To compensate footer wrapper padding */
+  margin-bottom: -10rem;
   .manticora-container,
   .zozobra-container {
     a {
@@ -101,6 +101,9 @@
   @media only screen and (max-width: 1200px) {
     .row {
       height: 100%;
+      .manticora-container {
+        margin-bottom: 175px;
+      }
       .zozobra-container,
       .manticora-container {
         padding: 0;
@@ -120,20 +123,23 @@
     }
   }
   @media only screen and (max-width: 768px) {
-    .manticora-container,
-    .zozobra-container {
-      button {
-        font-size: 16px;
+    .row {
+      .manticora-container,
+      .zozobra-container {
+        button {
+          font-size: 16px;
+        }
       }
-    }
-    .manticora-container {
-      img {
-        width: 200px;
+      .manticora-container {
+        margin-bottom: 75px;
+        img {
+          width: 200px;
+        }
       }
-    }
-    .zozobra-container {
-      img {
-        width: 270px !important;
+      .zozobra-container {
+        img {
+          width: 270px;
+        }
       }
     }
   }
