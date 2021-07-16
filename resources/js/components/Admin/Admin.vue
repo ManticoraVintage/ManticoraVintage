@@ -287,7 +287,16 @@
                                             >
                                                 <i class="fas fa-trash"></i>
                                             </button>
-                                            <button class="action-button">
+                                            <button
+                                                class="action-button"
+                                                v-on:click="
+                                                    showEditClothPopup(
+                                                        cloth.item,
+                                                        cloth,
+                                                        cloth.item.photo
+                                                    )
+                                                "
+                                            >
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                         </div>
@@ -585,7 +594,7 @@
                         <label for="price">Price</label>
                         <input
                             v-model="itemToAdd.price"
-                            type="text"
+                            type="number"
                             name="price"
                             required
                         />
@@ -600,9 +609,9 @@
                         />
                     </div>
                     <div>
-                        <label for="quality">Quality</label>
+                        <label for="quality">Quality(1-5)</label>
                         <input
-                            type="text"
+                            type="number"
                             name="quality"
                             v-model="itemToAdd.quality"
                             required
@@ -804,6 +813,156 @@
                 <p style="display:none;">{{ showRequestStatus() }}</p>
             </div>
         </div>
+        <div
+            class="edit-cloth-modal-layout"
+            v-bind:class="{ active: isEditModalActive }"
+            v-if="isEditModalActive"
+        >
+            <div class="edit-cloth-modal">
+                <h1>Edit</h1>
+                {{ responseMsg }}
+                <form
+                    method="PUT"
+                    class="form"
+                    ref="editClothForm"
+                    @submit="preventSubmit"
+                >
+                    <div>
+                        <input
+                            hidden
+                            v-model="itemToEdit.id"
+                            type="text"
+                            name="id"
+                        />
+
+                        <label for="name">Name</label>
+                        <input
+                            v-model="itemToEdit.name"
+                            type="text"
+                            name="name"
+                            v-text="itemToEdit.name"
+                        />
+                    </div>
+                    <div>
+                        <label for="price">Price</label>
+                        <input
+                            v-model="itemToEdit.price"
+                            type="number"
+                            name="price"
+                            v-text="itemToEdit.price"
+                        />
+                    </div>
+                    <div>
+                        <label for="size">Size</label>
+                        <input
+                            type="text"
+                            v-model="itemToEdit.size"
+                            name="size"
+                        />
+                    </div>
+                    <div>
+                        <label for="quality">Quality(1-5)</label>
+                        <input
+                            type="number"
+                            name="quality"
+                            v-model="itemToEdit.quality"
+                        />
+                    </div>
+                    <div>
+                        <label for="country">Country</label>
+                        <input
+                            type="text"
+                            name="country"
+                            v-model="itemToEdit.country"
+                        />
+                    </div>
+                    <div>
+                        <label for="photoName">Photo name</label>
+                        <input
+                            type="text"
+                            name="photoName"
+                            v-model="itemToEdit.photo_name"
+                        />
+                    </div>
+                    <div>
+                        <label for="photoUrl">URL</label>
+                        <input
+                            type="text"
+                            name="url"
+                            v-model="itemToEdit.url"
+                        />
+                    </div>
+                    <div>
+                        <label for="available">Available: </label>
+
+                        <input
+                            type="radio"
+                            name="available"
+                            value="1"
+                            v-model="itemToEdit.available"
+                        />
+                        YES
+
+                        <input
+                            v-model="itemToEdit.available"
+                            type="radio"
+                            name="available"
+                            value="0"
+                        />
+                        NO
+                    </div>
+                    <div>
+                        <label for="categoryDropdown">Category</label>
+                        <select
+                            name="categoryDropdown"
+                            id="categoryDropdown"
+                            v-model="itemToEdit.category"
+                        >
+                            <option value="" selected
+                                >--Select the category--</option
+                            >
+                            <option
+                                :value="category.name"
+                                v-for="(category, index) in categories"
+                                :key="index"
+                            >
+                                {{ category.name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="typeDropdown">Type</label>
+                        <select
+                            name="typeDropdown"
+                            id="typeDropdown"
+                            v-model="itemToEdit.type"
+                        >
+                            <option value="" selected
+                                >--Selecciona the type--</option
+                            >
+                            <option
+                                :value="type.name"
+                                v-for="(type, index) in types"
+                                :key="index"
+                            >
+                                {{ type.name }}
+                            </option>
+                        </select>
+                    </div>
+                    <div
+                        class="button-container d-flex justify-content-between"
+                    >
+                        <button type="submit" v-on:click="editCloth()">
+                            Confirm
+                        </button>
+                        <button type="submit" v-on:click="openTab(7)">
+                            Return
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -894,6 +1053,104 @@
     font-weight: bold;
     margin: 5px 10px !important;
     padding: 0 !important;
+}
+
+/*Edit modal */
+
+.edit-cloth-modal-layout {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.66);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-cloth-modal {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 7px;
+    border: 2px solid #ee2a7b;
+    background-color: white;
+    max-width: 400px;
+    padding: 25px 30px;
+    -webkit-box-shadow: 3px 4px 9px -2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 3px 4px 9px -2px rgba(0, 0, 0, 0.75);
+    box-shadow: 3px 4px 9px -2px rgba(0, 0, 0, 0.75);
+}
+
+.edit-cloth-modal div,
+.edit-category-modal div,
+.edit-type-modal div {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.edit-cloth-modal div label,
+.edit-category-modal div label,
+.edit-type-modal div label {
+    min-width: 100px;
+    color: #ee2a7b;
+    font-weight: bold;
+}
+
+.edit-cloth-modal div input,
+.edit-category-modal div input,
+.edit-type-modal div input {
+    border: 1px solid rgb(179, 179, 179);
+    padding: 4px;
+}
+.edit-cloth-modal div textarea {
+    border: 1px solid rgb(179, 179, 179);
+    padding: 4px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.edit-cloth-modal div input:active,
+.edit-category-modal div input:active,
+.edit-type-modal div input:active,
+.edit-type-modal div textarea:active {
+    outline: 1px solid #ee2a7b;
+}
+
+.edit-cloth-modal div input:focus,
+.edit-category-modal div input:focus,
+.edit-type-modal div input:focus,
+.edit-type-modal div textarea:focus {
+    outline: 1px solid #ee2a7b;
+}
+
+.edit-cloth-modal div input[type="radio"] {
+    color: black;
+}
+
+.edit-cloth-modal div select {
+    margin-top: 10px;
+}
+.edit-cloth-modal button,
+.edit-category-modal button,
+.edit-type-modal button {
+    margin-top: 10px;
+    padding: 5px;
+    border: 2px solid #ee2a7b;
+    font-weight: bold;
+    color: #ee2a7b;
+    transition: 0.3s ease-in-out;
+    background: transparent;
+    margin-left: 0;
+}
+
+.edit-cloth-modal button:hover,
+.edit-category-modal button:hover,
+.edit-type-modal button:hover {
+    background: #ee2a7b;
+    color: white;
+    border: 2px solid #ee2a7b;
 }
 
 .menu-actions-container {
@@ -1204,10 +1461,27 @@ export default {
             categorySearched: null,
             typeSearched: null,
             insertItemTitle: null,
+            isEditModalActive: false,
+            isEditCategoryModalActive: false,
+            isEditTypeModalActive: false,
             cloth: null,
             errorMsg: "",
             responseMsg: "",
             itemToAdd: {
+                name: null,
+                price: null,
+                size: null,
+                quality: null,
+                country: null,
+                photo_name: null,
+                url: null,
+                available: null,
+                category: null,
+                type: null
+            },
+
+            itemToEdit: {
+                id: null,
                 name: null,
                 price: null,
                 size: null,
@@ -1291,6 +1565,7 @@ export default {
                     this.isViewTypeActive = false;
                     this.request_status = "";
                     this.responseMsg = "";
+
                     break;
                 case 4:
                     this.isTableActive = false;
@@ -1327,6 +1602,9 @@ export default {
                     this.request_status = "";
                     this.responseMsg = "";
                     break;
+
+                case 7:
+                    this.isEditModalActive = false;
             }
         },
 
@@ -1347,6 +1625,22 @@ export default {
             this.selectedTypeIndex = index;
         },
 
+        showEditClothPopup: function(clothToEdit, attributesToEdit, photo) {
+            this.isEditModalActive = true;
+            this.itemToEdit.id = clothToEdit.id;
+            this.itemToEdit.name = clothToEdit.name;
+            this.itemToEdit.price = attributesToEdit.price;
+            this.itemToEdit.size = attributesToEdit.size;
+            this.itemToEdit.quality = clothToEdit.quality;
+            this.itemToEdit.country = clothToEdit.country;
+            this.itemToEdit.photo_name = photo;
+            this.itemToEdit.url = attributesToEdit.url;
+            this.itemToEdit.available = attributesToEdit.available;
+            this.itemToEdit.category = clothToEdit.category;
+            this.itemToEdit.type = clothToEdit.type;
+            console.log(photo);
+        },
+
         async addItem() {
             try {
                 const response = await axios
@@ -1354,7 +1648,15 @@ export default {
                     .then(response => {
                         this.responseMsg = "Inserted correctly";
                         this.typeMsg = true;
+                        this.itemToAdd.name = "";
+                        this.itemToAdd.quality = "";
+                        this.itemToAdd.country = "";
+                        this.itemToAdd.size = "";
+                        this.itemToAdd.price = "";
+                        this.itemToAdd.url = "";
+                        this.itemToAdd.photo_name= "";
                     })
+
                     .catch(error => {
                         this.responseMsg =
                             "Some data is invalid, check the inputs and try again";
@@ -1394,15 +1696,43 @@ export default {
 
         async addType() {
             try {
-                const response = await axios.put(
-                    "api/admin/type",
-                    this.typeToAdd
-                ).then(response => {
+                const response = await axios
+                    .put("api/admin/type", this.typeToAdd)
+                    .then(response => {
                         this.responseMsg = "Inserted correctly";
                         this.typeMsg = true;
                         // this.categories.push(this.categoryToAdd);
                         this.request_status = response.status;
-                    }).catch(error => {
+                    })
+                    .catch(error => {
+                        this.responseMsg =
+                            "Some data is invalid, check the inputs and try again";
+                        this.request_status = error;
+                        console.log(error);
+                        this.typeMsg = false;
+                    });
+                this.request_status = response.status;
+                console.log(response);
+            } catch (error) {
+                this.request_status = error;
+                console.log(error);
+            }
+        },
+
+        editCloth() {
+            try {
+                const response = axios
+                    .put(
+                        `api/admin/edit/cloth/${this.itemToEdit.id}`,
+                        this.itemToEdit
+                    )
+                    .then(response => {
+                        this.responseMsg = "Edited correctly";
+                        this.typeMsg = true;
+                        // this.categories.push(this.categoryToAdd);
+                        this.request_status = response.status;
+                    })
+                    .catch(error => {
                         this.responseMsg =
                             "Some data is invalid, check the inputs and try again";
                         this.request_status = error;
@@ -1420,7 +1750,7 @@ export default {
         preventSubmit(e) {
             // Your form submission
             // this.$refs.insertClothForm.reset(); // This will clear that form
-            console.log("Sign In Button Pressed");
+
             e.preventDefault();
         },
 

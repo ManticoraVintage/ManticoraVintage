@@ -17,6 +17,9 @@ Route::get('/shop/category/{categoryId}/type/{typeId}', [ShopController::class, 
 Route::get('/shop/{itemId}', [ShopController::class, 'showOne']);
 
 Route::put('/admin/cloth', [ShopController::class, 'store']);
+
+Route::put('/admin/edit/cloth/{id}', [ShopController::class, 'update']);
+
 Route::put('/admin/category', [CategoryController::class, 'store']);
 Route::post('/admin/category/{id}', [CategoryController::class, 'destroy']);
 Route::put('/admin/type', [TypeController::class, 'store']);
