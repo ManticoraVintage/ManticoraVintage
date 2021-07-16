@@ -36,8 +36,14 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        //Create item
+        $item = new Type();
+        $item->name = $request->name;
+        $item->description = $request->description;
+    
+        $item->save();
+        return $item;
+}
 
     /**
      * Display the specified resource.
@@ -81,6 +87,6 @@ class TypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Type::where('id', $id)->delete();
     }
 }

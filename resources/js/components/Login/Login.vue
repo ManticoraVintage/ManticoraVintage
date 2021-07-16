@@ -23,7 +23,7 @@
                     />
                 </div>
 
-                <button style="background:#ee2a7b; border:transparent" @click="checkCredentials()" class="btn btn-primary">
+                <button @click="checkCredentials()" class="btn btn-primary">
                     Conectar
                 </button>
             </form>
@@ -34,7 +34,7 @@
 .main-div {
     height: 100%;
     width: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     background: rgb(104, 104, 104);
@@ -46,13 +46,38 @@
     background: white;
     width: 300px;
     height: 300px;
+    border: 2px solid #ee2a7b;
+}
+
+label{
+    color: #ee2a7b;
+    font-weight: bold;
+}
+
+input:active, input:focus{
+    outline: none !important;
+    border: 0px;
 }
 
 label {
     margin-top: 20px;
 }
+
+input{
+    border: 2px solid #ee2a7b !important;
+}
 button {
+    border: 2px solid #ee2a7b;
+    color: #ee2a7b;
     margin-top: 20px;
+    background: transparent;
+    font-weight: bold;
+  
+}
+
+button:hover{
+    background: #ee2a7b;
+    border: 2px solid #ee2a7b;
 }
 </style>
 

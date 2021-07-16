@@ -29,10 +29,10 @@
         /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
      
-        @font-face {
+        /* @font-face {
             font-family:'canela';
             src: url('/fonts/canela.tff');
-        }
+        } */
 
             html {
                 line-height: 1.15;
@@ -430,13 +430,13 @@
     */
 
         body {
-            font-family: 'canela', 'Quicksand';
+            font-family:'Quicksand';
             font-size: 18px;
         }
 
         h1 {
             font-size: 30px;
-            font-family: 'DrukWideBold', 'Quicksand';
+            font-family: 'Quicksand';
         }
 
         ul li {
