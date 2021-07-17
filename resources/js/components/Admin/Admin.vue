@@ -1655,6 +1655,7 @@ export default {
                         this.itemToAdd.price = "";
                         this.itemToAdd.url = "";
                         this.itemToAdd.photo_name= "";
+                        
                     })
 
                     .catch(error => {
