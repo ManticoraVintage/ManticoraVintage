@@ -35,7 +35,7 @@
 export default {
   methods: {
     showLogo() {
-      return this.$route.path !== "/";
+      return this.$route.path !== "/" && this.$route.path !== "/admin";
     },
     stylesForLanding(element) {
       if (this.$route.path === "/") {
