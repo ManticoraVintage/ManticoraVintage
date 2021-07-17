@@ -7,6 +7,7 @@ import Modal from "@burhanahmeed/vue-modal-2";
 import VueCarousel from 'vue-carousel';
 import Index from "./Index";
 import FooterCustom from "./components/Footer/FooterCustom.vue";
+import Logo from "./components/Logo/Logo.vue";
 
 window.Vue = require("vue").default;
 
@@ -17,7 +18,8 @@ Vue.use(Modal, {
   componentName: "ModalVue"
 });
 Vue.use(VueCarousel);
-Vue.component("footer-custom", FooterCustom);
+Vue.component("FooterCustom", FooterCustom);
+Vue.component("Logo", Logo);
 
 //Main component of the website that acts as a container
 const app = new Vue({

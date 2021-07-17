@@ -25,11 +25,9 @@
 </template>
 
 <style lang="scss" scoped>
-.footer {
+#footer {
   font-family: "Quicksand";
-  section {
-    padding-top: 10px;
-  }
+  padding-bottom: 30px;
   .media {
     i {
       font-size: 20px;

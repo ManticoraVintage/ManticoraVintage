@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-    <Logo></Logo>
     <div class="main-container row">
       <div
         class="
@@ -95,7 +94,7 @@
 </template>
 <style lang="scss" scoped>
 .main {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
 }
 .main-container {
