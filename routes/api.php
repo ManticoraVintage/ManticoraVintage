@@ -16,8 +16,9 @@ Route::get('/types', [TypeController::class, 'index']);
 Route::get('/shop/category/{categoryId}/type/{typeId}', [ShopController::class, 'showFilteredItems']);
 Route::get('/shop/{itemId}', [ShopController::class, 'showOne']);
 
-Route::put('/admin/cloth', [ShopController::class, 'store']);
+Route::post('/admin/login', [AdminController::class, 'verifyUser']);
 
+Route::put('/admin/cloth', [ShopController::class, 'store']);
 Route::put('/admin/edit/cloth/{id}', [ShopController::class, 'update']);
 
 Route::put('/admin/category', [CategoryController::class, 'store']);
@@ -26,4 +27,6 @@ Route::put('/admin/type', [TypeController::class, 'store']);
 
 Route::post('/admin/type/{id}', [TypeController::class, 'destroy']);
 Route::post('/admin/{id}', [ShopController::class, 'destroy']);
+
+
 

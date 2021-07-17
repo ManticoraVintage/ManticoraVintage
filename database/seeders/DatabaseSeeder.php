@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             TypeSeeder::class,
             ItemSeeder::class,
             ItemAttributesSeeder::class,
+            AdminSeeder::class,
         ]);
     }
 }
