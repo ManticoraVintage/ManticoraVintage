@@ -1602,34 +1602,308 @@ export default {
       console.log(photo);
     },
 
-    async addItem() {
-      try {
-        const response = await axios
-          .put("api/admin/cloth", this.itemToAdd)
-          .then((response) => {
-            this.responseMsg = "Inserted correctly";
-            this.typeMsg = true;
-            this.itemToAdd.name = "";
-            this.itemToAdd.quality = "";
-            this.itemToAdd.country = "";
-            this.itemToAdd.size = "";
-            this.itemToAdd.price = "";
-            this.itemToAdd.url = "";
-            this.itemToAdd.photo_name = "";
-          })
+    methods: {
+        openTab: function(tabType) {
+            switch (tabType) {
+                case 0:
+                    this.isTableActive = true;
+                    this.isInsertMenuActive = false;
+                    this.isInsertActive = false;
+                    this.isCategoryInsertActive = false;
+                    this.isTypeInsertActive = false;
+                    this.isViewCategoryActive = false;
+                    this.isViewTypeActive = false;
+                    this.request_status = "";
+                    this.responseMsg = "";
 
-          .catch((error) => {
-            this.responseMsg =
-              "Some data is invalid, check the inputs and try again";
-            this.typeMsg = false;
-          });
+                    break;
+                case 1:
+                    this.isTableActive = false;
+                    this.isInsertActive = true;
+                    this.isInsertMenuActive = false;
+                    this.isCategoryInsertActive = false;
+                    this.isTypeInsertActive = false;
+                    this.isViewCategoryActive = false;
+                    this.isViewTypeActive = false;
+                    this.insertItemTitle = "CLOTH";
+                    this.request_status = "";
+                    break;
+                case 2:
+                    this.isTableActive = false;
+                    this.isInsertMenuActive = false;
+                    this.isInsertActive = false;
+                    this.isCategoryInsertActive = true;
+                    this.isTypeInsertActive = false;
+                    this.isViewCategoryActive = false;
+                    this.isViewTypeActive = false;
+                    this.insertItemTitle = "CATEGORY";
+                    this.request_status = "";
+                    break;
+                case 3:
+                    this.isTableActive = false;
+                    this.isInsertMenuActive = true;
+                    this.isInsertActive = false;
+                    this.isCategoryInsertActive = false;
+                    this.isTypeInsertActive = false;
+                    this.isViewCategoryActive = false;
+                    this.isViewTypeActive = false;
+                    this.request_status = "";
+                    this.responseMsg = "";
 
-        this.request_status = response.status;
-        console.log(response);
-      } catch (error) {
-        this.request_status = error;
-        console.log(error);
-      }
+                    break;
+                case 4:
+                    this.isTableActive = false;
+                    this.isInsertMenuActive = false;
+                    this.isInsertActive = false;
+                    this.isCategoryInsertActive = false;
+                    this.isTypeInsertActive = true;
+                    this.isViewCategoryActive = false;
+                    this.isViewTypeActive = false;
+                    this.insertItemTitle = "TYPE";
+                    this.request_status = "";
+                    break;
+                case 5:
+                    this.isTableActive = false;
+                    this.isInsertMenuActive = false;
+                    this.isInsertActive = false;
+                    this.isCategoryInsertActive = false;
+                    this.isTypeInsertActive = false;
+                    this.isViewCategoryActive = true;
+                    this.isViewTypeActive = false;
+                    this.insertItemTitle = "";
+                    this.request_status = "";
+                    this.responseMsg = "";
+                    break;
+                case 6:
+                    this.isTableActive = false;
+                    this.isInsertMenuActive = false;
+                    this.isInsertActive = false;
+                    this.isCategoryInsertActive = false;
+                    this.isTypeInsertActive = false;
+                    this.isViewCategoryActive = false;
+                    this.isViewTypeActive = true;
+                    this.insertItemTitle = "";
+                    this.request_status = "";
+                    this.responseMsg = "";
+                    break;
+
+                case 7:
+                    this.isEditModalActive = false;
+            }
+        },
+
+        showDeletePopup: function(id, index) {
+            this.$vm2.open("modal-1");
+            this.selectedId = id;
+            this.selectedIndex = index;
+        },
+        showDeletePopup2: function(id, index) {
+            this.$vm2.open("modal-2");
+            this.selectedCategoryId = id;
+            this.selectedCategoryIndex = index;
+        },
+
+        showDeletePopup3: function(id, index) {
+            this.$vm2.open("modal-3");
+            this.selectedTypeId = id;
+            this.selectedTypeIndex = index;
+        },
+
+        showEditClothPopup: function(clothToEdit, attributesToEdit, photo) {
+            this.isEditModalActive = true;
+            this.itemToEdit.id = clothToEdit.id;
+            this.itemToEdit.name = clothToEdit.name;
+            this.itemToEdit.price = attributesToEdit.price;
+            this.itemToEdit.size = attributesToEdit.size;
+            this.itemToEdit.quality = clothToEdit.quality;
+            this.itemToEdit.country = clothToEdit.country;
+            this.itemToEdit.photo_name = photo;
+            this.itemToEdit.url = attributesToEdit.url;
+            this.itemToEdit.available = attributesToEdit.available;
+            this.itemToEdit.category = clothToEdit.category;
+            this.itemToEdit.type = clothToEdit.type;
+            console.log(photo);
+        },
+
+        async addItem() {
+            try {
+                const response = await axios
+                    .put("api/admin/cloth", this.itemToAdd)
+                    .then(response => {
+                        this.responseMsg = "Inserted correctly";
+                        this.typeMsg = true;
+                        this.itemToAdd.name = "";
+                        this.itemToAdd.quality = "";
+                        this.itemToAdd.country = "";
+                        this.itemToAdd.size = "";
+                        this.itemToAdd.price = "";
+                        this.itemToAdd.url = "";
+                        this.itemToAdd.photo_name= "";
+                        
+                    })
+
+                    .catch(error => {
+                        this.responseMsg =
+                            "Some data is invalid, check the inputs and try again";
+                        this.typeMsg = false;
+                    });
+
+                this.request_status = response.status;
+                console.log(response);
+            } catch (error) {
+                this.request_status = error;
+                console.log(error);
+            }
+        },
+
+        async addCategory() {
+            try {
+                const response = await axios
+                    .put("api/admin/category", this.categoryToAdd)
+                    .then(response => {
+                        this.responseMsg = "Inserted correctly";
+                        this.typeMsg = true;
+                        // this.categories.push(this.categoryToAdd);
+                        this.request_status = response.status;
+                    })
+                    .catch(error => {
+                        this.responseMsg =
+                            "Some data is invalid, check the inputs and try again";
+                        this.request_status = error;
+                        console.log(error);
+                        this.typeMsg = false;
+                    });
+            } catch (error) {
+                this.request_status = error;
+                console.log(error);
+            }
+        },
+
+        async addType() {
+            try {
+                const response = await axios
+                    .put("api/admin/type", this.typeToAdd)
+                    .then(response => {
+                        this.responseMsg = "Inserted correctly";
+                        this.typeMsg = true;
+                        // this.categories.push(this.categoryToAdd);
+                        this.request_status = response.status;
+                    })
+                    .catch(error => {
+                        this.responseMsg =
+                            "Some data is invalid, check the inputs and try again";
+                        this.request_status = error;
+                        console.log(error);
+                        this.typeMsg = false;
+                    });
+                this.request_status = response.status;
+                console.log(response);
+            } catch (error) {
+                this.request_status = error;
+                console.log(error);
+            }
+        },
+
+        editCloth() {
+            try {
+                const response = axios
+                    .put(
+                        `api/admin/edit/cloth/${this.itemToEdit.id}`,
+                        this.itemToEdit
+                    )
+                    .then(response => {
+                        this.responseMsg = "Edited correctly";
+                        this.typeMsg = true;
+                        // this.categories.push(this.categoryToAdd);
+                        this.request_status = response.status;
+                    })
+                    .catch(error => {
+                        this.responseMsg =
+                            "Some data is invalid, check the inputs and try again";
+                        this.request_status = error;
+                        console.log(error);
+                        this.typeMsg = false;
+                    });
+                this.request_status = response.status;
+                console.log(response);
+            } catch (error) {
+                this.request_status = error;
+                console.log(error);
+            }
+        },
+
+        preventSubmit(e) {
+            // Your form submission
+            // this.$refs.insertClothForm.reset(); // This will clear that form
+
+            e.preventDefault();
+        },
+
+        doDelete: function() {
+            axios
+                .post(`api/admin/${this.selectedId}`)
+                .then(
+                    response => console.log(response.data, "de locos"),
+                    this.items.splice(this.selectedIndex, 1)
+                )
+                .catch(error => console.log(error.response.data));
+
+            this.$vm2.close("modal-1");
+        },
+
+        doDeleteCategory: function() {
+            axios
+                .post(`api/admin/category/${this.selectedCategoryId}`)
+                .then(response => {
+                    this.responseMsg = "Deleted correctly";
+                    this.typeMsg = true;
+                    this.categories.splice(this.selectedCategoryIndex, 1);
+                })
+                .catch(error => {
+                    this.responseMsg =
+                        "No puedes borrar esta categoria, borra toda la ropa de esta categoria primero";
+                    this.typeMsg = false;
+                });
+
+            //  (this.responseMsg = "Deleted correctly"),
+            //     (this.typeMsg = true),
+            //     (this.categories.splice(this.selectedCategoryIndex, 1))
+
+            //  .catch(error => console.log(error.response.data));
+
+            this.$vm2.close("modal-2");
+        },
+
+        doDeleteType: function() {
+            axios
+                .post(`api/admin/type/${this.selectedTypeId}`)
+                .then(response => {
+                    this.responseMsg = "Deleted correctly";
+                    this.typeMsg = true;
+                    this.types.splice(this.selectedTypeIndex, 1);
+                })
+                .catch(error => {
+                    this.responseMsg =
+                        "No puedes borrar este type, borra toda la ropa de este type primero";
+                    this.typeMsg = false;
+                });
+
+            //  (this.responseMsg = "Deleted correctly"),
+            //     (this.typeMsg = true),
+            //     (this.categories.splice(this.selectedCategoryIndex, 1))
+
+            //  .catch(error => console.log(error.response.data));
+
+            this.$vm2.close("modal-3");
+        },
+
+        showRequestStatus() {
+            if (this.request_status) {
+                return this.request_status === 201
+                    ? "Item added to the database"
+                    : this.request_status;
+            }
+        }
     },
 
     async addCategory() {

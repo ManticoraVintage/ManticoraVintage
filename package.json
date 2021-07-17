@@ -14,25 +14,26 @@
         "bootstrap": "^4.0.0",
         "file-loader": "^6.2.0",
         "jquery": "^3.2",
-        "laravel-mix": "^6.0.6",
+        "laravel-mix": "^6.0.25",
         "lodash": "^4.17.19",
         "popper.js": "^1.12",
-        "postcss": "^8.1.14",
+        "postcss": "^8.3.5",
         "resolve-url-loader": "^2.3.1",
-        "sass": "^1.15.2",
+        "sass": "^1.35.2",
         "sass-loader": "^8.0.2",
-        "vue": "^2.5.17",
+        "vue": "^2.6.14",
         "vue-concise-slider": "^3.4.4",
-        "vue-loader": "^15.9.5",
-        "vue-template-compiler": "^2.6.10"
+        "vue-loader": "^15.9.7",
+        "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
-        "@burhanahmeed/vue-modal-2": "^1.1.9",
+        "@burhanahmeed/vue-modal-2": "^1.1.11",
+        "cross-env": "^7.0.3",
         "fix": "0.0.6",
         "node-sass": "^4.14.1",
         "vue-carousel": "^0.18.0",
         "vue-flux": "^5.1.9",
-        "vue-router": "^3.5.1"
+        "vue-router": "^3.5.2"
     },
     "post-install-cmd": [
         "php artisan clear-compiled",
