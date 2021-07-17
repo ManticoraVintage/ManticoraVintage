@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div class="row">
+    <div class="row w-100">
       <div
         class="col-12 col-xl-6 d-flex justify-content-end manticora-container"
       >
@@ -131,7 +131,7 @@
         }
       }
       .manticora-container {
-        margin-bottom: 75px;
+        margin-bottom: 50px;
         img {
           width: 200px;
         }
