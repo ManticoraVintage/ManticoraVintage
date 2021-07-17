@@ -17,19 +17,6 @@ class ItemSeeder extends Seeder
      */
     public function run()
     {
-        // //Fill array with images URLs
-        // $directory = 'manticoravintage\public\images\fake_clothes';
-        // $images = glob("$directory/*.{jpg,jpeg,png,gif}", GLOB_BRACE);
-        // $startOfUrl = strpos($images[0], "/images");
-
-        // //Reformat the URL to be correctly displayed
-        // $images_formatted_url = array_map(function ($image) use ($startOfUrl) {
-        //     return substr($image, $startOfUrl, strlen($image));
-        // }, $images);
-
-        // Item::factory()->count(1)->create(['photo' => $images_formatted_url[array_rand($images_formatted_url)]]); 
-
-
 
         DB::table('items')->insert([
 
@@ -104,9 +91,5 @@ class ItemSeeder extends Seeder
             ['id' => 69, 'created_at' => Carbon::create('2021', '01', '01'), 'updated_at' => Carbon::create('2021', '01', '01'), 'name' => 'Vintage fake fur cardigan', 'photo' => "69a,69b", 'quality' => 4, 'country' => 'China', 'category_id' => 7, 'type_id' => 1],
            
         ]);
-
-
-
-        // $items = Item::factory()->count(30)->create();
     }
 }
