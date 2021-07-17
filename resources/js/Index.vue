@@ -4,7 +4,7 @@
     <div id="content-wrap" :style="stylesForLanding('content')">
       <router-view></router-view>
     </div>
-    <FooterCustom id="footer" :style="stylesForLanding('footer')"></FooterCustom>
+    <FooterCustom v-if="showFooter()" id="footer" :style="stylesForLanding('footer')"></FooterCustom>
   </div>
 </template>
 
@@ -36,6 +36,9 @@ export default {
   methods: {
     showLogo() {
       return this.$route.path !== "/" && this.$route.path !== "/admin";
+    },
+    showFooter() {
+      return this.$route.path !== "/admin";
     },
     stylesForLanding(element) {
       if (this.$route.path === "/") {

@@ -3,27 +3,29 @@
         <div class="modal-login">
             <form @submit.prevent="onSubmit">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
+                    <label for="username">Username</label>
                     <input
                         type="text"
                         class="form-control"
                         name="username"
-                        id="name1"
+                        id="username"
                         placeholder="Enter username"
+                        v-model="username"
                     />
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
+                    <label for="password">Password</label>
                     <input
                         type="password"
                         class="form-control"
-                        id="password1"
+                        id="password"
                         name="password"
                         placeholder="Password"
+                        v-model="password"
                     />
                 </div>
 
-                <button @click="checkCredentials()" class="btn btn-primary">
+                <button class="btn btn-primary">
                     Conectar
                 </button>
             </form>
@@ -41,74 +43,73 @@
     z-index: 1001;
 }
 .modal-login {
-    padding: 20px;
-    border-radius: 10px;
-    background: white;
-    width: 300px;
-    height: 300px;
-    border: 2px solid #ee2a7b;
-}
-
-label{
-    color: #ee2a7b;
-    font-weight: bold;
-}
-
-input:active, input:focus{
-    outline: none !important;
-    border: 0px;
+  padding: 20px;
+  border-radius: 10px;
+  background: white;
+  width: 300px;
+  height: 300px;
+  border: 2px solid #ee2a7b;
 }
 
 label {
-    margin-top: 20px;
+  color: #ee2a7b;
+  font-weight: bold;
 }
 
-input{
-    border: 2px solid #ee2a7b !important;
+input:active,
+input:focus {
+  outline: none !important;
+  border: 0px;
+}
+
+label {
+  margin-top: 20px;
+}
+
+input {
+  border: 2px solid #ee2a7b !important;
 }
 button {
-    border: 2px solid #ee2a7b;
-    color: #ee2a7b;
-    margin-top: 20px;
-    background: transparent;
-    font-weight: bold;
-  
+  border: 2px solid #ee2a7b;
+  color: #ee2a7b;
+  margin-top: 20px;
+  background: transparent;
+  font-weight: bold;
 }
 
-button:hover{
-    background: #ee2a7b;
-    border: 2px solid #ee2a7b;
+button:hover {
+  background: #ee2a7b;
+  border: 2px solid #ee2a7b;
 }
 </style>
 
 <script>
 export default {
-    name: "Login",
+  name: "Login",
 
-    data() {
-        return {
-            usuario: "",
-            password: ""
-        };
+  data() {
+    return {
+      username: null,
+      password: null,
+      isSuccessLogin: false,
+    };
+  },
+  methods: {
+    async onSubmit() {
+      this.isSuccessLogin = (
+        await axios.post("/api/admin/login", {
+          username: this.username,
+          password: this.password,
+        })
+      ).data;
+
+      if (this.isSuccessLogin) {
+        const modal = document.querySelector(".main-div");
+        modal.style.visibility = "hidden";
+      } else {
+        alert("USUARIO O CONTRASEÑA INCORRECTOS");
+      }
     },
-    methods: {
-        checkCredentials() {
-            const modal = document.querySelector(".main-div");
-            const username = document.querySelector("input[name=username]")
-                .value;
-            const password = document.querySelector("input[name=password]")
-                .value;
-            if (username == this.usuario && password == this.password) {
-             
-                modal.style.visibility = "hidden";
-            } else{
-               alert("USUARIO O CONTRASEÑA INCORRECTOS")
-            }
-           
-        },
-        onSubmit() {
-            // Do something...
-        }
-    }
+  },
 };
 </script>
