@@ -115,6 +115,7 @@
           order-sm-2 order-md-2 order-1
           mx-100
           text-center text-container
+          title-font
         "
       >
         <h4>
