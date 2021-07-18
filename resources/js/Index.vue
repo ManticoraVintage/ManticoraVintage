@@ -8,6 +8,14 @@
   </div>
 </template>
 
+
+<style lang="scss">
+// Move this global styles to a scss file
+.title-font{
+  font-family: druk;
+}
+</style>
+
 <style lang="scss" scoped>
 #web-container {
   background: #f2f3f5;

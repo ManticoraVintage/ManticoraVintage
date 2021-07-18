@@ -11,7 +11,7 @@
         "
       >
         <div class="title">
-          <h1>{{ item.name }}</h1>
+          <h1 class="title-font">{{ item.name }}</h1>
           <h4>Pants</h4>
         </div>
 
